@@ -1,0 +1,36 @@
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\03_CODE_PersistenceLib\obj\Debug\netcoreapp3.1\03_CODE_PersistenceLib.csprojAssemblyReference.cache
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\03_CODE_PersistenceLib\obj\Debug\netcoreapp3.1\03_CODE_PersistenceLib.AssemblyInfoInputs.cache
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\03_CODE_PersistenceLib\obj\Debug\netcoreapp3.1\03_CODE_PersistenceLib.AssemblyInfo.cs
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\03_CODE_PersistenceLib\bin\Debug\netcoreapp3.1\02_CODE_GameLib.dll
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\03_CODE_PersistenceLib\bin\Debug\netcoreapp3.1\03_CODE_PersistenceLib.deps.json
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\03_CODE_PersistenceLib\bin\Debug\netcoreapp3.1\03_CODE_PersistenceLib.dll
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\03_CODE_PersistenceLib\bin\Debug\netcoreapp3.1\03_CODE_PersistenceLib.pdb
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\03_CODE_PersistenceLib\bin\Debug\netcoreapp3.1\02_CODE_GameLib.pdb
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\03_CODE_PersistenceLib\obj\Debug\netcoreapp3.1\03_CODE_PersistenceLib.csproj.CopyComplete
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\03_CODE_PersistenceLib\obj\Debug\netcoreapp3.1\03_CODE_PersistenceLib.dll
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\03_CODE_PersistenceLib\obj\Debug\netcoreapp3.1\03_CODE_PersistenceLib.pdb
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\03_CODE_PersistenceLib\obj\Debug\netcoreapp3.1\03_CODE_PersistenceLib.csproj.CoreCompileInputs.cache
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\03_CODE_PersistenceLib\bin\Debug\netcoreapp3.1\03_CODE_PersistenceLib.deps.json
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\03_CODE_PersistenceLib\bin\Debug\netcoreapp3.1\03_CODE_PersistenceLib.dll
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\03_CODE_PersistenceLib\bin\Debug\netcoreapp3.1\03_CODE_PersistenceLib.pdb
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\03_CODE_PersistenceLib\bin\Debug\netcoreapp3.1\02_CODE_GameLib.dll
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\03_CODE_PersistenceLib\bin\Debug\netcoreapp3.1\02_CODE_GameLib.pdb
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\03_CODE_PersistenceLib\obj\Debug\netcoreapp3.1\03_CODE_PersistenceLib.csprojAssemblyReference.cache
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\03_CODE_PersistenceLib\obj\Debug\netcoreapp3.1\03_CODE_PersistenceLib.AssemblyInfoInputs.cache
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\03_CODE_PersistenceLib\obj\Debug\netcoreapp3.1\03_CODE_PersistenceLib.AssemblyInfo.cs
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\03_CODE_PersistenceLib\obj\Debug\netcoreapp3.1\03_CODE_PersistenceLib.csproj.CoreCompileInputs.cache
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\03_CODE_PersistenceLib\obj\Debug\netcoreapp3.1\03_CODE_PersistenceLib.csproj.CopyComplete
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\03_CODE_PersistenceLib\obj\Debug\netcoreapp3.1\03_CODE_PersistenceLib.dll
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\03_CODE_PersistenceLib\obj\Debug\netcoreapp3.1\03_CODE_PersistenceLib.pdb
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\03_CODE_PersistenceLib\obj\Debug\netcoreapp3.1\03_CODE_PersistenceLib.csprojAssemblyReference.cache
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\03_CODE_PersistenceLib\obj\Debug\netcoreapp3.1\03_CODE_PersistenceLib.AssemblyInfoInputs.cache
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\03_CODE_PersistenceLib\obj\Debug\netcoreapp3.1\03_CODE_PersistenceLib.AssemblyInfo.cs
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\03_CODE_PersistenceLib\obj\Debug\netcoreapp3.1\03_CODE_PersistenceLib.csproj.CoreCompileInputs.cache
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\03_CODE_PersistenceLib\obj\Debug\netcoreapp3.1\03_CODE_PersistenceLib.dll
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\03_CODE_PersistenceLib\obj\Debug\netcoreapp3.1\03_CODE_PersistenceLib.pdb
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\03_CODE_PersistenceLib\bin\Debug\netcoreapp3.1\03_CODE_PersistenceLib.deps.json
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\03_CODE_PersistenceLib\bin\Debug\netcoreapp3.1\03_CODE_PersistenceLib.dll
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\03_CODE_PersistenceLib\bin\Debug\netcoreapp3.1\03_CODE_PersistenceLib.pdb
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\03_CODE_PersistenceLib\bin\Debug\netcoreapp3.1\02_CODE_GameLib.dll
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\03_CODE_PersistenceLib\bin\Debug\netcoreapp3.1\02_CODE_GameLib.pdb
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\03_CODE_PersistenceLib\obj\Debug\netcoreapp3.1\03_CODE_PersistenceLib.csproj.CopyComplete

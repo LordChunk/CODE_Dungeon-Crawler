@@ -1,0 +1,64 @@
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\01_CODE_Frontend\bin\Debug\netcoreapp3.1\02_CODE_GameLib.dll
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\01_CODE_Frontend\bin\Debug\netcoreapp3.1\03_CODE_PersistenceLib.dll
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\01_CODE_Frontend\obj\Debug\netcoreapp3.1\01_CODE_Frontend.csprojAssemblyReference.cache
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\01_CODE_Frontend\obj\Debug\netcoreapp3.1\01_CODE_Frontend.AssemblyInfoInputs.cache
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\01_CODE_Frontend\obj\Debug\netcoreapp3.1\01_CODE_Frontend.AssemblyInfo.cs
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\01_CODE_Frontend\obj\Debug\netcoreapp3.1\01_CODE_Frontend.csproj.CoreCompileInputs.cache
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\01_CODE_Frontend\bin\Debug\netcoreapp3.1\01_CODE_Frontend.exe
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\01_CODE_Frontend\bin\Debug\netcoreapp3.1\01_CODE_Frontend.deps.json
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\01_CODE_Frontend\bin\Debug\netcoreapp3.1\01_CODE_Frontend.runtimeconfig.json
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\01_CODE_Frontend\bin\Debug\netcoreapp3.1\01_CODE_Frontend.runtimeconfig.dev.json
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\01_CODE_Frontend\bin\Debug\netcoreapp3.1\01_CODE_Frontend.dll
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\01_CODE_Frontend\bin\Debug\netcoreapp3.1\01_CODE_Frontend.pdb
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\01_CODE_Frontend\bin\Debug\netcoreapp3.1\Autofac.dll
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\01_CODE_Frontend\bin\Debug\netcoreapp3.1\03_CODE_PersistenceLib.pdb
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\01_CODE_Frontend\bin\Debug\netcoreapp3.1\02_CODE_GameLib.pdb
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\01_CODE_Frontend\obj\Debug\netcoreapp3.1\01_CODE_Frontend.csproj.CopyComplete
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\01_CODE_Frontend\obj\Debug\netcoreapp3.1\01_CODE_Frontend.dll
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\01_CODE_Frontend\obj\Debug\netcoreapp3.1\01_CODE_Frontend.pdb
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\01_CODE_Frontend\obj\Debug\netcoreapp3.1\01_CODE_Frontend.genruntimeconfig.cache
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\01_CODE_Frontend\bin\Debug\netcoreapp3.1\Levels\SimpleLevel.json
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\01_CODE_Frontend\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\mmaar\Documents\GitHub\CODE_DungeonCrawler\01_CODE_Frontend\bin\Debug\netcoreapp3.1\Levels\TempleOfDoom.json
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\01_CODE_Frontend\bin\Debug\netcoreapp3.1\01_CODE_Frontend.exe
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\01_CODE_Frontend\bin\Debug\netcoreapp3.1\Levels\SimpleLevel.json
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\01_CODE_Frontend\bin\Debug\netcoreapp3.1\Levels\TempleOfDoom.json
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\01_CODE_Frontend\bin\Debug\netcoreapp3.1\01_CODE_Frontend.deps.json
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\01_CODE_Frontend\bin\Debug\netcoreapp3.1\01_CODE_Frontend.runtimeconfig.json
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\01_CODE_Frontend\bin\Debug\netcoreapp3.1\01_CODE_Frontend.runtimeconfig.dev.json
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\01_CODE_Frontend\bin\Debug\netcoreapp3.1\01_CODE_Frontend.dll
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\01_CODE_Frontend\bin\Debug\netcoreapp3.1\01_CODE_Frontend.pdb
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\01_CODE_Frontend\bin\Debug\netcoreapp3.1\Autofac.dll
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\01_CODE_Frontend\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\01_CODE_Frontend\bin\Debug\netcoreapp3.1\02_CODE_GameLib.dll
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\01_CODE_Frontend\bin\Debug\netcoreapp3.1\03_CODE_PersistenceLib.dll
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\01_CODE_Frontend\bin\Debug\netcoreapp3.1\03_CODE_PersistenceLib.pdb
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\01_CODE_Frontend\bin\Debug\netcoreapp3.1\02_CODE_GameLib.pdb
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\01_CODE_Frontend\obj\Debug\netcoreapp3.1\01_CODE_Frontend.csprojAssemblyReference.cache
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\01_CODE_Frontend\obj\Debug\netcoreapp3.1\01_CODE_Frontend.AssemblyInfoInputs.cache
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\01_CODE_Frontend\obj\Debug\netcoreapp3.1\01_CODE_Frontend.AssemblyInfo.cs
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\01_CODE_Frontend\obj\Debug\netcoreapp3.1\01_CODE_Frontend.csproj.CoreCompileInputs.cache
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\01_CODE_Frontend\obj\Debug\netcoreapp3.1\01_CODE_Frontend.csproj.CopyComplete
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\01_CODE_Frontend\obj\Debug\netcoreapp3.1\01_CODE_Frontend.dll
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\01_CODE_Frontend\obj\Debug\netcoreapp3.1\01_CODE_Frontend.pdb
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Voorbeelduitwerkingen\CODE_Deelopdracht1\01_CODE_Frontend\obj\Debug\netcoreapp3.1\01_CODE_Frontend.genruntimeconfig.cache
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\01_CODE_Frontend\obj\Debug\netcoreapp3.1\01_CODE_Frontend.csprojAssemblyReference.cache
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\01_CODE_Frontend\obj\Debug\netcoreapp3.1\01_CODE_Frontend.AssemblyInfoInputs.cache
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\01_CODE_Frontend\obj\Debug\netcoreapp3.1\01_CODE_Frontend.AssemblyInfo.cs
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\01_CODE_Frontend\obj\Debug\netcoreapp3.1\01_CODE_Frontend.csproj.CoreCompileInputs.cache
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\01_CODE_Frontend\obj\Debug\netcoreapp3.1\01_CODE_Frontend.dll
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\01_CODE_Frontend\obj\Debug\netcoreapp3.1\01_CODE_Frontend.pdb
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\01_CODE_Frontend\bin\Debug\netcoreapp3.1\01_CODE_Frontend.exe
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\01_CODE_Frontend\bin\Debug\netcoreapp3.1\Levels\TempleOfDoom.json
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\01_CODE_Frontend\bin\Debug\netcoreapp3.1\01_CODE_Frontend.deps.json
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\01_CODE_Frontend\bin\Debug\netcoreapp3.1\01_CODE_Frontend.runtimeconfig.json
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\01_CODE_Frontend\bin\Debug\netcoreapp3.1\01_CODE_Frontend.runtimeconfig.dev.json
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\01_CODE_Frontend\bin\Debug\netcoreapp3.1\01_CODE_Frontend.dll
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\01_CODE_Frontend\bin\Debug\netcoreapp3.1\01_CODE_Frontend.pdb
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\01_CODE_Frontend\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\01_CODE_Frontend\bin\Debug\netcoreapp3.1\02_CODE_GameLib.dll
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\01_CODE_Frontend\bin\Debug\netcoreapp3.1\03_CODE_PersistenceLib.dll
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\01_CODE_Frontend\bin\Debug\netcoreapp3.1\03_CODE_PersistenceLib.pdb
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\01_CODE_Frontend\bin\Debug\netcoreapp3.1\02_CODE_GameLib.pdb
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\01_CODE_Frontend\obj\Debug\netcoreapp3.1\01_CODE_Frontend.csproj.CopyComplete
+C:\Users\mmaar\Avans Hogeschool\AII-Informatica - General\Modules (MoCo, Docenten)\Periode 2\06_CODE\CODE_2021\Toetsing\CODE_Deelopdracht1 Startproject\01_CODE_Frontend\obj\Debug\netcoreapp3.1\01_CODE_Frontend.genruntimeconfig.cache

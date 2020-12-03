@@ -1,0 +1,65 @@
+﻿{
+	"rooms": [
+		{
+			"id": 1,
+			"type": "room",
+			"width": 5,
+			"height": 5,
+			"items": [
+				{
+					"type": "key",
+					"color": "red",
+					"x": 1,
+					"y": 1
+				}
+			]
+		},
+		{
+			"id": 2,
+			"type": "room",
+			"width": 9,
+			"height": 3,
+			"items": [
+				{
+					"type": "boobietrap",
+					"damage": "1",
+					"x": 4,
+					"y": 1
+				}
+			]
+		},
+		{
+			"id": 3,
+			"type": "room",
+			"width": 5,
+			"height": 5,
+			"items": [
+				{
+					"type": "holy grail",
+					"x": 2,
+					"y": 2
+				}
+			]
+		}
+	],
+	"connections": [
+		{
+			"WEST": 1,
+			"EAST": 2,
+			"behavior": {
+				"type": "door",
+				"color": "red"
+			}
+		},
+		{
+			"NORTH": 2,
+			"SOUTH": 3
+		}
+	],
+	"player": {
+		"startRoomId": 1,
+		"startX": 3,
+		"startY": 3,
+		"lives":  3
+	}
+}
