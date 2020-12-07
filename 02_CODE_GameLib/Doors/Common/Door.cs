@@ -3,7 +3,7 @@
     public abstract class Door
     {
         public Direction Direction;
-        public Room ConnectedRoom;
-        public Direction ConnectedRoomSpawnDirection;
+        public Door LinkedDoor;
+        public Room LinkedRoom;
     }
 }
