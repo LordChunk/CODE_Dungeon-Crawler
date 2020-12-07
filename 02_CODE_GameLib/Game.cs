@@ -9,6 +9,8 @@ namespace CODE_GameLib
         public ConsoleKey KeyPressed { get; private set; }
         public bool Quit { get; private set; } = false;
 
+        public Player Player;
+
         public void Run()
         {
             KeyPressed = Console.ReadKey().Key;

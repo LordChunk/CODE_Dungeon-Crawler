@@ -1,6 +1,6 @@
 ﻿using CODE_GameLib;
 
-namespace CODE_FileSystem
+namespace CODE_PersistenceLib
 {
     public class GameReader
     {
