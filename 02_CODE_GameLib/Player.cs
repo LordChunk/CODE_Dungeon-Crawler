@@ -1,4 +1,5 @@
-﻿using CODE_GameLib.Interfaces;
+﻿using System.Collections.Generic;
+using CODE_GameLib.Interfaces;
 using CODE_GameLib.Items.Common;
 
 namespace CODE_GameLib
@@ -10,6 +11,6 @@ namespace CODE_GameLib
         public int Y;
 
         public int Lives;
-        public IPickUpItem[] Items;
+        public IEnumerable<IPickUpItem> Items;
     }
 }

@@ -12,16 +12,15 @@ namespace CODE_Frontend
             Console.WriteLine("Please hit any keys or hit escape to exit...");
         }
 
-        public void Draw(Game game)
+        public void Draw(ConsoleKey keyPressed)
+        { 
+            Console.WriteLine($"\nYou pressed {keyPressed}");
+            //TODO: draw Board
+        }
+
+        public void DrawEnd()
         {
-            if (!game.Quit)
-            {
-                Console.WriteLine($"\nYou pressed {game.KeyPressed}");
-            }
-            else
-            {
-                Console.WriteLine("Quitting game, goodbye!");
-            }
+            Console.WriteLine("Quitting game, goodbye!");
         }
     }
 }
