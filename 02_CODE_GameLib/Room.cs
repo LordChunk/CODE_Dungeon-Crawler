@@ -10,7 +10,7 @@ namespace CODE_GameLib
         public int Width;
         public int Height;
         public List<IItem> Items;
-        public List<IConnection> Connections;
+        public Dictionary<Direction, IConnection> Connections;
         public readonly string Type = "room";
     }
 }

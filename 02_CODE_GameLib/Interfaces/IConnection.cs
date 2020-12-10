@@ -6,7 +6,7 @@ namespace CODE_GameLib.Interfaces
 {
     public interface IConnection
     {
-        public Dictionary<Direction, Room> Rooms { get; set; }
+        public List<Connection.RoomDirectionPair> Rooms { get; set; }
         bool CanUseDoor(Player player);
         bool UseDoor(Player player);
     }

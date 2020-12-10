@@ -56,7 +56,7 @@ namespace CODE_Frontend
             }
 
             //put all door position in array
-            foreach (var kvp in player.CurrentRoom.Doors)
+            foreach (var kvp in player.CurrentRoom.Connections)
             {
                 switch (kvp.Key)
                 {
