@@ -6,7 +6,7 @@ namespace CODE_GameLib
 {
     public class Player
     {
-        public Room CurrentRoom;
+        public Room CurrentRoom = new Room{Height = 5, Width = 5};
         public int X;
         public int Y;
 

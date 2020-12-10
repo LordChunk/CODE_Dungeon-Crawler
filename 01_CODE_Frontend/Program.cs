@@ -22,7 +22,6 @@ namespace CODE_Frontend
 
             gameView.Draw(game);
 
-            //game.Updated += (sender, game) => 
             GameInputs inputReader = new GameInputs();
             inputReader.Run(gameView, game);
         }
