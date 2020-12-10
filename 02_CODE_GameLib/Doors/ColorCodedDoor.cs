@@ -9,5 +9,9 @@ namespace CODE_GameLib.Doors
     {
         public Color ColorCode { get; set; }
         public bool IsLocked { get; set; }
+
+        public ColorCodedDoor(int roomId, Direction direction) : base(roomId, direction)
+        {
+        }
     }
 }

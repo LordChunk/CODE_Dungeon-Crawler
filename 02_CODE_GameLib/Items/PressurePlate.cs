@@ -1,4 +1,6 @@
-﻿using CODE_GameLib.Interfaces;
+﻿using System.Linq;
+using CODE_GameLib.Doors;
+using CODE_GameLib.Interfaces;
 using CODE_GameLib.Items.Common;
 
 namespace CODE_GameLib.Items
@@ -14,7 +16,14 @@ namespace CODE_GameLib.Items
 
         public void OnTrigger(Player player)
         {
-            //player.CurrentRoom.;
+            var toggleDoors = player.CurrentRoom.Doors
+                .Where(d => d.GetType() == typeof(ToggleDoor))
+                .Select(d => d.Value as ToggleDoor);
+
+            foreach (var toggleDoor in toggleDoors)
+            {
+                toggleDoor?.Toggle();
+            }
 
             IsActive = !IsActive;
         }

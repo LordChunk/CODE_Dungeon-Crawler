@@ -1,6 +1,8 @@
-﻿namespace CODE_GameLib.Doors.Common
+﻿using CODE_GameLib.Interfaces;
+
+namespace CODE_GameLib.Doors.Common
 {
-    public abstract class Door
+    public abstract class Door : IDoor
     {
         public int RoomId { get; }
         public Direction Direction { get; }
