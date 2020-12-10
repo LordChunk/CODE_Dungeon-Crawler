@@ -34,8 +34,6 @@ namespace CODE_PersistenceLib
             var jsonRooms = json["rooms"];
             Room startRoom;
 
-            var tempRooms = new List<Room>();
-
             if (jsonRooms == null) throw new NoNullAllowedException("This level contains no rooms.");
             foreach (var jsonRoom in jsonRooms)
             {
@@ -47,7 +45,6 @@ namespace CODE_PersistenceLib
                 // TODO: Parse doors
 
 
-                tempRooms.Add(room);
             }
 
 
