@@ -20,5 +20,15 @@ namespace CODE_GameLib.Doors.Common
             LinkedDoor = toLinkDoor;
             return false;
         }
+
+        public virtual bool CanUseDoor(Player player)
+        {
+            return true;
+        }
+
+        public virtual bool UseDoor(Player player)
+        {
+            return CanUseDoor(player);
+        }
     }
 }

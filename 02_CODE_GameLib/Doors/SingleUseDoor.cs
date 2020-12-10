@@ -12,9 +12,16 @@ namespace CODE_GameLib.Doors
             IsLocked = false;
         }
 
-        public void UseDoor()
+        public override bool CanUseDoor(Player player)
         {
+            return !IsLocked;
+        }
+
+        public override bool UseDoor(Player player)
+        {
+            if (!CanUseDoor(player)) return false;
             IsLocked = true;
+            return true;
         }
     }
 }

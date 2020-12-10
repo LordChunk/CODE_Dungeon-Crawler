@@ -16,4 +16,10 @@ namespace CODE_GameLib.Doors
         {
             IsLocked = !IsLocked;
         }
+
+        public override bool CanUseDoor(Player player)
+        {
+            return !IsLocked;
+        }
+    }
 }
