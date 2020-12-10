@@ -5,11 +5,15 @@ namespace CODE_GameLib
     public class Game
     {
         public event EventHandler<Game> Updated;
+        public Player Player;
 
-        public Player Player = new Player();
 
-        //wanneer game aangepast word:
+        //wanneer game aangepast wordt:
         //Updated?.Invoke(this, this);
+        protected virtual void OnUpdated(Game game)
+        {
+            Updated?.Invoke(this, game);
+        }
 
         public void MovePlayer(Direction direction)
         {

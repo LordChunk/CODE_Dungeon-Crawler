@@ -4,9 +4,14 @@
     {
         public bool IsUsed { get; private set; }
 
-        public override void OnTrigger()
+        public SingleUseTrap(int damage) : base(damage)
         {
-            base.OnTrigger();
+            IsUsed = false;
+        }
+
+        public override void OnTrigger(Player player)
+        {
+            base.OnTrigger(player);
             IsUsed = true;
         }
     }
