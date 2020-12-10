@@ -1,15 +1,15 @@
-﻿using System;
+﻿using CODE_GameLib;
+using CODE_GameLib.Doors.Common;
+using CODE_GameLib.Enums;
+using CODE_GameLib.Interfaces;
+using CODE_GameLib.Items;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using CODE_GameLib;
-using CODE_GameLib.Enums;
-using CODE_GameLib.Interfaces;
-using CODE_GameLib.Items;
-using CODE_GameLib.Items.Common;
-using Newtonsoft.Json.Linq;
 // ddReSharper disable AssignNullToNotNullAttribute
 
 namespace CODE_PersistenceLib
@@ -26,7 +26,9 @@ namespace CODE_PersistenceLib
             { "sankara stone", CreateSankaraStone },
             { "key", CreateKey },
             { "pressure plate", CreatePressurePlate },
-        }; 
+        };
+
+        private Dictionary<int, Room> rooms;
 
         public Game Read(string filePath)
         {
@@ -34,16 +36,17 @@ namespace CODE_PersistenceLib
             var jsonRooms = json["rooms"];
             Room startRoom;
 
-            var rooms = new List<Room>();
+            rooms = new Dictionary<int, Room>();
 
             if (jsonRooms == null) throw new NoNullAllowedException("This level contains no rooms.");
             foreach (var jsonRoom in jsonRooms)
             {
-                if(jsonRoom["type"]?.ToString() != "room") continue;
+                if (jsonRoom["type"]?.ToString() != "room") continue;
                 var room = CreateRoom(jsonRoom);
                 var jsonItems = jsonRoom["items"];
-                if(jsonItems != null)
+                if (jsonItems != null)
                     room.Items = CreateItems(jsonItems);
+                rooms.Add(room.Id, room);
             }
 
             // TODO: Parse doors
@@ -51,18 +54,41 @@ namespace CODE_PersistenceLib
             var connections = new List<IConnection>();
             foreach (var jsonConnection in jsonConnections)
             {
-                   
+                var conn = CreateConnection(jsonConnection);
             }
 
 
             return new Game();
         }
 
-        private static List<IConnection> CreateConnections()
+        private IConnection CreateConnection(JToken jsonConnection)
         {
+            IConnection connection;
+            var jsonDoor = jsonConnection["door"];
 
+            if (jsonDoor != null)
+            {
+                var type = jsonDoor.First;
+            }
+
+            var direction1 = CreateConnectionPair(jsonConnection.First);
+
+            var direction2 = CreateConnectionPair(jsonConnection.First.Next);
 
             return null;
+        }
+
+        private Connection.RoomDirectionPair CreateConnectionPair(JToken jsonConnection)
+        {
+            var directionString = jsonConnection.ToObject<JProperty>()?.Name;
+            var roomId = jsonConnection.First.Value<int>();
+            var direction = (Direction) Enum.Parse(typeof(Direction), directionString, true);
+
+            return new Connection.RoomDirectionPair
+            {
+                Room = rooms.FirstOrDefault(kvp => kvp.Key == jsonConnection.First.Value<int>()).Value,
+                DoorLocation = direction
+            };
         }
 
         /// <summary>
@@ -95,7 +121,7 @@ namespace CODE_PersistenceLib
             var type = jsonItem["type"].Value<string>();
             // Check if item type is valid
             var typeKvp = ItemTypes.FirstOrDefault(it => it.Key == type);
-            if(typeKvp.Value == null) throw new NoNullAllowedException("Item type "+ type +" is not a valid item type.");
+            if (typeKvp.Value == null) throw new NoNullAllowedException("Item type " + type + " is not a valid item type.");
             // Parse item and return
             return typeKvp.Value(jsonItem);
         }
@@ -103,7 +129,7 @@ namespace CODE_PersistenceLib
         private static Coordinate GetItemCoordinates(JToken jsonItem)
         {
             return new Coordinate(
-                jsonItem["x"].Value<int>(), 
+                jsonItem["x"].Value<int>(),
                 jsonItem["y"].Value<int>()
             );
         }

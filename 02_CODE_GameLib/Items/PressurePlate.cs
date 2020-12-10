@@ -19,7 +19,7 @@ namespace CODE_GameLib.Items
         {
             var toggleDoors = player.CurrentRoom.Connections
                 .Where(d => d.GetType() == typeof(ToggleConnection))
-                .Select(d => d as ToggleConnection);
+                .Select(d => d.Value as ToggleConnection);
 
             foreach (var toggleDoor in toggleDoors)
             {
