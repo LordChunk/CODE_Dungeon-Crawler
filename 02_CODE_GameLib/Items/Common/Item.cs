@@ -1,8 +1,10 @@
-﻿namespace CODE_GameLib.Items.Common
+﻿using CODE_GameLib.Interfaces;
+
+namespace CODE_GameLib.Items.Common
 {
-    public abstract class Item
+    public abstract class Item : IItem
     {
-        public int X;
-        public int Y;
+        public int X { get; set; }
+        public int Y { get; set; }
     }
 }
