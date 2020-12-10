@@ -3,18 +3,17 @@ using CODE_GameLib.Interfaces;
 
 namespace CODE_GameLib.Doors
 {
-    public class ToggleDoor : Door
+    public class ToggleDoor : Door, ILockable
     {
-        public bool Toggled { get; private set; }
+        public bool IsLocked { get; private set; }
 
         public ToggleDoor(int roomId, Direction direction) : base(roomId, direction)
         {
-            Toggled = false;
+            IsLocked = false;
         }
 
         public void Toggle()
         {
-            Toggled = !Toggled;
+            IsLocked = !IsLocked;
         }
-    }
 }
