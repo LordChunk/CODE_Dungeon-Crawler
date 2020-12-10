@@ -7,13 +7,9 @@ using CODE_GameLib.Items;
 
 namespace CODE_GameLib.Doors
 {
-    public class ColorCodedDoor : Door, IColorBinder
+    public class ColorCodedConnection : Connection, IColorBinder
     {
         public Color ColorCode { get; private set; }
-
-        public ColorCodedDoor(int roomId, Direction direction) : base(roomId, direction)
-        {
-        }
 
         public override bool CanUseDoor(Player player)
         {

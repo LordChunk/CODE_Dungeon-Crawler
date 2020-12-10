@@ -17,9 +17,9 @@ namespace CODE_GameLib.Items
 
         public void OnTrigger(Player player)
         {
-            var toggleDoors = player.CurrentRoom.Doors
-                .Where(d => d.GetType() == typeof(ToggleDoor))
-                .Select(d => d.Value as ToggleDoor);
+            var toggleDoors = player.CurrentRoom.Connections
+                .Where(d => d.GetType() == typeof(ToggleConnection))
+                .Select(d => d as ToggleConnection);
 
             foreach (var toggleDoor in toggleDoors)
             {

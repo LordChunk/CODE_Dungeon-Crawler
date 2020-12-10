@@ -10,12 +10,7 @@ namespace CODE_GameLib
         public int Width;
         public int Height;
         public List<IItem> Items;
-        public Dictionary<Direction, IDoor> Doors;
+        public List<IConnection> Connections;
         public readonly string Type = "room";
-
-        public Room()
-        {
-            Doors = new Dictionary<Direction, IDoor>();
-        }
     }
 }
