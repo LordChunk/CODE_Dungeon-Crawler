@@ -6,7 +6,7 @@ namespace CODE_GameLib.Items
     {
         public bool IsUsed { get; private set; }
 
-        public SingleUseTrap() : base(ItemType.DisappearingBoobyTrap)
+        public SingleUseTrap()
         {
             IsUsed = false;
         }

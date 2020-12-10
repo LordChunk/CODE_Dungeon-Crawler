@@ -10,7 +10,7 @@ namespace CODE_GameLib.Items
     {
         public bool IsActive { get; private set; }
 
-        public PressurePlate() : base(ItemType.PressurePlate)
+        public PressurePlate()
         {
             IsActive = false;
         }
