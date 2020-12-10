@@ -39,9 +39,10 @@ namespace CODE_PersistenceLib
             {
                 if(jsonRoom["type"]?.ToString() != "room") continue;
                 var room = CreateRoom(jsonRoom);
-                room.Items = CreateItems(jsonRoom["items"].Values());
+                var jsonItems = jsonRoom["items"];
+                if(jsonItems != null)
+                    room.Items = CreateItems(jsonItems);
                 // TODO: Parse doors
-
 
 
             }
