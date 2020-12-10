@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using CODE_GameLib;
@@ -21,9 +22,9 @@ namespace CODE_PersistenceLib
         {
             { "boobietrap", CreateTrap },
             { "disappearing boobietrap", CreateSingleUseTrap },
-            { "sankara stone", null },
-            { "key", null },
-            { "pressure plate", null },
+            { "sankara stone", CreateSankaraStone },
+            { "key", CreateKey },
+            { "pressure plate", CreatePressurePlate },
         }; 
 
         public Game Read(string filePath)
@@ -49,16 +50,7 @@ namespace CODE_PersistenceLib
 
         private List<IItem> ParseItems(IEnumerable<JToken> jsonItems)
         {
-            var items = new List<IItem>();
-            foreach (var jsonItem in jsonItems)
-            {
-                var item = ItemTypes.FirstOrDefault(
-                        i => i.Key == jsonItem["type"].Value<string>())
-                    .Value(jsonItem);
-                items.Add(item);
-            }
-
-            return items;
+            return jsonItems.Select(CreateItem).ToList();
         }
 
 
@@ -74,26 +66,35 @@ namespace CODE_PersistenceLib
             };
         }
 
-        private static Item CreateItem(JToken jsonItem)
+        /// <summary>
+        /// Parses a JSON string containing an item. This method will check the item against all item types stored in the ItemTypes dictionary
+        /// </summary>
+        /// <param name="jsonItem">JSON string containing the item</param>
+        /// <returns>Parsed item</returns>
+        private static IItem CreateItem(JToken jsonItem)
         {
             var type = jsonItem["type"].Value<string>();
-            
-
-            return null;
+            // Check if item type is valid
+            var typeKvp = ItemTypes.FirstOrDefault(it => it.Key == type);
+            if(typeKvp.Value == null) throw new NoNullAllowedException("Item type "+ type +" is not a valid item type.");
+            // Parse item and return
+            return typeKvp.Value(jsonItem);
         }
 
-        //private static IItem SetItemCoordinates(IItem item, JToken jsonItem)
-        //{
-        //    //return new 
-        //}
+        private static Coordinate GetItemCoordinates(JToken jsonItem)
+        {
+            return new Coordinate(
+                jsonItem["x"].Value<int>(), 
+                jsonItem["y"].Value<int>()
+            );
+        }
 
         private static Trap CreateTrap(JToken jsonTrap)
         {
             return new Trap
             {
-                X = jsonTrap["x"].Value<int>(),
-                Y = jsonTrap["y"].Value<int>(),
                 Damage = jsonTrap["damage"].Value<int>(),
+                Coordinate = GetItemCoordinates(jsonTrap),
             };
         }
 
@@ -101,20 +102,39 @@ namespace CODE_PersistenceLib
         {
             return new SingleUseTrap
             {
-                X = jsonTrap["x"].Value<int>(),
-                Y = jsonTrap["y"].Value<int>(),
+                Coordinate = GetItemCoordinates(jsonTrap),
                 Damage = jsonTrap["damage"].Value<int>(),
             };
         }
 
-        private static SankaraStone createSankaraStone(JToken jsonStone)
+        private static SankaraStone CreateSankaraStone(JToken jsonStone)
         {
-            //return new SankaraStone
-            //{
-                
-            //}
+            return new SankaraStone
+            {
+                Coordinate = GetItemCoordinates(jsonStone),
+            };
+        }
 
-            return null;
+        private static Key CreateKey(JToken jsonKey)
+        {
+            return new Key
+            {
+                Coordinate = GetItemCoordinates(jsonKey),
+                ColorCode = ParseColorString(jsonKey["color"].Value<string>())
+            };
+        }
+
+        private static PressurePlate CreatePressurePlate(JToken jsonPlate)
+        {
+            return new PressurePlate()
+            {
+                Coordinate = GetItemCoordinates(jsonPlate)
+            };
+        }
+
+        private static Color ParseColorString(string color)
+        {
+            return Color.FromName(color);
         }
     }
 }
