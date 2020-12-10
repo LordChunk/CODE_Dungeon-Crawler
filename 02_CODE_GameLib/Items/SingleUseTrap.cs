@@ -4,7 +4,7 @@
     {
         public bool IsUsed { get; private set; }
 
-        public SingleUseTrap(int damage) : base(damage)
+        public SingleUseTrap()
         {
             IsUsed = false;
         }
