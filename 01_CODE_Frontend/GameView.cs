@@ -1,6 +1,7 @@
 ﻿using CODE_GameLib;
 using System;
 using System.Collections.Generic;
+using CODE_GameLib.Doors;
 using CODE_GameLib.Enums;
 using CODE_GameLib.Items;
 
@@ -37,10 +38,24 @@ namespace CODE_Frontend
             {
                 if (item.GetType() == typeof(Key))
                 {
-                    
+                    _board[item.Coordinate.X, item.Coordinate.Y] = 'K';
                 }
-                
-                //_board[item.Coordinate.X, item.Coordinate.Y] = (char)item.Type;
+                else if(item.GetType() == typeof(PressurePlate))
+                {
+                    _board[item.Coordinate.X, item.Coordinate.Y] = 'T';
+                }
+                else if (item.GetType() == typeof(SankaraStone))
+                {
+                    _board[item.Coordinate.X, item.Coordinate.Y] = 'S';
+                }
+                else if (item.GetType() == typeof(SingleUseTrap))
+                {
+                    _board[item.Coordinate.X, item.Coordinate.Y] = '@';
+                }
+                else if (item.GetType() == typeof(Trap))
+                {
+                    _board[item.Coordinate.X, item.Coordinate.Y] = 'O';
+                }
             }
 
             //put all walls position in array
@@ -56,22 +71,41 @@ namespace CODE_Frontend
             }
 
             //put all door position in array
-            foreach (var kvp in player.CurrentRoom.Doors)
+            foreach (var connection in player.CurrentRoom.Connections)
             {
-                switch (kvp.Key)
+                var coordinate = new Coordinate(0,0);
+
+                switch (connection.Rooms)
                 {
                     case Direction.North:
-                        _board[(player.CurrentRoom.Width - 1) / 2, 0] = '=';
+                        coordinate.X = (player.CurrentRoom.Width - 1) / 2;
+                        coordinate.Y = 0;
+                        _board[coordinate.X, coordinate.Y] = '=';
                         break;
                     case Direction.East:
-                        _board[player.CurrentRoom.Width - 1, (player.CurrentRoom.Width - 1) / 2] = '|';
+                        coordinate.X = player.CurrentRoom.Width - 1;
+                        coordinate.Y = (player.CurrentRoom.Height - 1) / 2;
+                        _board[coordinate.X, coordinate.Y] = '|';
                         break;
                     case Direction.West:
-                        _board[0, (player.CurrentRoom.Height - 1) / 2] = '|';
+                        coordinate.X = 0;
+                        coordinate.Y = (player.CurrentRoom.Height - 1) / 2;
+                        _board[coordinate.X, coordinate.Y] = '|';
                         break;
                     case Direction.South:
-                        _board[(player.CurrentRoom.Width - 1) / 2, player.CurrentRoom.Height - 1] = '=';
+                        coordinate.X = (player.CurrentRoom.Width - 1) / 2;
+                        coordinate.Y = player.CurrentRoom.Height - 1;
+                        _board[coordinate.X, coordinate.Y] = '=';
                         break;
+                }
+
+                if (kvp.Value.GetType() == typeof(ToggleDoor))
+                {
+                    _board[coordinate.X, coordinate.Y] = '┴';
+                }
+                else if (kvp.Value.GetType() == typeof(SingleUseDoor))
+                {
+                    _board[coordinate.X, coordinate.Y] = '∩';
                 }
             }
 
