@@ -5,11 +5,16 @@ namespace CODE_GameLib.Items
 {
     public class Trap : Item, IEnvironmentalItem
     {
-        public int Damage;
+        public readonly int Damage;
 
-        public virtual void OnTrigger()
+        public Trap(int damage)
         {
-            throw new System.NotImplementedException();
+            Damage = damage;
+        }
+
+        public virtual void OnTrigger(Player player)
+        {
+            player.Lives -= Damage;
         }
     }
 }

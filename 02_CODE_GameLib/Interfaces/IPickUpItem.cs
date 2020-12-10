@@ -2,6 +2,9 @@
 {
     public interface IPickUpItem
     {
-        public void OnPickUp();
+        public void OnPickUp(Player player)
+        {
+            player.Items.Add(this);
+        }
     }
 }

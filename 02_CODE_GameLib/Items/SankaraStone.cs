@@ -5,9 +5,5 @@ namespace CODE_GameLib.Items
 {
     public class SankaraStone : Item, IPickUpItem
     {
-        public void OnPickUp()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

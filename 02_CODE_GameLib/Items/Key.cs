@@ -6,11 +6,10 @@ namespace CODE_GameLib.Items
 {
     public class Key : Item, IPickUpItem, IColorBinder
     {
-        public void OnPickUp()
+        public Key(Color color)
         {
-            throw new System.NotImplementedException();
+            ColorCode = color;
         }
-
         public Color ColorCode { get; set; }
     }
 }
