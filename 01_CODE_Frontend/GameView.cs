@@ -71,11 +71,11 @@ namespace CODE_Frontend
             }
 
             //put all door position in array
-            foreach (var connection in player.CurrentRoom.Connections)
+            foreach (var kvp in player.CurrentRoom.Connections)
             {
                 var coordinate = new Coordinate(0,0);
 
-                switch (connection.Rooms)
+                switch (kvp.Key)
                 {
                     case Direction.North:
                         coordinate.X = (player.CurrentRoom.Width - 1) / 2;
@@ -99,11 +99,11 @@ namespace CODE_Frontend
                         break;
                 }
 
-                if (kvp.Value.GetType() == typeof(ToggleDoor))
+                if (kvp.Value.GetType() == typeof(ToggleConnection))
                 {
                     _board[coordinate.X, coordinate.Y] = '┴';
                 }
-                else if (kvp.Value.GetType() == typeof(SingleUseDoor))
+                else if (kvp.Value.GetType() == typeof(SingleUseConnection))
                 {
                     _board[coordinate.X, coordinate.Y] = '∩';
                 }
