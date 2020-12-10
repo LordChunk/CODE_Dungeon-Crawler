@@ -5,10 +5,18 @@ namespace CODE_GameLib.Items
 {
     public class PressurePlate : Item, IEnvironmentalItem
     {
-        public bool IsActive;
-        public void OnTrigger()
+        public bool IsActive { get; private set; }
+
+        public PressurePlate()
         {
-            throw new System.NotImplementedException();
+            IsActive = false;
+        }
+
+        public void OnTrigger(Player player)
+        {
+            //player.CurrentRoom.;
+
+            IsActive = !IsActive;
         }
     }
 }

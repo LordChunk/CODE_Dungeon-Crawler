@@ -2,8 +2,8 @@
 {
     public abstract class Door
     {
+        public Room IsInRoom;
         public Direction Direction;
         public Door LinkedDoor;
-        public Room LinkedRoom;
     }
 }
