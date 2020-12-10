@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using CODE_GameLib.Doors;
+using CODE_GameLib.Enums;
 using CODE_GameLib.Interfaces;
 using CODE_GameLib.Items.Common;
 
@@ -9,7 +10,7 @@ namespace CODE_GameLib.Items
     {
         public bool IsActive { get; private set; }
 
-        public PressurePlate()
+        public PressurePlate() : base(ItemType.PressurePlate)
         {
             IsActive = false;
         }

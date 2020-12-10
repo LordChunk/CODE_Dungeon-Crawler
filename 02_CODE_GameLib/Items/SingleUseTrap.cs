@@ -1,10 +1,12 @@
-﻿namespace CODE_GameLib.Items
+﻿using CODE_GameLib.Enums;
+
+namespace CODE_GameLib.Items
 {
     public class SingleUseTrap : Trap
     {
         public bool IsUsed { get; private set; }
 
-        public SingleUseTrap()
+        public SingleUseTrap() : base(ItemType.DisappearingBoobyTrap)
         {
             IsUsed = false;
         }

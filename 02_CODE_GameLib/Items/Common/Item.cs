@@ -7,5 +7,10 @@ namespace CODE_GameLib.Items.Common
     {
         public Coordinate Coordinate { get; set; }
         public ItemType Type { get; set; }
+
+        public Item(ItemType type)
+        {
+            Type = type;
+        }
     }
 }
