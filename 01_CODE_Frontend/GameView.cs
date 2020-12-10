@@ -108,61 +108,77 @@ namespace CODE_Frontend
                     _board[coordinate.X, coordinate.Y] = '∩';
                 }
             }
-
-            //var room = player.CurrentRoom;
-
-            ////Check if location is on the outside
-            //if (coordinate.X == 0 || coordinate.Y == 0 || coordinate.X == room.Width -1|| coordinate.Y == room.Height - 1)
-            //{
-            //    _board[coordinate.X,coordinate.Y] = '#';
-            //}
-            //else if(coordinate.X == player.X && coordinate.Y == player.Y)
-            //{
-            //    _board[coordinate.X, coordinate.Y] = 'X';
-            //}
-            //else
-            //{
-            //    foreach (var item in room.Items)
-            //    {
-            //        if (item.Coordinate.X == coordinate.X && item.Coordinate.Y == coordinate.Y)
-            //        {
-            //            _board[coordinate.X, coordinate.Y] = (char)item.Type;
-            //            break;
-            //        }
-            //    }
-            //}
         }
 
         private void DrawBoard(Player player)
         {
-            //Console.Clear();
-            //_board = new char[game.Player.CurrentRoom.Width, game.Player.CurrentRoom.Height];
-            ////TODO: draw Board
+            Console.Clear();
 
-            //bool color = false;
-            //for (int i = 0; i < game.Player.CurrentRoom.Height; i++)
-            //{
-            //    for (int j = 0; j < game.Player.CurrentRoom.Width; j++)
-            //    {
-            //        if (color)
-            //        {
-            //            Console.BackgroundColor = ConsoleColor.DarkGray;
-            //            color = false;
-            //        }
-            //        else
-            //        {
-            //            Console.BackgroundColor = ConsoleColor.White;
-            //            color = true;
-            //        }
-            //        CalcChar(new Coordinate(j, i), game.Player);
-            //    }
-            //    Console.WriteLine();
-            //}
-            //Console.BackgroundColor = ConsoleColor.DarkGray;
+            bool color = false;
+            Console.BackgroundColor = ConsoleColor.DarkGray;
 
+            for (int i = 0; i < _board.GetLength(0); i++)
+            {
+                for (int j = 0; j < _board.GetLength(1); j++)
+                {
+                    if (color)
+                    {
+                        Console.BackgroundColor = ConsoleColor.DarkGray;
+                        color = false;
+                    }
+                    else
+                    {
+                        Console.BackgroundColor = ConsoleColor.White;
+                        color = true;
+                    }
 
+                    Console.ForegroundColor = DetermineColor(_board[j, i]);
+                    Console.Write(_board[j,i]);
+                }
+                Console.WriteLine();
+            }
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
+        }
 
-            //Console.BackgroundColor = ConsoleColor.Black;
+        private ConsoleColor DetermineColor(char c)
+        {
+            if (c == '#')
+            {
+                return ConsoleColor.Yellow;
+            }
+            else if (c == '@')
+            {
+                return ConsoleColor.Black;
+            }
+            else if(c == 's')
+            {
+                return ConsoleColor.DarkRed;
+            }
+            else if (c == 'O')
+            {
+                return ConsoleColor.Red;
+            }
+            else if (c == 'X')
+            {
+                return ConsoleColor.Cyan;
+            }
+            else if (c == '=' || c == '|')
+            {
+                return ConsoleColor.DarkGreen;
+            }
+            else if (c == '∩')
+            {
+                return ConsoleColor.DarkBlue;
+            }
+            else if (c == '┴')
+            {
+                return ConsoleColor.DarkBlue;
+            }
+            else 
+            {
+                return ConsoleColor.DarkBlue;
+            }
         }
     }
 }
