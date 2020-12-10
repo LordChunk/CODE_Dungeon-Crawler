@@ -31,30 +31,37 @@ namespace CODE_PersistenceLib
         {
             var json = JObject.Parse(File.ReadAllText(filePath));
             var jsonRooms = json["rooms"];
-            var rooms = new List<Room>();
+            Room startRoom;
 
             if (jsonRooms == null) throw new NoNullAllowedException("This level contains no rooms.");
             foreach (var jsonRoom in jsonRooms)
             {
                 if(jsonRoom["type"]?.ToString() != "room") continue;
-                var room = CreateRoomFromJson(jsonRoom);
-                room.Items = ParseItems(jsonRoom["items"].Values());
+                var room = CreateRoom(jsonRoom);
+                room.Items = CreateItems(jsonRoom["items"].Values());
                 // TODO: Parse doors
 
-                rooms.Add(room);
+
+
             }
 
 
             return new Game();
         }
 
-        private List<IItem> ParseItems(IEnumerable<JToken> jsonItems)
+        private static List<IDoor> CreateDoorsForRoom()
         {
-            return jsonItems.Select(CreateItem).ToList();
+
+
+            return null;
         }
 
-
-        private static Room CreateRoomFromJson(JToken jsonRoom)
+        /// <summary>
+        /// Creates a room item without items or doors
+        /// </summary>
+        /// <param name="jsonRoom">JSON string containing the room</param>
+        /// <returns>Room without doors or items</returns>
+        private static Room CreateRoom(JToken jsonRoom)
         {
             return new Room
             {
@@ -64,6 +71,11 @@ namespace CODE_PersistenceLib
                 Doors = new Dictionary<Direction, IDoor>(),
                 Items = new List<IItem>()
             };
+        }
+
+        private List<IItem> CreateItems(IEnumerable<JToken> jsonItems)
+        {
+            return jsonItems.Select(CreateItem).ToList();
         }
 
         /// <summary>
