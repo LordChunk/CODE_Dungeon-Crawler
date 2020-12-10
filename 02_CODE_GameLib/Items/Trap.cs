@@ -12,9 +12,5 @@ namespace CODE_GameLib.Items
         {
             player.Lives -= Damage;
         }
-
-        public Trap(ItemType type = ItemType.BoobyTrap) : base(type)
-        {
-        }
     }
 }

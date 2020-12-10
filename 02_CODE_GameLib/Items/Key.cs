@@ -8,9 +8,5 @@ namespace CODE_GameLib.Items
     public class Key : Item, IPickUpItem, IColorBinder
     {
         public Color ColorCode { get; set; }
-
-        public Key() : base(ItemType.Key)
-        {
-        }
     }
 }
