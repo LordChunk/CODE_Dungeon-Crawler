@@ -8,7 +8,7 @@ namespace CODE_GameLib.Doors
 {
     public class ColorCodedDoor : Door, IColorBinder
     {
-        public Color ColorCode { get; set; }
+        public Color ColorCode { get; private set; }
 
         public ColorCodedDoor(int roomId, Direction direction) : base(roomId, direction)
         {
