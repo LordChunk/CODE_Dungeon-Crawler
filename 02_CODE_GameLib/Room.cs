@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CODE_GameLib.Enums;
 using CODE_GameLib.Interfaces;
 
 namespace CODE_GameLib
