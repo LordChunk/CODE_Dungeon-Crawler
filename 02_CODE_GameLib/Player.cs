@@ -6,14 +6,15 @@ namespace CODE_GameLib
     public class Player
     {
         public Room CurrentRoom;
-        public int X;
-        public int Y;
+
+        public Coordinate Spot;
 
         public int Lives;
         public readonly List<IPickUpItem> Items;
 
-        public Player()
+        public Player(Coordinate startSpot)
         {
+            Spot = startSpot;
             Items = new List<IPickUpItem>();
         }
     }
