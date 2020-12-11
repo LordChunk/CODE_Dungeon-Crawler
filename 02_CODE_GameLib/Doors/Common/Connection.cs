@@ -4,7 +4,7 @@ using CODE_GameLib.Interfaces;
 
 namespace CODE_GameLib.Doors.Common
 {
-    public abstract class Connection : IConnection
+    public class Connection : IConnection
     {
         public List<RoomDirectionPair> Rooms { get; set; }
 
