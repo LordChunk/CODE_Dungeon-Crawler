@@ -1,6 +1,4 @@
-﻿using CODE_GameLib.Enums;
-
-namespace CODE_GameLib.Items
+﻿namespace CODE_GameLib.Items
 {
     public class SingleUseTrap : Trap
     {

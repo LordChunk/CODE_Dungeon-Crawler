@@ -1,15 +1,14 @@
 ﻿using CODE_GameLib;
-using System;
-using System.Collections.Generic;
 using CODE_GameLib.Doors;
 using CODE_GameLib.Enums;
 using CODE_GameLib.Items;
+using System;
 
 namespace CODE_Frontend
 {
     public class GameView
     {
-        private char[,] _board;
+        private CharWithColor[,] _board;
 
         public GameView()
         {
@@ -18,7 +17,7 @@ namespace CODE_Frontend
 
         public void Draw(Game game)
         {
-            _board = new char[game.Player.CurrentRoom.Width, game.Player.CurrentRoom.Height];
+            _board = new CharWithColor[game.Player.CurrentRoom.Width, game.Player.CurrentRoom.Height];
             CalcBoard(game.Player);
             DrawBoard(game.Player);
         }
@@ -31,81 +30,127 @@ namespace CODE_Frontend
         private void CalcBoard(Player player)
         {
             //put player position in array
-            _board[player.X, player.Y] = 'X';
+            _board[player.X, player.Y] = new CharWithColor('X', ConsoleColor.Yellow);
 
             //put all item position in array
             foreach (var item in player.CurrentRoom.Items)
             {
                 if (item.GetType() == typeof(Key))
                 {
-                    _board[item.Coordinate.X, item.Coordinate.Y] = 'K';
+                    var temp = (Key)item;
+                    _board[item.Coordinate.X, item.Coordinate.Y] = new CharWithColor('K', (ConsoleColor)Enum.Parse(typeof(ConsoleColor), temp.ColorCode.ToString()));
                 }
-                else if(item.GetType() == typeof(PressurePlate))
+                else if (item.GetType() == typeof(PressurePlate))
                 {
-                    _board[item.Coordinate.X, item.Coordinate.Y] = 'T';
+                    _board[item.Coordinate.X, item.Coordinate.Y] = new CharWithColor('T', ConsoleColor.Black);
                 }
                 else if (item.GetType() == typeof(SankaraStone))
                 {
-                    _board[item.Coordinate.X, item.Coordinate.Y] = 'S';
+                    _board[item.Coordinate.X, item.Coordinate.Y] = new CharWithColor('S', ConsoleColor.DarkYellow);
                 }
                 else if (item.GetType() == typeof(SingleUseTrap))
                 {
-                    _board[item.Coordinate.X, item.Coordinate.Y] = '@';
+                    _board[item.Coordinate.X, item.Coordinate.Y] = new CharWithColor('@', ConsoleColor.Black);
                 }
                 else if (item.GetType() == typeof(Trap))
                 {
-                    _board[item.Coordinate.X, item.Coordinate.Y] = 'O';
+                    _board[item.Coordinate.X, item.Coordinate.Y] = new CharWithColor('O', ConsoleColor.Black);
                 }
             }
 
             //put all walls position in array
             for (int i = 0; i < player.CurrentRoom.Width; i++)
             {
-                _board[i, 0] = '#';
-                _board[i, player.CurrentRoom.Height - 1] = '#';
+                _board[i, 0] = new CharWithColor('#', ConsoleColor.Yellow);
+                _board[i, player.CurrentRoom.Height - 1] = new CharWithColor('#', ConsoleColor.Yellow);
             }
+
             for (int i = 0; i < player.CurrentRoom.Height; i++)
             {
-                _board[0, i] = '#';
-                _board[player.CurrentRoom.Width - 1, i] = '#';
+                _board[0, i] = new CharWithColor('#', ConsoleColor.Yellow);
+                _board[player.CurrentRoom.Width - 1, i] = new CharWithColor('#', ConsoleColor.Yellow);
             }
 
             //put all door position in array
             foreach (var kvp in player.CurrentRoom.Connections)
             {
-                var coordinate = new Coordinate(0,0);
+                var coordinate = new Coordinate(0, 0);
 
                 switch (kvp.Key)
                 {
                     case Direction.North:
                         coordinate.X = (player.CurrentRoom.Width - 1) / 2;
                         coordinate.Y = 0;
-                        _board[coordinate.X, coordinate.Y] = '=';
+
+                        if (kvp.Value.GetType() == typeof(ColorCodedConnection))
+                        {
+                            var temp = (ColorCodedConnection)kvp.Value;
+                            _board[coordinate.X, coordinate.Y] = new CharWithColor('=',
+                                (ConsoleColor)Enum.Parse(typeof(ConsoleColor), temp.ColorCode.ToString()));
+                        }
+                        else
+                        {
+                            _board[coordinate.X, coordinate.Y] = new CharWithColor(' ', ConsoleColor.Black);
+                        }
+
                         break;
                     case Direction.East:
                         coordinate.X = player.CurrentRoom.Width - 1;
                         coordinate.Y = (player.CurrentRoom.Height - 1) / 2;
-                        _board[coordinate.X, coordinate.Y] = '|';
+
+                        if (kvp.Value.GetType() == typeof(ColorCodedConnection))
+                        {
+                            var temp = (ColorCodedConnection)kvp.Value;
+                            _board[coordinate.X, coordinate.Y] = new CharWithColor('|',
+                                (ConsoleColor)Enum.Parse(typeof(ConsoleColor), temp.ColorCode.ToString()));
+                        }
+                        else
+                        {
+                            _board[coordinate.X, coordinate.Y] = new CharWithColor(' ', ConsoleColor.Black);
+                        }
+
                         break;
                     case Direction.West:
                         coordinate.X = 0;
                         coordinate.Y = (player.CurrentRoom.Height - 1) / 2;
-                        _board[coordinate.X, coordinate.Y] = '|';
+
+                        if (kvp.Value.GetType() == typeof(ColorCodedConnection))
+                        {
+                            var temp = (ColorCodedConnection)kvp.Value;
+                            _board[coordinate.X, coordinate.Y] = new CharWithColor('|',
+                                (ConsoleColor)Enum.Parse(typeof(ConsoleColor), temp.ColorCode.ToString()));
+                        }
+                        else
+                        {
+                            _board[coordinate.X, coordinate.Y] = new CharWithColor(' ', ConsoleColor.Black);
+                        }
+
                         break;
                     case Direction.South:
                         coordinate.X = (player.CurrentRoom.Width - 1) / 2;
                         coordinate.Y = player.CurrentRoom.Height - 1;
-                        _board[coordinate.X, coordinate.Y] = '=';
+
+                        if (kvp.Value.GetType() == typeof(ColorCodedConnection))
+                        {
+                            var temp = (ColorCodedConnection)kvp.Value;
+                            _board[coordinate.X, coordinate.Y] = new CharWithColor('=',
+                                (ConsoleColor)Enum.Parse(typeof(ConsoleColor), temp.ColorCode.ToString()));
+                        }
+                        else
+                        {
+                            _board[coordinate.X, coordinate.Y] = new CharWithColor(' ', ConsoleColor.Black);
+                        }
+
                         break;
                 }
 
                 if (kvp.Value.GetType() == typeof(ToggleConnection))
                 {
-                    _board[coordinate.X, coordinate.Y] = '┴';
+                    _board[coordinate.X, coordinate.Y] = new CharWithColor('┴', ConsoleColor.Black);
                 }
                 else if (kvp.Value.GetType() == typeof(SingleUseConnection))
                 {
-                    _board[coordinate.X, coordinate.Y] = '∩';
+                    _board[coordinate.X, coordinate.Y] = new CharWithColor('∩', ConsoleColor.Black);
                 }
             }
         }
@@ -132,53 +177,13 @@ namespace CODE_Frontend
                         color = true;
                     }
 
-                    Console.ForegroundColor = DetermineColor(_board[j, i]);
-                    Console.Write(_board[j,i]);
+                    Console.ForegroundColor = _board[j, i].Color;
+                    Console.Write(_board[j, i].C);
                 }
                 Console.WriteLine();
             }
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
-        }
-
-        private ConsoleColor DetermineColor(char c)
-        {
-            if (c == '#')
-            {
-                return ConsoleColor.Yellow;
-            }
-            else if (c == '@')
-            {
-                return ConsoleColor.Black;
-            }
-            else if(c == 's')
-            {
-                return ConsoleColor.DarkRed;
-            }
-            else if (c == 'O')
-            {
-                return ConsoleColor.Red;
-            }
-            else if (c == 'X')
-            {
-                return ConsoleColor.Cyan;
-            }
-            else if (c == '=' || c == '|')
-            {
-                return ConsoleColor.DarkGreen;
-            }
-            else if (c == '∩')
-            {
-                return ConsoleColor.DarkBlue;
-            }
-            else if (c == '┴')
-            {
-                return ConsoleColor.DarkBlue;
-            }
-            else 
-            {
-                return ConsoleColor.DarkBlue;
-            }
         }
     }
 }
