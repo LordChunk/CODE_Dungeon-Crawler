@@ -11,5 +11,10 @@ namespace CODE_GameLib.Items
         {
             player.Lives -= Damage;
         }
+
+        public override void OnTouch(Player player)
+        {
+            OnTrigger(player);
+        }
     }
 }

@@ -11,8 +11,11 @@
 
         public override void OnTrigger(Player player)
         {
-            base.OnTrigger(player);
-            IsUsed = true;
+            if (!IsUsed)
+            {
+                base.OnTrigger(player);
+                IsUsed = true;
+            }
         }
     }
 }

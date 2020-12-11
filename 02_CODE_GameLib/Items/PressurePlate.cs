@@ -27,5 +27,10 @@ namespace CODE_GameLib.Items
 
             IsActive = !IsActive;
         }
+
+        public override void OnTouch(Player player)
+        {
+            OnTrigger(player);
+        }
     }
 }

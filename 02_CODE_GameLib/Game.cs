@@ -14,35 +14,46 @@ namespace CODE_GameLib
 
         public void MovePlayer(Direction direction)
         {
-            Updated?.Invoke(this, this);
+            Coordinate targetCoordinate = CalcTargetCoordinate(direction);
+            if (CanPlayerMove(targetCoordinate))
+            {
+                foreach (var item in Player.CurrentRoom.Items)
+                {
+                    if (item.Coordinate.IsEqual(targetCoordinate))
+                    {
+                        item.OnTouch(Player);
+                    }
+                }
+                
+                Updated?.Invoke(this, this);
+            }
         }
 
-        private bool CanPlayerMove(Direction direction)
+        private bool CanPlayerMove(Coordinate targetCoordinate)
         {
-            Coordinate targetCoordinate = null;
-
-            switch (direction)
-            {
-                case Direction.North:
-                    targetCoordinate = new Coordinate(Player.Spot.X, Player.Spot.X - 1);
-                    break;
-                case Direction.East:
-                    targetCoordinate = new Coordinate(Player.Spot.X + 1, Player.Spot.X);
-                    break;
-                case Direction.South:
-                    targetCoordinate = new Coordinate(Player.Spot.X, Player.Spot.X + 1);
-                    break;
-                case Direction.West:
-                    targetCoordinate = new Coordinate(Player.Spot.X - 1, Player.Spot.X);
-                    break;
-            }
-
             if (IsCoordinateWall(targetCoordinate))
             {
                 return false;
             }
 
             return true;
+        }
+
+        private Coordinate CalcTargetCoordinate(Direction direction)
+        {
+            switch (direction)
+            {
+                case Direction.North:
+                    return new Coordinate(Player.Spot.X, Player.Spot.X - 1);
+                case Direction.East:
+                    return new Coordinate(Player.Spot.X + 1, Player.Spot.X);
+                case Direction.South:
+                    return new Coordinate(Player.Spot.X, Player.Spot.X + 1);
+                case Direction.West:
+                    return new Coordinate(Player.Spot.X - 1, Player.Spot.X);
+            }
+
+            return null;
         }
 
         private bool IsCoordinateWall(Coordinate targetCoordinate)
