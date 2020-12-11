@@ -10,6 +10,8 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using CODE_GameLib.Doors;
+
 // ddReSharper disable AssignNullToNotNullAttribute
 
 namespace CODE_PersistenceLib
@@ -27,6 +29,14 @@ namespace CODE_PersistenceLib
             { "key", CreateKey },
             { "pressure plate", CreatePressurePlate },
         };
+
+        private static Dictionary<string, IConnection> ConnectionTypes = new Dictionary<string, IConnection>
+        {
+            { "colored", new ColorCodedConnection() },
+            { "toggle", new ToggleConnection() },
+            { "closing gate", new SingleUseConnection() }
+        };
+
 
         private Dictionary<int, Room> rooms;
 
@@ -51,11 +61,7 @@ namespace CODE_PersistenceLib
 
             // TODO: Parse doors
             var jsonConnections = json["connections"];
-            var connections = new List<IConnection>();
-            foreach (var jsonConnection in jsonConnections)
-            {
-                var conn = CreateConnection(jsonConnection);
-            }
+            var connections = jsonConnections.Select(CreateConnection).ToList();
 
 
             return new Game();
@@ -64,18 +70,29 @@ namespace CODE_PersistenceLib
         private IConnection CreateConnection(JToken jsonConnection)
         {
             IConnection connection;
+            // Check if connection between room is "special connection"
             var jsonDoor = jsonConnection["door"];
-
             if (jsonDoor != null)
             {
-                var type = jsonDoor.First;
+                // Get door type
+                var type = jsonDoor["type"].Value<string>();
+
+                var (_, roomConnection) = ConnectionTypes.FirstOrDefault(kvp => kvp.Key == type);
+                connection = roomConnection ?? throw new NoNullAllowedException("Connection type " + type + " is not a valid connection type.");
+            }
+            else
+            {
+                connection = new Connection();
             }
 
-            var direction1 = CreateConnectionPair(jsonConnection.First);
+            // Add two connections to the rooms
+            connection.Rooms = new List<Connection.RoomDirectionPair>
+            {
+                CreateConnectionPair(jsonConnection.First), 
+                CreateConnectionPair(jsonConnection.First.Next)
+            };
 
-            var direction2 = CreateConnectionPair(jsonConnection.First.Next);
-
-            return null;
+            return connection;
         }
 
         private Connection.RoomDirectionPair CreateConnectionPair(JToken jsonConnection)
@@ -134,6 +151,7 @@ namespace CODE_PersistenceLib
             );
         }
 
+        #region Item create methods
         private static Trap CreateTrap(JToken jsonTrap)
         {
             return new Trap
@@ -181,5 +199,6 @@ namespace CODE_PersistenceLib
         {
             return Color.FromName(color);
         }
+        #endregion
     }
 }
