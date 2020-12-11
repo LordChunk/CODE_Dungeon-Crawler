@@ -3,5 +3,7 @@
     public interface IItem
     {
         public Coordinate Coordinate { get; set; }
+
+        public void OnTouch(Player player);
     }
 }
