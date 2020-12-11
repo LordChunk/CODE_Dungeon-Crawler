@@ -47,7 +47,7 @@ namespace CODE_PersistenceLib
             Room startRoom;
 
             rooms = new Dictionary<int, Room>();
-
+            // Parse rooms
             if (jsonRooms == null) throw new NoNullAllowedException("This level contains no rooms.");
             foreach (var jsonRoom in jsonRooms)
             {
@@ -59,10 +59,19 @@ namespace CODE_PersistenceLib
                 rooms.Add(room.Id, room);
             }
 
-            // TODO: Parse doors
+            // Parse doors/connections
             var jsonConnections = json["connections"];
             var connections = jsonConnections.Select(CreateConnection).ToList();
 
+            // Link connections to rooms
+            foreach (var connection in connections)
+            {
+                var pair0 = connection.Rooms[0];
+                var pair1 = connection.Rooms[1];
+
+                pair0.Room.Connections.Add(pair1.DoorLocation, connection);
+                pair1.Room.Connections.Add(pair0.DoorLocation, connection);
+            }
 
             return new Game();
         }
@@ -120,6 +129,7 @@ namespace CODE_PersistenceLib
                 Id = jsonRoom["id"].Value<int>(),
                 Height = jsonRoom["height"].Value<int>(),
                 Width = jsonRoom["width"].Value<int>(),
+                Connections = new Dictionary<Direction, IConnection>(),
             };
         }
 
