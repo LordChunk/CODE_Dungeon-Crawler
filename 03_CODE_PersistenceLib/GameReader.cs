@@ -21,7 +21,7 @@ namespace CODE_PersistenceLib
         /// <summary>
         /// A list of all item types with their corresponding parser methods. Each method takes a JToken as it's parameter and outputs an IItem.
         /// </summary>
-        private static Dictionary<string, Func<JToken, IItem>> ItemTypes = new Dictionary<string, Func<JToken, IItem>>
+        private Dictionary<string, Func<JToken, IItem>> ItemTypes = new Dictionary<string, Func<JToken, IItem>>
         {
             { "boobietrap", CreateTrap },
             { "disappearing boobietrap", CreateSingleUseTrap },
@@ -30,13 +30,12 @@ namespace CODE_PersistenceLib
             { "pressure plate", CreatePressurePlate },
         };
 
-        private static Dictionary<string, IConnection> ConnectionTypes = new Dictionary<string, IConnection>
+        private Dictionary<string, Func<IDoor>> DoorTypes = new Dictionary<string, Func<IDoor>>
         {
-            { "colored", new ColorCodedConnection() },
-            { "toggle", new ToggleConnection() },
-            { "closing gate", new SingleUseConnection() }
+            { "colored", () => new ColorCodedDoor() },
+            { "toggle", () => new ToggleDoor() },
+            { "closing gate", () => new SingleUseDoor() }
         };
-
 
         private Dictionary<int, Room> rooms;
 
@@ -46,8 +45,8 @@ namespace CODE_PersistenceLib
             var jsonRooms = json["rooms"];
             Room startRoom;
 
-            rooms = new Dictionary<int, Room>();
             // Parse rooms
+            rooms = new Dictionary<int, Room>();
             if (jsonRooms == null) throw new NoNullAllowedException("This level contains no rooms.");
             foreach (var jsonRoom in jsonRooms)
             {
@@ -60,68 +59,127 @@ namespace CODE_PersistenceLib
             }
 
             // Parse doors/connections
-            var jsonConnections = json["connections"];
-            var connections = jsonConnections.Select(CreateConnection).ToList();
+            var jsonConnections = json["connections"].ToList();
 
-            // Link connections to rooms
-            foreach (var connection in connections)
-            {
-                var pair0 = connection.Rooms[0];
-                var pair1 = connection.Rooms[1];
+            // Create doors and add them to rooms
+            jsonConnections.ForEach(CreateDoorSet);
 
-                pair0.Room.Connections.Add(pair1.DoorLocation, connection);
-                pair1.Room.Connections.Add(pair0.DoorLocation, connection);
-            }
+            // TODO: Add player to and set starter room
 
             return new Game();
         }
 
-        private IConnection CreateConnection(JToken jsonConnection)
+        /// <summary>
+        /// Creates Door instances and links them to each other and to their respective room
+        /// </summary>
+        /// <param name="jsonConnection">JSON string containing all connections</param>
+        private void CreateDoorSet(JToken jsonConnection)
         {
-            IConnection connection;
-            // Check if connection between room is "special connection"
+            IDoor door1;
+            IDoor door2;
             var jsonDoor = jsonConnection["door"];
             if (jsonDoor != null)
             {
                 // Get door type
                 var type = jsonDoor["type"].Value<string>();
-
-                var (_, roomConnection) = ConnectionTypes.FirstOrDefault(kvp => kvp.Key == type);
-                connection = roomConnection ?? throw new NoNullAllowedException("Connection type " + type + " is not a valid connection type.");
+                door1 = DoorTypes.FirstOrDefault(kvp => kvp.Key == type).Value();
+                door2 = DoorTypes.FirstOrDefault(kvp => kvp.Key == type).Value();
             }
             else
             {
-                connection = new Connection();
+                door1 = new Door();
+                door2 = new Door();
             }
+            // Connect doors to each other
+            door1.ConnectsToDoor = door2;
+            door2.ConnectsToDoor = door1;
 
-            // Add two connections to the rooms
-            connection.Rooms = new List<Connection.RoomDirectionPair>
-            {
-                CreateConnectionPair(jsonConnection.First), 
-                CreateConnectionPair(jsonConnection.First.Next)
-            };
+            var connection1 = jsonConnection.First;
+            var connection2 = jsonConnection.First.Next;
 
-            return connection;
+            // Parse definitions for first JSON line
+            var locationStringDoor2 = connection1.ToObject<JProperty>()?.Name;
+            var room1 = GetRoomFromId((int) connection1.First);
+            var location2 = (Direction)Enum.Parse(typeof(Direction), locationStringDoor2, true);
+
+            // Parse definitions for 2nd JSON line
+            var locationStringDoor1 = connection2.ToObject<JProperty>()?.Name;
+            var room2 = GetRoomFromId((int) connection2.First);
+            var location1 = (Direction)Enum.Parse(typeof(Direction), locationStringDoor1, true);
+
+            door1.IsInRoom = room1;
+            door1.Location = location1;
+
+            door2.IsInRoom = room2;
+            door2.Location = location2;
+
+            // TODO: Remove debug code
+            //Console.WriteLine("Door 1");
+            //Console.WriteLine("type: "+ door1.GetType());
+            //Console.WriteLine("room id: " + door1.IsInRoom.Id);
+            //Console.WriteLine("location in room: " + door1.Location);
+
+            //Console.WriteLine("Door 2");
+            //Console.WriteLine("type: " + door2.GetType());
+            //Console.WriteLine("room id:" + door2.IsInRoom.Id);
+            //Console.WriteLine("location in room:" + door2.Location);
+
+            room1.Connections.Add(location1, door1);
+            room2.Connections.Add(location2, door2);
         }
 
-        private Connection.RoomDirectionPair CreateConnectionPair(JToken jsonConnection)
+        private Room GetRoomFromId(int id)
         {
-            var directionString = jsonConnection.ToObject<JProperty>()?.Name;
-            var roomId = jsonConnection.First.Value<int>();
-            var direction = (Direction) Enum.Parse(typeof(Direction), directionString, true);
-
-            return new Connection.RoomDirectionPair
-            {
-                Room = rooms.FirstOrDefault(kvp => kvp.Key == jsonConnection.First.Value<int>()).Value,
-                DoorLocation = direction
-            };
+            return rooms.FirstOrDefault(kvp => kvp.Key == id).Value;
         }
+
+
+        //private IConnection CreateConnection(JToken jsonConnection)
+        //{
+        //    IConnection connection;
+        //    // Check if connection between room is "special connection"
+        //    var jsonDoor = jsonConnection["door"];
+        //    if (jsonDoor != null)
+        //    {
+        //        // Get door type
+        //        var type = jsonDoor["type"].Value<string>();
+
+        //        var (_, roomConnection) = ConnectionTypes.FirstOrDefault(kvp => kvp.Key == type);
+        //        connection = roomConnection ?? throw new NoNullAllowedException("Connection type " + type + " is not a valid connection type.");
+        //    }
+        //    else
+        //    {
+        //        connection = new Connection();
+        //    }
+
+        //    // Add two connections to the rooms
+        //    connection.Rooms = new List<Connection.RoomDirectionPair>
+        //    {
+        //        CreateConnectionPair(jsonConnection.First), 
+        //        CreateConnectionPair(jsonConnection.First.Next)
+        //    };
+
+        //    return connection;
+        //}
+
+        //private Connection.RoomDirectionPair CreateConnectionPair(JToken jsonConnection)
+        //{
+        //    var directionString = jsonConnection.ToObject<JProperty>()?.Name;
+        //    var roomId = jsonConnection.First.Value<int>();
+        //    var direction = (Direction) Enum.Parse(typeof(Direction), directionString, true);
+
+        //    return new Connection.RoomDirectionPair
+        //    {
+        //        ConnectsToRoom = rooms.FirstOrDefault(kvp => kvp.Key == jsonConnection.First.Value<int>()).Value,
+        //        DoorLocation = direction
+        //    };
+        //}
 
         /// <summary>
         /// Creates a room item without items or doors
         /// </summary>
         /// <param name="jsonRoom">JSON string containing the room</param>
-        /// <returns>Room without doors or items</returns>
+        /// <returns>ConnectsToRoom without doors or items</returns>
         private static Room CreateRoom(JToken jsonRoom)
         {
             return new Room
@@ -129,7 +187,7 @@ namespace CODE_PersistenceLib
                 Id = jsonRoom["id"].Value<int>(),
                 Height = jsonRoom["height"].Value<int>(),
                 Width = jsonRoom["width"].Value<int>(),
-                Connections = new Dictionary<Direction, IConnection>(),
+                Connections = new Dictionary<Direction, IDoor>(),
             };
         }
 
@@ -143,7 +201,7 @@ namespace CODE_PersistenceLib
         /// </summary>
         /// <param name="jsonItem">JSON string containing the item</param>
         /// <returns>Parsed item</returns>
-        private static IItem CreateItem(JToken jsonItem)
+        private IItem CreateItem(JToken jsonItem)
         {
             var type = jsonItem["type"].Value<string>();
             // Check if item type is valid

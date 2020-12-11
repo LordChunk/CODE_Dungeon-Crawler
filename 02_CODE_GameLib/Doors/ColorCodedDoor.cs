@@ -6,7 +6,7 @@ using CODE_GameLib.Items;
 
 namespace CODE_GameLib.Doors
 {
-    public class ColorCodedConnection : Connection, IColorBinder
+    public class ColorCodedDoor : Door, IColorBinder
     {
         public Color ColorCode { get; private set; }
 

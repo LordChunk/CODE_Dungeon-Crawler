@@ -3,11 +3,11 @@ using CODE_GameLib.Interfaces;
 
 namespace CODE_GameLib.Doors
 {
-    public class SingleUseConnection : Connection, ILockable
+    public class SingleUseDoor : Door, ILockable
     {
         public bool IsLocked { get; private set; }
 
-        public SingleUseConnection()
+        public SingleUseDoor()
         {
             IsLocked = false;
         }

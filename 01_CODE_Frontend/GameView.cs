@@ -114,11 +114,11 @@ namespace CODE_Frontend
                         break;
                 }
 
-                if (kvp.Value.GetType() == typeof(ToggleConnection))
+                if (kvp.Value.GetType() == typeof(ToggleDoor))
                 {
                     _board[coordinate.X, coordinate.Y] = new CharWithColor('┴', ConsoleColor.Black);
                 }
-                else if (kvp.Value.GetType() == typeof(SingleUseConnection))
+                else if (kvp.Value.GetType() == typeof(SingleUseDoor))
                 {
                     _board[coordinate.X, coordinate.Y] = new CharWithColor('∩', ConsoleColor.Black);
                 }
@@ -140,11 +140,11 @@ namespace CODE_Frontend
             }
         }
 
-        private void AddDoor(Coordinate coordinate, IConnection door)
+        private void AddDoor(Coordinate coordinate, IDoor door)
         {
-            if (door.GetType() == typeof(ColorCodedConnection))
+            if (door.GetType() == typeof(ColorCodedDoor))
             {
-                var temp = (ColorCodedConnection)door;
+                var temp = (ColorCodedDoor)door;
                 _board[coordinate.X, coordinate.Y] = new CharWithColor('=',
                     (ConsoleColor)Enum.Parse(typeof(ConsoleColor), temp.ColorCode.ToString()));
             }
