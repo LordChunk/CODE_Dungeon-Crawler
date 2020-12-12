@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CODE_GameLib.Doors;
 using CODE_GameLib.Doors.Common;
 using CODE_GameLib.Enums;
 using CODE_GameLib.Interfaces;
