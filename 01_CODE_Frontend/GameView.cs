@@ -20,10 +20,14 @@ namespace CODE_Frontend
         {
             Console.Clear();
 
+            //TODO: move this logic to game class
             if (game.DidPlayerWin())
             {
                 DrawWin();
-                DrawEnd();
+            }
+            else if (game.IsPlayerDead())
+            {
+                DrawLose();
             }
             else
             {
@@ -41,14 +45,17 @@ namespace CODE_Frontend
         public void DrawWin()
         {
             Console.WriteLine("You did it. You crazy son of a bitch, you did it! You picked up all the stones!");
-            Console.WriteLine("Press ");
+            Console.WriteLine("Press esc to quit.");
+        }
+
+        public void DrawLose()
+        {
+            Console.WriteLine("You absolute fucktard you died!");
+            Console.WriteLine("Press esc to quit.");
         }
 
         private void CalcBoard(Player player)
         {
-            //put player position in array
-            CalcPlayer(player);
-
             //put all item position in array
             CalcItem(player);
 
@@ -57,6 +64,9 @@ namespace CODE_Frontend
 
             //put all door position in array
             CalcDoors(player);
+
+            //put player position in array
+            CalcPlayer(player);
         }
 
         private void CalcPlayer(Player player)
