@@ -12,10 +12,12 @@ namespace CODE_GameLib
         public int Lives;
         public readonly List<IPickUpItem> Items;
 
-        public Player(Coordinate startSpot)
+        public Player(Coordinate startSpot,Room currentRoom, int lives)
         {
             Spot = startSpot;
             Items = new List<IPickUpItem>();
+            CurrentRoom = currentRoom;
+            Lives = lives;
         }
     }
 }

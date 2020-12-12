@@ -12,5 +12,14 @@ namespace CODE_GameLib
         public List<IItem> Items;
         public Dictionary<Direction, IDoor> Connections;
         public readonly string Type = "room";
+
+        public Room(int id, int height, int width, Dictionary<Direction, IDoor> connections)
+        {
+            Id = id;
+            Height = height;
+            Width = width;
+            Connections = connections;
+            Items = new List<IItem>();
+        }
     }
 }

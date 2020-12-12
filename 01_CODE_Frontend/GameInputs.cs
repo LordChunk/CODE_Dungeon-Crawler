@@ -38,17 +38,15 @@ namespace CODE_Frontend
 
             while (!_quit)
             {
+                _keyPressed = Console.ReadKey().Key;
+                _quit = _keyPressed == ConsoleKey.Escape;
+
                 if (_moveKeys.TryGetValue(_keyPressed, out var action))
                 {
                     action.Invoke();
                     
                     _keyPressed = 0;
                 }
-                                
-
-                _keyPressed = Console.ReadKey().Key;
-                Console.WriteLine($"\nYou pressed {_keyPressed}");
-                _quit = _keyPressed == ConsoleKey.Escape;
             }
 
             Console.ReadLine();

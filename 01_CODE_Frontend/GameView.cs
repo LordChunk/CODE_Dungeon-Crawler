@@ -18,14 +18,30 @@ namespace CODE_Frontend
 
         public void Draw(Game game)
         {
-            _board = new CharWithColor[game.Player.CurrentRoom.Width, game.Player.CurrentRoom.Height];
-            CalcBoard(game.Player);
-            DrawBoard();
+            Console.Clear();
+
+            if (game.DidPlayerWin())
+            {
+                DrawWin();
+                DrawEnd();
+            }
+            else
+            {
+                _board = new CharWithColor[game.Player.CurrentRoom.Width, game.Player.CurrentRoom.Height];
+                CalcBoard(game.Player);
+                DrawBoard();
+            }
         }
 
         public void DrawEnd()
         {
             Console.WriteLine("Quitting game, goodbye!");
+        }
+
+        public void DrawWin()
+        {
+            Console.WriteLine("You did it. You crazy son of a bitch, you did it! You picked up all the stones!");
+            Console.WriteLine("Press ");
         }
 
         private void CalcBoard(Player player)
@@ -156,28 +172,33 @@ namespace CODE_Frontend
 
         private void DrawBoard()
         {
-            Console.Clear();
-
-            bool color = false;
-            Console.BackgroundColor = ConsoleColor.DarkGray;
+            //bool color = false;
+            //Console.BackgroundColor = ConsoleColor.DarkGray;
 
             for (int i = 0; i < _board.GetLength(0); i++)
             {
                 for (int j = 0; j < _board.GetLength(1); j++)
                 {
-                    if (color)
+                    //if (color)
+                    //{
+                    //    Console.BackgroundColor = ConsoleColor.DarkGray;
+                    //    color = false;
+                    //}
+                    //else
+                    //{
+                    //    Console.BackgroundColor = ConsoleColor.White;
+                    //    color = true;
+                    //}
+
+                    if (_board[j, i] != null)
                     {
-                        Console.BackgroundColor = ConsoleColor.DarkGray;
-                        color = false;
+                        Console.ForegroundColor = _board[j, i].Color;
+                        Console.Write(_board[j, i].C);
                     }
                     else
                     {
-                        Console.BackgroundColor = ConsoleColor.White;
-                        color = true;
+                        Console.Write(" ");
                     }
-
-                    Console.ForegroundColor = _board[j, i].Color;
-                    Console.Write(_board[j, i].C);
                 }
                 Console.WriteLine();
             }

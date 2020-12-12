@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using CODE_GameLib.Enums;
+using CODE_GameLib.Items;
 
 namespace CODE_GameLib
 {
@@ -8,9 +10,7 @@ namespace CODE_GameLib
         public event EventHandler<Game> Updated;
         public Player Player;
 
-
-        //wanneer game aangepast wordt:
-        //Updated?.Invoke(this, this);
+        private const int AmountOfSankaraStonesInGame = 5;
 
         public void MovePlayer(Direction direction)
         {
@@ -24,10 +24,15 @@ namespace CODE_GameLib
                         item.OnTouch(Player);
                     }
                 }
-                
+
+                Player.Spot = targetCoordinate;
+
                 Updated?.Invoke(this, this);
             }
         }
+
+        public bool DidPlayerWin() => 
+            Player.Items.Count(item => item.GetType() == typeof(SankaraStone)) == AmountOfSankaraStonesInGame;
 
         private bool CanPlayerMove(Coordinate targetCoordinate)
         {
@@ -41,19 +46,14 @@ namespace CODE_GameLib
 
         private Coordinate CalcTargetCoordinate(Direction direction)
         {
-            switch (direction)
+            return direction switch
             {
-                case Direction.North:
-                    return new Coordinate(Player.Spot.X, Player.Spot.X - 1);
-                case Direction.East:
-                    return new Coordinate(Player.Spot.X + 1, Player.Spot.X);
-                case Direction.South:
-                    return new Coordinate(Player.Spot.X, Player.Spot.X + 1);
-                case Direction.West:
-                    return new Coordinate(Player.Spot.X - 1, Player.Spot.X);
-            }
-
-            return null;
+                Direction.North => new Coordinate(Player.Spot.X, Player.Spot.Y - 1),
+                Direction.East => new Coordinate(Player.Spot.X + 1, Player.Spot.Y),
+                Direction.South => new Coordinate(Player.Spot.X, Player.Spot.Y + 1),
+                Direction.West => new Coordinate(Player.Spot.X - 1, Player.Spot.Y),
+                _ => throw new ArgumentOutOfRangeException($"The direction you gave as input was not found. Did you add a new direction to the Direction enum?")
+            };
         }
 
         private bool IsCoordinateWall(Coordinate targetCoordinate)
