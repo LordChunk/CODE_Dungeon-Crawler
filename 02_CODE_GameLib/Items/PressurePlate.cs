@@ -9,7 +9,7 @@ namespace CODE_GameLib.Items
     {
         public bool IsActive { get; private set; }
 
-        public PressurePlate()
+        public PressurePlate(Coordinate coordinate) : base(coordinate)
         {
             IsActive = false;
         }

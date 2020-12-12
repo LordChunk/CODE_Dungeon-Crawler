@@ -16,5 +16,10 @@ namespace CODE_GameLib.Items
         {
             OnTrigger(player);
         }
+
+        public Trap(Coordinate coordinate, int damage) : base(coordinate)
+        {
+            Damage = damage;
+        }
     }
 }

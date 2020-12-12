@@ -8,9 +8,21 @@ namespace CODE_GameLib.Items
     {
         public Color ColorCode { get; set; }
 
+        public bool IsPickedUp { get; set; }
+
+        public Key(Coordinate coordinate,Color colorCode) : base(coordinate)
+        {
+            ColorCode = colorCode;
+            IsPickedUp = false;
+        }
+
         public void OnPickUp(Player player)
         {
-            player.Items.Add(this);
+            if (!IsPickedUp)
+            {
+                player.Items.Add(this);
+                IsPickedUp = true;
+            }
         }
 
         public override void OnTouch(Player player)

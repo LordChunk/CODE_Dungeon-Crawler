@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CODE_GameLib.Doors;
+using CODE_GameLib.Doors.Common;
 using CODE_GameLib.Enums;
 using CODE_GameLib.Interfaces;
 using CODE_GameLib.Items;
@@ -22,9 +24,12 @@ namespace CODE_GameLib
             if (IsCoordinateDoor(targetCoordinate))
             {
                 var door = GetDoorOnLocation(targetCoordinate).ConnectsToDoor;
-                Player.CurrentRoom = door.IsInRoom;
 
-                targetCoordinate = CalcNewLocation(door.Location);
+                if (CanUseDoor(door))
+                {
+                    Player.CurrentRoom = door.IsInRoom;
+                    targetCoordinate = CalcNewLocation(door.Location);
+                }
             }
 
             foreach (var item in Player.CurrentRoom.Items.Where(item => item.Coordinate.IsEqual(targetCoordinate)))
@@ -162,6 +167,12 @@ namespace CODE_GameLib
                 Direction.West => new Coordinate(0, (Player.CurrentRoom.Height - 1) / 2),
                 _ => throw new ArgumentOutOfRangeException("The direction you gave as input was not found. Did you add a new direction to the Direction enum?")
             };
+        }
+
+        private bool CanUseDoor(IDoor door)
+        {
+            var temp = (Door)door;
+            return temp.CanUseDoor(Player);
         }
     }
 }

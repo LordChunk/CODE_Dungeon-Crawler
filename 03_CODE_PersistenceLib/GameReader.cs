@@ -21,7 +21,7 @@ namespace CODE_PersistenceLib
         /// <summary>
         /// A list of all item types with their corresponding parser methods. Each method takes a JToken as it's parameter and outputs an IItem.
         /// </summary>
-        private Dictionary<string, Func<JToken, IItem>> ItemTypes = new Dictionary<string, Func<JToken, IItem>>
+        private readonly Dictionary<string, Func<JToken, IItem>> ItemTypes = new Dictionary<string, Func<JToken, IItem>>
         {
             { "boobietrap", CreateTrap },
             { "disappearing boobietrap", CreateSingleUseTrap },
@@ -30,7 +30,7 @@ namespace CODE_PersistenceLib
             { "pressure plate", CreatePressurePlate },
         };
 
-        private Dictionary<string, Func<IDoor>> DoorTypes = new Dictionary<string, Func<IDoor>>
+        private readonly Dictionary<string, Func<IDoor>> DoorTypes = new Dictionary<string, Func<IDoor>>
         {
             { "colored", () => new ColorCodedDoor() },
             { "toggle", () => new ToggleDoor() },
@@ -221,45 +221,27 @@ namespace CODE_PersistenceLib
         #region Item create methods
         private static Trap CreateTrap(JToken jsonTrap)
         {
-            return new Trap
-            {
-                Damage = jsonTrap["damage"].Value<int>(),
-                Coordinate = GetItemCoordinates(jsonTrap),
-            };
+            return new Trap(GetItemCoordinates(jsonTrap), jsonTrap["damage"].Value<int>());
         }
 
         private static SingleUseTrap CreateSingleUseTrap(JToken jsonTrap)
         {
-            return new SingleUseTrap
-            {
-                Coordinate = GetItemCoordinates(jsonTrap),
-                Damage = jsonTrap["damage"].Value<int>(),
-            };
+            return new SingleUseTrap(GetItemCoordinates(jsonTrap), jsonTrap["damage"].Value<int>());
         }
 
         private static SankaraStone CreateSankaraStone(JToken jsonStone)
         {
-            return new SankaraStone
-            {
-                Coordinate = GetItemCoordinates(jsonStone),
-            };
+            return new SankaraStone(GetItemCoordinates(jsonStone));
         }
 
         private static Key CreateKey(JToken jsonKey)
         {
-            return new Key
-            {
-                Coordinate = GetItemCoordinates(jsonKey),
-                ColorCode = ParseColorString(jsonKey["color"].Value<string>())
-            };
+            return new Key(GetItemCoordinates(jsonKey), ParseColorString(jsonKey["color"].Value<string>()));
         }
 
         private static PressurePlate CreatePressurePlate(JToken jsonPlate)
         {
-            return new PressurePlate()
-            {
-                Coordinate = GetItemCoordinates(jsonPlate)
-            };
+            return new PressurePlate(GetItemCoordinates(jsonPlate));
         }
 
         private static Color ParseColorString(string color)

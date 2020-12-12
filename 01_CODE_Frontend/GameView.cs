@@ -81,23 +81,34 @@ namespace CODE_Frontend
                 if (item.GetType() == typeof(Key))
                 {
                     var temp = (Key)item;
-                    _board[item.Coordinate.X, item.Coordinate.Y] = new CharWithColor('K', (ConsoleColor)Enum.Parse(typeof(ConsoleColor), temp.ColorCode.ToString()));
+                    if (!temp.IsPickedUp)
+                    {
+                        _board[item.Coordinate.X, item.Coordinate.Y] = new CharWithColor('K', (ConsoleColor)Enum.Parse(typeof(ConsoleColor), temp.ColorCode.Name));
+                    }
                 }
                 else if (item.GetType() == typeof(PressurePlate))
                 {
-                    _board[item.Coordinate.X, item.Coordinate.Y] = new CharWithColor('T', ConsoleColor.Black);
+                    _board[item.Coordinate.X, item.Coordinate.Y] = new CharWithColor('T', ConsoleColor.Yellow);
                 }
                 else if (item.GetType() == typeof(SankaraStone))
                 {
-                    _board[item.Coordinate.X, item.Coordinate.Y] = new CharWithColor('S', ConsoleColor.DarkYellow);
+                    var temp = (SankaraStone)item;
+                    if (!temp.IsPickedUp)
+                    {
+                        _board[item.Coordinate.X, item.Coordinate.Y] = new CharWithColor('S', ConsoleColor.Yellow);
+                    }
                 }
                 else if (item.GetType() == typeof(SingleUseTrap))
                 {
-                    _board[item.Coordinate.X, item.Coordinate.Y] = new CharWithColor('@', ConsoleColor.Black);
+                    var temp = (SingleUseTrap)item;
+                    if (!temp.IsUsed)
+                    {
+                        _board[item.Coordinate.X, item.Coordinate.Y] = new CharWithColor('@', ConsoleColor.Yellow);
+                    }
                 }
                 else if (item.GetType() == typeof(Trap))
                 {
-                    _board[item.Coordinate.X, item.Coordinate.Y] = new CharWithColor('O', ConsoleColor.Black);
+                    _board[item.Coordinate.X, item.Coordinate.Y] = new CharWithColor('O', ConsoleColor.Yellow);
                 }
             }
         }
@@ -108,6 +119,7 @@ namespace CODE_Frontend
             {
                 var coordinate = new Coordinate(0, 0);
 
+                //calculate location door
                 switch (kvp.Key)
                 {
                     case Direction.North:
@@ -140,13 +152,32 @@ namespace CODE_Frontend
                         break;
                 }
 
+                //check type door
                 if (kvp.Value.GetType() == typeof(ToggleDoor))
                 {
-                    _board[coordinate.X, coordinate.Y] = new CharWithColor('┴', ConsoleColor.Black);
+                    _board[coordinate.X, coordinate.Y] = new CharWithColor('┴', ConsoleColor.Yellow);
                 }
                 else if (kvp.Value.GetType() == typeof(SingleUseDoor))
                 {
-                    _board[coordinate.X, coordinate.Y] = new CharWithColor('∩', ConsoleColor.Black);
+                    _board[coordinate.X, coordinate.Y] = new CharWithColor('∩', ConsoleColor.Yellow);
+                }
+                else if (kvp.Value.GetType() == typeof(ColorCodedDoor))
+                {
+                    var temp = (ColorCodedDoor)kvp.Value;
+                    if (temp.Location == Direction.East || temp.Location == Direction.West)
+                    {
+                        _board[coordinate.X, coordinate.Y] = new CharWithColor('|',
+                            (ConsoleColor)Enum.Parse(typeof(ConsoleColor), temp.ColorCode.Name));
+                    }
+                    else
+                    {
+                        _board[coordinate.X, coordinate.Y] = new CharWithColor('=',
+                        (ConsoleColor)Enum.Parse(typeof(ConsoleColor), temp.ColorCode.Name));
+                    }
+                }
+                else
+                {
+                    _board[coordinate.X, coordinate.Y] = new CharWithColor(' ', ConsoleColor.Black);
                 }
             }
         }
@@ -172,7 +203,8 @@ namespace CODE_Frontend
             {
                 var temp = (ColorCodedDoor)door;
                 _board[coordinate.X, coordinate.Y] = new CharWithColor('=',
-                    (ConsoleColor)Enum.Parse(typeof(ConsoleColor), temp.ColorCode.ToString()));
+                    (ConsoleColor)Enum.Parse(typeof(ConsoleColor), temp.ColorCode.Name));
+                _board[coordinate.X, coordinate.Y] = new CharWithColor('=', ConsoleColor.Yellow);
             }
             else
             {
@@ -185,9 +217,9 @@ namespace CODE_Frontend
             //bool color = false;
             //Console.BackgroundColor = ConsoleColor.DarkGray;
 
-            for (int i = 0; i < _board.GetLength(0); i++)
+            for (int i = 0; i < _board.GetLength(1); i++)
             {
-                for (int j = 0; j < _board.GetLength(1); j++)
+                for (int j = 0; j < _board.GetLength(0); j++)
                 {
                     //if (color)
                     //{
