@@ -12,8 +12,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 
-// ddReSharper disable AssignNullToNotNullAttribute
-
 namespace CODE_PersistenceLib
 {
     public class GameReader
@@ -21,7 +19,7 @@ namespace CODE_PersistenceLib
         /// <summary>
         /// A list of all item types with their corresponding parser methods. Each method takes a JToken as it's parameter and outputs an IItem.
         /// </summary>
-        private readonly Dictionary<string, Func<JToken, IItem>> ItemTypes = new Dictionary<string, Func<JToken, IItem>>
+        private readonly Dictionary<string, Func<JToken, IItem>> _itemTypes = new Dictionary<string, Func<JToken, IItem>>
         {
             { "boobietrap", CreateTrap },
             { "disappearing boobietrap", CreateSingleUseTrap },
@@ -30,14 +28,17 @@ namespace CODE_PersistenceLib
             { "pressure plate", CreatePressurePlate },
         };
 
-        private readonly Dictionary<string, Func<JToken, IDoor>> DoorTypes = new Dictionary<string, Func<JToken, IDoor>>
+        /// <summary>
+        /// A list of all door types and their corresponding parser methods. Each method takes a JToken as it's parameter and outputs an IDoor.
+        /// </summary>
+        private readonly Dictionary<string, Func<JToken, IDoor>> _doorTypes = new Dictionary<string, Func<JToken, IDoor>>
         {
             { "colored", CreateColorCodedDoor },
             { "toggle", (_) => new ToggleDoor() },
             { "closing gate", (_) => new SingleUseDoor() }
         };
 
-        private Dictionary<int, Room> rooms;
+        private Dictionary<int, Room> _rooms;
 
         public Game Read(string filePath)
         {
@@ -47,7 +48,7 @@ namespace CODE_PersistenceLib
             var jsonRooms = json["rooms"];
 
             // Parse rooms
-            rooms = new Dictionary<int, Room>();
+            _rooms = new Dictionary<int, Room>();
             if (jsonRooms == null) throw new NoNullAllowedException("This level contains no rooms.");
             foreach (var jsonRoom in jsonRooms)
             {
@@ -56,7 +57,7 @@ namespace CODE_PersistenceLib
                 var jsonItems = jsonRoom["items"];
                 if (jsonItems != null)
                     room.Items = CreateItems(jsonItems);
-                rooms.Add(room.Id, room);
+                _rooms.Add(room.Id, room);
             }
 
             // Parse doors/connections
@@ -65,7 +66,7 @@ namespace CODE_PersistenceLib
             // Create doors and add them to rooms
             jsonConnections.ForEach(CreateDoorSet);
 
-            var startRoom = rooms[json["player"]["startRoomId"].Value<int>()];
+            var startRoom = _rooms[json["player"]["startRoomId"].Value<int>()];
             var startCoordinate = new Coordinate(json["player"]["startX"].Value<int>(), json["player"]["startY"].Value<int>());
             var startLives = json["player"]["lives"].Value<int>();
 
@@ -87,8 +88,8 @@ namespace CODE_PersistenceLib
             {
                 // Get door type
                 var type = jsonDoor["type"].Value<string>();
-                door1 = DoorTypes.FirstOrDefault(kvp => kvp.Key == type).Value(jsonDoor);
-                door2 = DoorTypes.FirstOrDefault(kvp => kvp.Key == type).Value(jsonDoor);
+                door1 = _doorTypes.FirstOrDefault(kvp => kvp.Key == type).Value(jsonDoor);
+                door2 = _doorTypes.FirstOrDefault(kvp => kvp.Key == type).Value(jsonDoor);
             }
             else
             {
@@ -135,7 +136,7 @@ namespace CODE_PersistenceLib
 
         private Room GetRoomFromId(int id)
         {
-            return rooms.FirstOrDefault(kvp => kvp.Key == id).Value;
+            return _rooms.FirstOrDefault(kvp => kvp.Key == id).Value;
         }
 
         /// <summary>
@@ -162,7 +163,7 @@ namespace CODE_PersistenceLib
         {
             var type = jsonItem["type"].Value<string>();
             // Check if item type is valid
-            var typeKvp = ItemTypes.FirstOrDefault(it => it.Key == type);
+            var typeKvp = _itemTypes.FirstOrDefault(it => it.Key == type);
             if (typeKvp.Value == null) throw new NoNullAllowedException("Item type " + type + " is not a valid item type.");
             // Parse item and return
             return typeKvp.Value(jsonItem);
