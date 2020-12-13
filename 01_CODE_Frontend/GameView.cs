@@ -184,13 +184,13 @@ namespace CODE_Frontend
 
         private void CalcWalls(Player player)
         {
-            for (int i = 0; i < player.CurrentRoom.Width; i++)
+            for (var i = 0; i < player.CurrentRoom.Width; i++)
             {
                 _board[i, 0] = new CharWithColor('#', ConsoleColor.Yellow);
                 _board[i, player.CurrentRoom.Height - 1] = new CharWithColor('#', ConsoleColor.Yellow);
             }
 
-            for (int i = 0; i < player.CurrentRoom.Height; i++)
+            for (var i = 0; i < player.CurrentRoom.Height; i++)
             {
                 _board[0, i] = new CharWithColor('#', ConsoleColor.Yellow);
                 _board[player.CurrentRoom.Width - 1, i] = new CharWithColor('#', ConsoleColor.Yellow);
@@ -217,9 +217,9 @@ namespace CODE_Frontend
             //bool color = false;
             //Console.BackgroundColor = ConsoleColor.DarkGray;
 
-            for (int i = 0; i < _board.GetLength(1); i++)
+            for (var i = 0; i < _board.GetLength(1); i++)
             {
-                for (int j = 0; j < _board.GetLength(0); j++)
+                for (var j = 0; j < _board.GetLength(0); j++)
                 {
                     //if (color)
                     //{

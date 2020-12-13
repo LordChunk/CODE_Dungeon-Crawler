@@ -41,7 +41,7 @@ namespace CODE_PersistenceLib
 
         public Game Read(string filePath)
         {
-            Game returnGame = new Game();
+            var returnGame = new Game();
 
             var json = JObject.Parse(File.ReadAllText(filePath));
             var jsonRooms = json["rooms"];

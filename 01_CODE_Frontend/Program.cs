@@ -15,14 +15,14 @@ namespace CODE_Frontend
             Console.WindowHeight = 50;
             Console.CursorVisible = false;
 
-            GameReader reader = new GameReader();
-            Game game = reader.Read(@"./Levels/TempleOfDoom.json");
+            var reader = new GameReader();
+            var game = reader.Read(@"./Levels/TempleOfDoom.json");
 
-            GameView gameView = new GameView();
+            var gameView = new GameView();
 
             gameView.Draw(game);
 
-            GameInputs inputReader = new GameInputs(gameView, game);
+            var inputReader = new GameInputs(gameView, game);
             inputReader.Run();
         }
     }

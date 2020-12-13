@@ -17,7 +17,7 @@ namespace CODE_GameLib
 
         public void MovePlayer(Direction direction)
         {
-            Coordinate targetCoordinate = CalcTargetCoordinate(direction);
+            var targetCoordinate = CalcTargetCoordinate(direction);
             if (!CanPlayerMove(targetCoordinate)) return;
 
             if (IsCoordinateDoor(targetCoordinate))
@@ -60,8 +60,8 @@ namespace CODE_GameLib
 
         private Coordinate CalcTargetCoordinate(Direction direction)
         {
-            int x = Player.Spot.X;
-            int y = Player.Spot.Y;
+            var x = Player.Spot.X;
+            var y = Player.Spot.Y;
             switch (direction)
             {
                 case Direction.North:
