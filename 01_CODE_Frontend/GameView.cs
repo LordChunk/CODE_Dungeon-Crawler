@@ -20,7 +20,6 @@ namespace CODE_Frontend
         {
             Console.Clear();
 
-            //TODO: move this logic to game class
             if (game.DidPlayerWin())
             {
                 DrawWin();
