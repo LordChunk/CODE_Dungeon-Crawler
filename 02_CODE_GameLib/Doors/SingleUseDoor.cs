@@ -11,7 +11,7 @@ namespace CODE_GameLib.Doors
         {
             IsLocked = true;
             if (ConnectsToDoor.GetType() == typeof(SingleUseDoor))
-                ((SingleUseDoor) ConnectsToDoor).IsLocked = true;
+                ((SingleUseDoor)ConnectsToDoor).IsLocked = true;
         }
 
         public SingleUseDoor()
