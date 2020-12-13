@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using CODE_GameLib.Doors;
+﻿using CODE_GameLib.Doors;
 using CODE_GameLib.Interfaces;
 using CODE_GameLib.Items.Common;
+using System.Linq;
 
 namespace CODE_GameLib.Items
 {

@@ -1,4 +1,5 @@
 ﻿using CODE_GameLib;
+using CODE_GameLib.Doors;
 using CODE_GameLib.Doors.Common;
 using CODE_GameLib.Enums;
 using CODE_GameLib.Interfaces;
@@ -10,7 +11,6 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using CODE_GameLib.Doors;
 
 // ddReSharper disable AssignNullToNotNullAttribute
 
@@ -45,7 +45,7 @@ namespace CODE_PersistenceLib
 
             var json = JObject.Parse(File.ReadAllText(filePath));
             var jsonRooms = json["rooms"];
-            
+
             // Parse rooms
             rooms = new Dictionary<int, Room>();
             if (jsonRooms == null) throw new NoNullAllowedException("This level contains no rooms.");
@@ -104,12 +104,12 @@ namespace CODE_PersistenceLib
 
             // Parse definitions for first JSON line
             var locationStringDoor2 = connection1.ToObject<JProperty>()?.Name;
-            var room1 = GetRoomFromId((int) connection1.First);
+            var room1 = GetRoomFromId((int)connection1.First);
             var location2 = (Direction)Enum.Parse(typeof(Direction), locationStringDoor2, true);
 
             // Parse definitions for 2nd JSON line
             var locationStringDoor1 = connection2.ToObject<JProperty>()?.Name;
-            var room2 = GetRoomFromId((int) connection2.First);
+            var room2 = GetRoomFromId((int)connection2.First);
             var location1 = (Direction)Enum.Parse(typeof(Direction), locationStringDoor1, true);
 
             door1.IsInRoom = room1;

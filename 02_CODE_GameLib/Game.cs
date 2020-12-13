@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using CODE_GameLib.Doors.Common;
+﻿using CODE_GameLib.Doors.Common;
 using CODE_GameLib.Enums;
 using CODE_GameLib.Interfaces;
 using CODE_GameLib.Items;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CODE_GameLib
 {
@@ -72,8 +72,8 @@ namespace CODE_GameLib
 
                     break;
                 case Direction.East:
-                    x ++;
-                    if (x > Player.CurrentRoom.Width -1)
+                    x++;
+                    if (x > Player.CurrentRoom.Width - 1)
                     {
                         x = Player.CurrentRoom.Width - 1;
                     }

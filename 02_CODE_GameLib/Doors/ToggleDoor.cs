@@ -7,7 +7,7 @@ namespace CODE_GameLib.Doors
     {
         public bool IsLocked { get; private set; }
 
-        public ToggleDoor() 
+        public ToggleDoor()
         {
             IsLocked = false;
         }

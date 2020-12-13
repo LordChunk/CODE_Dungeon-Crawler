@@ -1,8 +1,8 @@
-﻿using System.Drawing;
-using System.Linq;
-using CODE_GameLib.Doors.Common;
+﻿using CODE_GameLib.Doors.Common;
 using CODE_GameLib.Interfaces;
 using CODE_GameLib.Items;
+using System.Drawing;
+using System.Linq;
 
 namespace CODE_GameLib.Doors
 {
@@ -13,7 +13,7 @@ namespace CODE_GameLib.Doors
         public override bool CanUseDoor(Player player)
         {
             var matchingKey = player.Items.FirstOrDefault(
-                i => i.GetType() == typeof(Key) && ((Key) i).ColorCode == ColorCode
+                i => i.GetType() == typeof(Key) && ((Key)i).ColorCode == ColorCode
                 );
             return matchingKey != null;
         }

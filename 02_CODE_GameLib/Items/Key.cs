@@ -1,6 +1,6 @@
-﻿using System.Drawing;
-using CODE_GameLib.Interfaces;
+﻿using CODE_GameLib.Interfaces;
 using CODE_GameLib.Items.Common;
+using System.Drawing;
 
 namespace CODE_GameLib.Items
 {
@@ -10,7 +10,7 @@ namespace CODE_GameLib.Items
 
         public bool IsPickedUp { get; set; }
 
-        public Key(Coordinate coordinate,Color colorCode) : base(coordinate)
+        public Key(Coordinate coordinate, Color colorCode) : base(coordinate)
         {
             ColorCode = colorCode;
             IsPickedUp = false;

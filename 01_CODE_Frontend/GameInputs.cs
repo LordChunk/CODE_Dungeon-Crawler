@@ -1,7 +1,7 @@
 ﻿using CODE_GameLib;
+using CODE_GameLib.Enums;
 using System;
 using System.Collections.Generic;
-using CODE_GameLib.Enums;
 
 namespace CODE_Frontend
 {
@@ -44,7 +44,7 @@ namespace CODE_Frontend
                 if (_moveKeys.TryGetValue(_keyPressed, out var action))
                 {
                     action.Invoke();
-                    
+
                     _keyPressed = 0;
                 }
             }
