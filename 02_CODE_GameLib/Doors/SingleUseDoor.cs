@@ -5,7 +5,14 @@ namespace CODE_GameLib.Doors
 {
     public class SingleUseDoor : Door, ILockable
     {
-        public bool IsLocked { get; private set; }
+        public bool IsLocked { get; set; }
+        // Lock both doors
+        public void Lock()
+        {
+            IsLocked = true;
+            if (ConnectsToDoor.GetType() == typeof(SingleUseDoor))
+                ((SingleUseDoor) ConnectsToDoor).IsLocked = true;
+        }
 
         public SingleUseDoor()
         {
@@ -20,7 +27,7 @@ namespace CODE_GameLib.Doors
         public override bool UseDoor(Player player)
         {
             if (!CanUseDoor(player)) return false;
-            IsLocked = true;
+            Lock();
             return true;
         }
     }

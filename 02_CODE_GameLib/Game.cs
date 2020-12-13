@@ -24,8 +24,9 @@ namespace CODE_GameLib
             {
                 var door = GetDoorOnLocation(targetCoordinate).ConnectsToDoor;
 
-                if (CanUseDoor(door))
+                if (door.CanUseDoor(Player))
                 {
+                    door.UseDoor(Player);
                     Player.CurrentRoom = door.IsInRoom;
                     targetCoordinate = CalcNewLocation(door.Location);
                 }
@@ -166,12 +167,6 @@ namespace CODE_GameLib
                 Direction.West => new Coordinate(0, (Player.CurrentRoom.Height - 1) / 2),
                 _ => throw new ArgumentOutOfRangeException("The direction you gave as input was not found. Did you add a new direction to the Direction enum?")
             };
-        }
-
-        private bool CanUseDoor(IDoor door)
-        {
-            var temp = (Door)door;
-            return temp.CanUseDoor(Player);
         }
     }
 }
