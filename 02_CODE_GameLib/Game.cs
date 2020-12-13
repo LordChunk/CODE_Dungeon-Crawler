@@ -1,5 +1,4 @@
-﻿using CODE_GameLib.Doors.Common;
-using CODE_GameLib.Enums;
+﻿using CODE_GameLib.Enums;
 using CODE_GameLib.Interfaces;
 using CODE_GameLib.Items;
 using System;
