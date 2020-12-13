@@ -30,11 +30,11 @@ namespace CODE_PersistenceLib
             { "pressure plate", CreatePressurePlate },
         };
 
-        private readonly Dictionary<string, Func<IDoor>> DoorTypes = new Dictionary<string, Func<IDoor>>
+        private readonly Dictionary<string, Func<JToken, IDoor>> DoorTypes = new Dictionary<string, Func<JToken, IDoor>>
         {
-            { "colored", () => new ColorCodedDoor() },
-            { "toggle", () => new ToggleDoor() },
-            { "closing gate", () => new SingleUseDoor() }
+            { "colored", CreateColorCodedDoor },
+            { "toggle", (_) => new ToggleDoor() },
+            { "closing gate", (_) => new SingleUseDoor() }
         };
 
         private Dictionary<int, Room> rooms;
@@ -87,8 +87,8 @@ namespace CODE_PersistenceLib
             {
                 // Get door type
                 var type = jsonDoor["type"].Value<string>();
-                door1 = DoorTypes.FirstOrDefault(kvp => kvp.Key == type).Value();
-                door2 = DoorTypes.FirstOrDefault(kvp => kvp.Key == type).Value();
+                door1 = DoorTypes.FirstOrDefault(kvp => kvp.Key == type).Value(jsonDoor);
+                door2 = DoorTypes.FirstOrDefault(kvp => kvp.Key == type).Value(jsonDoor);
             }
             else
             {
@@ -175,6 +175,17 @@ namespace CODE_PersistenceLib
                 jsonItem["y"].Value<int>()
             );
         }
+
+        #region Door create methods
+
+        private static ColorCodedDoor CreateColorCodedDoor(JToken jsonDoor)
+        {
+            var color = Color.FromName(jsonDoor["color"].Value<string>());
+
+            return new ColorCodedDoor(color);
+        }
+
+        #endregion
 
         #region Item create methods
         private static Trap CreateTrap(JToken jsonTrap)

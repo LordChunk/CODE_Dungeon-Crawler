@@ -10,6 +10,11 @@ namespace CODE_GameLib.Doors
     {
         public Color ColorCode { get; private set; }
 
+        public ColorCodedDoor(Color color)
+        {
+            ColorCode = color;
+        }
+
         public override bool CanUseDoor(Player player)
         {
             var matchingKey = player.Items.FirstOrDefault(
