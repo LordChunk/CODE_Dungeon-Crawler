@@ -23,6 +23,12 @@ namespace CODE_PersistenceLib
             { "key", CreateKey },
             { "pressure plate", CreatePressurePlate },
         };
+
+        /// <summary>
+        /// Iterates through a set of JSON strings describing items and parses them.
+        /// </summary>
+        /// <param name="jsonItems">A set of JSON strings describing items</param>
+        /// <returns>List of items parsed from the jsonItems parameter</returns>
         public static List<IItem> CreateItems(IEnumerable<JToken> jsonItems)
         {
             return jsonItems.Select(CreateItem).ToList();
