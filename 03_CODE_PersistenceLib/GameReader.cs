@@ -138,48 +138,6 @@ namespace CODE_PersistenceLib
             return rooms.FirstOrDefault(kvp => kvp.Key == id).Value;
         }
 
-
-        //private IConnection CreateConnection(JToken jsonConnection)
-        //{
-        //    IConnection connection;
-        //    // Check if connection between room is "special connection"
-        //    var jsonDoor = jsonConnection["door"];
-        //    if (jsonDoor != null)
-        //    {
-        //        // Get door type
-        //        var type = jsonDoor["type"].Value<string>();
-
-        //        var (_, roomConnection) = ConnectionTypes.FirstOrDefault(kvp => kvp.Key == type);
-        //        connection = roomConnection ?? throw new NoNullAllowedException("Connection type " + type + " is not a valid connection type.");
-        //    }
-        //    else
-        //    {
-        //        connection = new Connection();
-        //    }
-
-        //    // Add two connections to the rooms
-        //    connection.Rooms = new List<Connection.RoomDirectionPair>
-        //    {
-        //        CreateConnectionPair(jsonConnection.First), 
-        //        CreateConnectionPair(jsonConnection.First.Next)
-        //    };
-
-        //    return connection;
-        //}
-
-        //private Connection.RoomDirectionPair CreateConnectionPair(JToken jsonConnection)
-        //{
-        //    var directionString = jsonConnection.ToObject<JProperty>()?.Name;
-        //    var roomId = jsonConnection.First.Value<int>();
-        //    var direction = (Direction) Enum.Parse(typeof(Direction), directionString, true);
-
-        //    return new Connection.RoomDirectionPair
-        //    {
-        //        ConnectsToRoom = rooms.FirstOrDefault(kvp => kvp.Key == jsonConnection.First.Value<int>()).Value,
-        //        DoorLocation = direction
-        //    };
-        //}
-
         /// <summary>
         /// Creates a room item without items or doors
         /// </summary>
