@@ -34,8 +34,8 @@ namespace CODE_PersistenceLib
         private readonly Dictionary<string, Func<JToken, IDoor>> _doorTypes = new Dictionary<string, Func<JToken, IDoor>>
         {
             { "colored", CreateColorCodedDoor },
-            { "toggle", (_) => new ToggleDoor() },
-            { "closing gate", (_) => new SingleUseDoor() }
+            { "toggle", _ => new ToggleDoor() },
+            { "closing gate", _ => new SingleUseDoor() }
         };
 
         private Dictionary<int, Room> _rooms;
@@ -118,17 +118,6 @@ namespace CODE_PersistenceLib
 
             door2.IsInRoom = room2;
             door2.Location = location2;
-
-            // TODO: Remove debug code
-            //Console.WriteLine("Door 1");
-            //Console.WriteLine("type: "+ door1.GetType());
-            //Console.WriteLine("room id: " + door1.IsInRoom.Id);
-            //Console.WriteLine("location in room: " + door1.Location);
-
-            //Console.WriteLine("Door 2");
-            //Console.WriteLine("type: " + door2.GetType());
-            //Console.WriteLine("room id:" + door2.IsInRoom.Id);
-            //Console.WriteLine("location in room:" + door2.Location);
 
             room1.Connections.Add(location1, door1);
             room2.Connections.Add(location2, door2);
