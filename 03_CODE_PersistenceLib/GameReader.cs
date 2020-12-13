@@ -16,28 +16,6 @@ namespace CODE_PersistenceLib
 {
     public class GameReader
     {
-        /// <summary>
-        /// A list of all item types with their corresponding parser methods. Each method takes a JToken as it's parameter and outputs an IItem.
-        /// </summary>
-        private readonly Dictionary<string, Func<JToken, IItem>> _itemTypes = new Dictionary<string, Func<JToken, IItem>>
-        {
-            { "boobietrap", CreateTrap },
-            { "disappearing boobietrap", CreateSingleUseTrap },
-            { "sankara stone", CreateSankaraStone },
-            { "key", CreateKey },
-            { "pressure plate", CreatePressurePlate },
-        };
-
-        /// <summary>
-        /// A list of all door types and their corresponding parser methods. Each method takes a JToken as it's parameter and outputs an IDoor.
-        /// </summary>
-        private readonly Dictionary<string, Func<JToken, IDoor>> _doorTypes = new Dictionary<string, Func<JToken, IDoor>>
-        {
-            { "colored", CreateColorCodedDoor },
-            { "toggle", _ => new ToggleDoor() },
-            { "closing gate", _ => new SingleUseDoor() }
-        };
-
         private Dictionary<int, Room> _rooms;
 
         public Game Read(string filePath)
@@ -56,7 +34,7 @@ namespace CODE_PersistenceLib
                 var room = CreateRoom(jsonRoom);
                 var jsonItems = jsonRoom["items"];
                 if (jsonItems != null)
-                    room.Items = CreateItems(jsonItems);
+                    room.Items = ItemFactory.CreateItems(jsonItems);
                 _rooms.Add(room.Id, room);
             }
 
@@ -75,27 +53,31 @@ namespace CODE_PersistenceLib
             return returnGame;
         }
 
+        private Room GetRoomFromId(int id)
+        {
+            return _rooms.FirstOrDefault(kvp => kvp.Key == id).Value;
+        }
+
+        /// <summary>
+        /// Creates a room item without items or doors
+        /// </summary>
+        /// <param name="jsonRoom">JSON string containing the room</param>
+        /// <returns>ConnectsToRoom without doors or items</returns>
+        private static Room CreateRoom(JToken jsonRoom)
+        {
+            return new Room(jsonRoom["id"].Value<int>(), jsonRoom["height"].Value<int>(), jsonRoom["width"].Value<int>(), new Dictionary<Direction, IDoor>());
+        }
+
+
         /// <summary>
         /// Creates Door instances and links them to each other and to their respective room
         /// </summary>
         /// <param name="jsonConnection">JSON string containing all connections</param>
         private void CreateDoorSet(JToken jsonConnection)
         {
-            IDoor door1;
-            IDoor door2;
-            var jsonDoor = jsonConnection["door"];
-            if (jsonDoor != null)
-            {
-                // Get door type
-                var type = jsonDoor["type"].Value<string>();
-                door1 = _doorTypes.FirstOrDefault(kvp => kvp.Key == type).Value(jsonDoor);
-                door2 = _doorTypes.FirstOrDefault(kvp => kvp.Key == type).Value(jsonDoor);
-            }
-            else
-            {
-                door1 = new Door();
-                door2 = new Door();
-            }
+            var door1 = DoorFactory.CreateDoor(jsonConnection);
+            var door2 = DoorFactory.CreateDoor(jsonConnection);
+
             // Connect doors to each other
             door1.ConnectsToDoor = door2;
             door2.ConnectsToDoor = door1;
@@ -123,90 +105,5 @@ namespace CODE_PersistenceLib
             room2.Connections.Add(location2, door2);
         }
 
-        private Room GetRoomFromId(int id)
-        {
-            return _rooms.FirstOrDefault(kvp => kvp.Key == id).Value;
-        }
-
-        /// <summary>
-        /// Creates a room item without items or doors
-        /// </summary>
-        /// <param name="jsonRoom">JSON string containing the room</param>
-        /// <returns>ConnectsToRoom without doors or items</returns>
-        private static Room CreateRoom(JToken jsonRoom)
-        {
-            return new Room(jsonRoom["id"].Value<int>(), jsonRoom["height"].Value<int>(), jsonRoom["width"].Value<int>(), new Dictionary<Direction, IDoor>());
-        }
-
-        private List<IItem> CreateItems(IEnumerable<JToken> jsonItems)
-        {
-            return jsonItems.Select(CreateItem).ToList();
-        }
-
-        /// <summary>
-        /// Parses a JSON string containing an item. This method will check the item against all item types stored in the ItemTypes dictionary
-        /// </summary>
-        /// <param name="jsonItem">JSON string containing the item</param>
-        /// <returns>Parsed item</returns>
-        private IItem CreateItem(JToken jsonItem)
-        {
-            var type = jsonItem["type"].Value<string>();
-            // Check if item type is valid
-            var typeKvp = _itemTypes.FirstOrDefault(it => it.Key == type);
-            if (typeKvp.Value == null) throw new NoNullAllowedException("Item type " + type + " is not a valid item type.");
-            // Parse item and return
-            return typeKvp.Value(jsonItem);
-        }
-
-        private static Coordinate GetItemCoordinates(JToken jsonItem)
-        {
-            return new Coordinate(
-                jsonItem["x"].Value<int>(),
-                jsonItem["y"].Value<int>()
-            );
-        }
-
-        #region Door create methods
-
-        private static ColorCodedDoor CreateColorCodedDoor(JToken jsonDoor)
-        {
-            var color = Color.FromName(jsonDoor["color"].Value<string>());
-
-            return new ColorCodedDoor(color);
-        }
-
-        #endregion
-
-        #region Item create methods
-        private static Trap CreateTrap(JToken jsonTrap)
-        {
-            return new Trap(GetItemCoordinates(jsonTrap), jsonTrap["damage"].Value<int>());
-        }
-
-        private static SingleUseTrap CreateSingleUseTrap(JToken jsonTrap)
-        {
-            return new SingleUseTrap(GetItemCoordinates(jsonTrap), jsonTrap["damage"].Value<int>());
-        }
-
-        private static SankaraStone CreateSankaraStone(JToken jsonStone)
-        {
-            return new SankaraStone(GetItemCoordinates(jsonStone));
-        }
-
-        private static Key CreateKey(JToken jsonKey)
-        {
-            return new Key(GetItemCoordinates(jsonKey), ParseColorString(jsonKey["color"].Value<string>()));
-        }
-
-        private static PressurePlate CreatePressurePlate(JToken jsonPlate)
-        {
-            return new PressurePlate(GetItemCoordinates(jsonPlate));
-        }
-
-        private static Color ParseColorString(string color)
-        {
-            return Color.FromName(color);
-        }
-        #endregion
     }
 }
