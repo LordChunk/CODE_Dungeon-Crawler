@@ -9,11 +9,12 @@
   <ItemGroup>
     <ProjectReference Include="..\03_CODE_PersistenceLib\03_CODE_PersistenceLib.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <None Update="Levels\TempleOfDoom.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Levels\TempleOfDoom_Extended_B.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
-
 </Project>

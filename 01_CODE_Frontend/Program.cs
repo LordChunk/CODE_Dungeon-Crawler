@@ -17,7 +17,7 @@ namespace CODE_Frontend
             Console.CursorVisible = false;
 
             var reader = new GameReader();
-            var game = reader.Read(@"./Levels/TempleOfDoom.json");
+            var game = reader.Read(@"./Levels/TempleOfDoom_Extended_B.json");
 
             var gameView = new GameView();
 
