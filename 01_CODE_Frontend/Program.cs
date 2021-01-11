@@ -1,6 +1,8 @@
 ﻿using CODE_PersistenceLib;
 using System;
 using System.Text;
+using CODE_GameLib;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CODE_Frontend
 {
@@ -23,6 +25,10 @@ namespace CODE_Frontend
 
             var inputReader = new GameInputs(gameView, game);
             inputReader.Run();
+
+            var serviceProvider = new ServiceCollection()
+                .AddSingleton(new CheatsService())
+                .BuildServiceProvider();
         }
     }
 }

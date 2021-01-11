@@ -61,7 +61,7 @@ namespace CODE_PersistenceLib
         /// <returns>ConnectsToRoom without doors or items</returns>
         private static Room CreateRoom(JToken jsonRoom)
         {
-            return new Room(jsonRoom["id"].Value<int>(), jsonRoom["height"].Value<int>(), jsonRoom["width"].Value<int>(), new Dictionary<Direction, IDoor>());
+            return new Room(jsonRoom["id"].Value<int>(), jsonRoom["height"].Value<int>(), jsonRoom["width"].Value<int>(), new Dictionary<Coordinate, IDoor>());
         }
 
 
@@ -92,13 +92,13 @@ namespace CODE_PersistenceLib
             var location1 = (Direction)Enum.Parse(typeof(Direction), locationStringDoor1, true);
 
             door1.IsInRoom = room1;
-            door1.Location = location1;
+            door1.Coordinate = DoorFactory.CalculateDoorCoordinate(door1, location1);
 
             door2.IsInRoom = room2;
-            door2.Location = location2;
+            door2.Coordinate = DoorFactory.CalculateDoorCoordinate(door2, location2);
 
-            room1.Connections.Add(location1, door1);
-            room2.Connections.Add(location2, door2);
+            room1.Connections.Add(door1.Coordinate, door1);
+            room2.Connections.Add(door2.Coordinate, door2);
         }
 
     }

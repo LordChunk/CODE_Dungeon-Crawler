@@ -27,7 +27,7 @@ namespace CODE_GameLib
                 {
                     door.UseDoor(Player);
                     Player.CurrentRoom = door.IsInRoom;
-                    targetCoordinate = CalcNewLocation(door.Location);
+                    targetCoordinate = door.Coordinate;
                 }
             }
 
@@ -114,7 +114,7 @@ namespace CODE_GameLib
 
             foreach (var kvp in Player.CurrentRoom.Connections)
             {
-                doorLocation.Add(CalcDoorLocation(kvp.Key));
+                doorLocation.Add(kvp.Key);
             }
 
             doorLocation = doorLocation.Where(coordinate => coordinate.IsEqual(targetCoordinate)).ToList();
@@ -138,22 +138,7 @@ namespace CODE_GameLib
             if (!IsCoordinateDoor(coordinate))
                 throw new ArgumentOutOfRangeException("The coordinate is not a door so this method cant return an IDoor.");
 
-            if (coordinate.X == 0)
-            {
-                return Player.CurrentRoom.Connections[Direction.West];
-            }
-            else if (coordinate.Y == 0)
-            {
-                return Player.CurrentRoom.Connections[Direction.North];
-            }
-            else if (coordinate.X == Player.CurrentRoom.Width - 1)
-            {
-                return Player.CurrentRoom.Connections[Direction.East];
-            }
-            else
-            {
-                return Player.CurrentRoom.Connections[Direction.South];
-            }
+            return Player.CurrentRoom.Connections.FirstOrDefault(kvp => kvp.Key.X == coordinate.X && kvp.Key.Y == coordinate.Y).Value; 
         }
 
         private Coordinate CalcNewLocation(Direction direction)

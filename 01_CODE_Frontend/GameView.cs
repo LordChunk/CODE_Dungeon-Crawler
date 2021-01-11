@@ -116,40 +116,8 @@ namespace CODE_Frontend
         {
             foreach (var kvp in player.CurrentRoom.Connections)
             {
-                var coordinate = new Coordinate(0, 0);
-
-                //calculate location door
-                switch (kvp.Key)
-                {
-                    case Direction.North:
-                        coordinate.X = (player.CurrentRoom.Width - 1) / 2;
-                        coordinate.Y = 0;
-
-                        AddDoor(coordinate, kvp.Value);
-
-                        break;
-                    case Direction.East:
-                        coordinate.X = player.CurrentRoom.Width - 1;
-                        coordinate.Y = (player.CurrentRoom.Height - 1) / 2;
-
-                        AddDoor(coordinate, kvp.Value);
-
-                        break;
-                    case Direction.West:
-                        coordinate.X = 0;
-                        coordinate.Y = (player.CurrentRoom.Height - 1) / 2;
-
-                        AddDoor(coordinate, kvp.Value);
-
-                        break;
-                    case Direction.South:
-                        coordinate.X = (player.CurrentRoom.Width - 1) / 2;
-                        coordinate.Y = player.CurrentRoom.Height - 1;
-
-                        AddDoor(coordinate, kvp.Value);
-
-                        break;
-                }
+                var coordinate = kvp.Key;
+                AddDoor(kvp.Key, kvp.Value);
 
                 //check type door
                 if (kvp.Value.GetType() == typeof(ToggleDoor))
@@ -163,7 +131,7 @@ namespace CODE_Frontend
                 else if (kvp.Value.GetType() == typeof(ColorCodedDoor))
                 {
                     var temp = (ColorCodedDoor)kvp.Value;
-                    if (temp.Location == Direction.East || temp.Location == Direction.West)
+                    if (coordinate.X == 0 || coordinate.X == kvp.Value.IsInRoom.Width)
                     {
                         _board[coordinate.X, coordinate.Y] = new CharWithColor('|',
                             (ConsoleColor)Enum.Parse(typeof(ConsoleColor), temp.ColorCode.Name));

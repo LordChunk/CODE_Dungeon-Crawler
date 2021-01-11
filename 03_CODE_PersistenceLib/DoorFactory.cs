@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using CODE_GameLib;
+using CODE_GameLib.Enums;
 
 namespace CODE_PersistenceLib
 {
@@ -27,6 +29,38 @@ namespace CODE_PersistenceLib
             if (jsonDoor == null) return new Door();
             var type = jsonDoor["type"].Value<string>();
             return _doorTypes.FirstOrDefault(kvp => kvp.Key == type).Value(jsonDoor);
+        }
+
+        public static Coordinate CalculateDoorCoordinate(IDoor door, Direction direction)
+        {
+            var width = door.IsInRoom.Width;
+            var height = door.IsInRoom.Height;
+            var coordinate = new Coordinate(0, 0);
+
+            // calculate location door
+            switch (direction)
+            {
+                case Direction.North:
+                    coordinate.X = (width - 1) / 2;
+                    coordinate.Y = 0;
+                    break;
+                case Direction.East:
+                    coordinate.X = width - 1;
+                    coordinate.Y = (height - 1) / 2;
+                    break;
+                case Direction.West:
+                    coordinate.X = 0;
+                    coordinate.Y = (height - 1) / 2;
+                    break;
+                case Direction.South:
+                    coordinate.X = (width - 1) / 2;
+                    coordinate.Y = height - 1;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(direction), direction, "Invalid direction");
+            }
+
+            return coordinate;
         }
 
         #region Door create methods
