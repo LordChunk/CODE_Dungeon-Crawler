@@ -38,7 +38,14 @@ namespace CODE_PersistenceLib
             var jsonConnections = json["connections"].ToList();
 
             // Create doors and add them to rooms
-            jsonConnections.ForEach(CreateDoorSet);
+            jsonConnections.ForEach(jtoken =>
+            {
+                var type = jtoken.Children<JProperty>().First().Name;
+                if (type != "portal")
+                    CreateDoorSet(jtoken);
+                else
+                    CreatePortalSet(jtoken);
+            });
 
             var startRoom = _rooms[json["player"]["startRoomId"].Value<int>()];
             var startCoordinate = new Coordinate(json["player"]["startX"].Value<int>(), json["player"]["startY"].Value<int>());
@@ -99,6 +106,26 @@ namespace CODE_PersistenceLib
 
             room1.Connections.Add(door1.Coordinate, door1);
             room2.Connections.Add(door2.Coordinate, door2);
+        }
+
+        private void CreatePortalSet(JToken jsonPortal)
+        {
+            var portal1Json = jsonPortal.First.First.First;
+            var portal2Json = jsonPortal.First.First.First.Next;
+            var portal1 = PortalFactory.CreatePortal(portal1Json);
+            var portal2 = PortalFactory.CreatePortal(portal2Json);
+            
+            var room1 = GetRoomFromId(portal1Json.Value<int>("roomId"));
+            var room2 = GetRoomFromId(portal2Json.Value<int>("roomId"));
+
+            portal1.IsInRoom = room1;
+            portal2.IsInRoom = room2;
+
+            portal1.ConnectsToDoor = portal2;
+            portal2.ConnectsToDoor = portal1;
+
+            room1.Connections.Add(portal1.Coordinate, portal1);
+            room2.Connections.Add(portal2.Coordinate, portal2);
         }
 
     }
