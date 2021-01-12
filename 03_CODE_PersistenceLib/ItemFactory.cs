@@ -7,11 +7,19 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using CODE_GameLib.Services;
 
 namespace CODE_PersistenceLib
 {
     public class ItemFactory
     {
+        private static CheatService _cheatService;
+
+        public ItemFactory(CheatService cheatService)
+        {
+            _cheatService = cheatService;
+        }
+
         /// <summary>
         /// A list of all item types with their corresponding parser methods. Each method takes a JToken as it's parameter and outputs an IItem.
         /// </summary>
@@ -60,27 +68,27 @@ namespace CODE_PersistenceLib
         #region Item create methods
         private static Trap CreateTrap(JToken jsonTrap)
         {
-            return new Trap(GetItemCoordinates(jsonTrap), jsonTrap["damage"].Value<int>());
+            return new Trap(GetItemCoordinates(jsonTrap), _cheatService, jsonTrap["damage"].Value<int>());
         }
 
         private static SingleUseTrap CreateSingleUseTrap(JToken jsonTrap)
         {
-            return new SingleUseTrap(GetItemCoordinates(jsonTrap), jsonTrap["damage"].Value<int>());
+            return new SingleUseTrap(GetItemCoordinates(jsonTrap), _cheatService, jsonTrap["damage"].Value<int>());
         }
 
         private static SankaraStone CreateSankaraStone(JToken jsonStone)
         {
-            return new SankaraStone(GetItemCoordinates(jsonStone));
+            return new SankaraStone(GetItemCoordinates(jsonStone), _cheatService);
         }
 
         private static Key CreateKey(JToken jsonKey)
         {
-            return new Key(GetItemCoordinates(jsonKey), ParseColorString(jsonKey["color"].Value<string>()));
+            return new Key(GetItemCoordinates(jsonKey), _cheatService, ParseColorString(jsonKey["color"].Value<string>()));
         }
 
         private static PressurePlate CreatePressurePlate(JToken jsonPlate)
         {
-            return new PressurePlate(GetItemCoordinates(jsonPlate));
+            return new PressurePlate(GetItemCoordinates(jsonPlate), _cheatService);
         }
 
         private static Color ParseColorString(string color)

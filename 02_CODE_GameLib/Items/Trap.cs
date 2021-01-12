@@ -1,23 +1,21 @@
 ﻿using CODE_GameLib.Interfaces;
 using CODE_GameLib.Items.Common;
+using CODE_GameLib.Services;
 
 namespace CODE_GameLib.Items
 {
     public class Trap : Item, IEnvironmentalItem
     {
         public int Damage;
-
-        public virtual void OnTrigger(Player player)
+        
+        public override void OnTouch(Player player)
         {
+            if (_cheatService.LoseNoLives)
+                return;
             player.Lives -= Damage;
         }
 
-        public override void OnTouch(Player player)
-        {
-            OnTrigger(player);
-        }
-
-        public Trap(Coordinate coordinate, int damage) : base(coordinate)
+        public Trap(Coordinate coordinate, CheatService cheatService, int damage) : base(coordinate,cheatService)
         {
             Damage = damage;
         }

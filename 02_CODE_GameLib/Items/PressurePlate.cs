@@ -2,6 +2,7 @@
 using CODE_GameLib.Interfaces;
 using CODE_GameLib.Items.Common;
 using System.Linq;
+using CODE_GameLib.Services;
 
 namespace CODE_GameLib.Items
 {
@@ -9,12 +10,12 @@ namespace CODE_GameLib.Items
     {
         public bool IsActive { get; private set; }
 
-        public PressurePlate(Coordinate coordinate) : base(coordinate)
+        public PressurePlate(Coordinate coordinate, CheatService cheatService) : base(coordinate, cheatService)
         {
             IsActive = false;
         }
-
-        public void OnTrigger(Player player)
+        
+        public override void OnTouch(Player player)
         {
             var toggleDoors = player.CurrentRoom.Connections
                 .Where(d => d.GetType() == typeof(ToggleDoor))
@@ -26,11 +27,6 @@ namespace CODE_GameLib.Items
             }
 
             IsActive = !IsActive;
-        }
-
-        public override void OnTouch(Player player)
-        {
-            OnTrigger(player);
         }
     }
 }

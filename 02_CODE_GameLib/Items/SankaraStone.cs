@@ -1,5 +1,6 @@
 ﻿using CODE_GameLib.Interfaces;
 using CODE_GameLib.Items.Common;
+using CODE_GameLib.Services;
 
 namespace CODE_GameLib.Items
 {
@@ -7,23 +8,16 @@ namespace CODE_GameLib.Items
     {
         public bool IsPickedUp { get; set; }
 
-        public SankaraStone(Coordinate coordinate) : base(coordinate)
+        public SankaraStone(Coordinate coordinate, CheatService cheatService) : base(coordinate,cheatService)
         {
             IsPickedUp = false;
         }
-
-        public void OnPickUp(Player player)
-        {
-            if (!IsPickedUp)
-            {
-                player.Items.Add(this);
-                IsPickedUp = true;
-            }
-        }
-
+        
         public override void OnTouch(Player player)
         {
-            OnPickUp(player);
+            if (IsPickedUp) return;
+            player.Items.Add(this);
+            IsPickedUp = true;
         }
     }
 }

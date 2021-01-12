@@ -1,21 +1,21 @@
-﻿namespace CODE_GameLib.Items
+﻿using CODE_GameLib.Services;
+
+namespace CODE_GameLib.Items
 {
     public class SingleUseTrap : Trap
     {
         public bool IsUsed { get; private set; }
 
-        public SingleUseTrap(Coordinate coordinate, int damage) : base(coordinate, damage)
+        public SingleUseTrap(Coordinate coordinate, CheatService cheatService, int damage) : base(coordinate, cheatService, damage)
         {
             IsUsed = false;
         }
 
-        public override void OnTrigger(Player player)
+        public override void OnTouch(Player player)
         {
-            if (!IsUsed)
-            {
-                base.OnTrigger(player);
-                IsUsed = true;
-            }
+            if (IsUsed) return;
+            base.OnTouch(player);
+            IsUsed = true;
         }
     }
 }

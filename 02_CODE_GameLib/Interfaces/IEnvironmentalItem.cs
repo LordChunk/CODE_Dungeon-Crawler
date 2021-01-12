@@ -2,6 +2,5 @@
 {
     public interface IEnvironmentalItem
     {
-        public void OnTrigger(Player player);
     }
 }
