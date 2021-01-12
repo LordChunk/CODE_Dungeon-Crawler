@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using CODE_TempleOfDoom_DownloadableContent;
 
 namespace CODE_PersistenceLib
 {
@@ -31,6 +32,13 @@ namespace CODE_PersistenceLib
                 var jsonItems = jsonRoom["items"];
                 if (jsonItems != null)
                     room.Items = ItemFactory.CreateItems(jsonItems);
+
+                var jsonEnemies = jsonRoom["enemies"];
+                if (jsonEnemies != null)
+                    room.Enemies = EnemyFactory.CreateEnemies(jsonEnemies);
+                else
+                    room.Enemies = new List<Enemy>();
+
                 _rooms.Add(room.Id, room);
             }
 

@@ -1,6 +1,5 @@
 ﻿using CODE_GameLib;
 using CODE_GameLib.Doors;
-using CODE_GameLib.Enums;
 using CODE_GameLib.Interfaces;
 using CODE_GameLib.Items;
 using System;
@@ -64,6 +63,9 @@ namespace CODE_Frontend
 
             //put all door position in array
             CalcDoors(player);
+
+            // put all enemy position in array
+            CalcEnemies(player);
 
             //put player position in array
             CalcPlayer(player);
@@ -166,6 +168,15 @@ namespace CODE_Frontend
             {
                 _board[0, i] = new CharWithColor('#', ConsoleColor.Yellow);
                 _board[player.CurrentRoom.Width - 1, i] = new CharWithColor('#', ConsoleColor.Yellow);
+            }
+        }
+
+        private void CalcEnemies(Player player)
+        {
+            var enemies = player.CurrentRoom.Enemies;
+            foreach (var enemy in enemies)
+            {
+                _board[enemy.CurrentXLocation, enemy.CurrentYLocation] = new CharWithColor('E', ConsoleColor.DarkRed);
             }
         }
 

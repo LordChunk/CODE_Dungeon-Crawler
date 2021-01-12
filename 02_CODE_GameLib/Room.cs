@@ -1,6 +1,7 @@
 ﻿using CODE_GameLib.Enums;
 using CODE_GameLib.Interfaces;
 using System.Collections.Generic;
+using CODE_TempleOfDoom_DownloadableContent;
 
 namespace CODE_GameLib
 {
@@ -10,6 +11,7 @@ namespace CODE_GameLib
         public int Width;
         public int Height;
         public List<IItem> Items;
+        public List<Enemy> Enemies;
         public Dictionary<Coordinate, IDoor> Connections;
         public readonly string Type = "room";
 
