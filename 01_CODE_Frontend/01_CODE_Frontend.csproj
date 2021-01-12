@@ -9,6 +9,12 @@
   <ItemGroup>
     <ProjectReference Include="..\03_CODE_PersistenceLib\03_CODE_PersistenceLib.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CODE_TempleOfDoom_DownloadableContent">
+      <HintPath>..\CODE_TempleOfDoom_DownloadableContent.dll</HintPath>
+    </Reference>
+  </ItemGroup>
   <ItemGroup>
     <None Update="Levels\TempleOfDoom.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
