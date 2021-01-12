@@ -27,9 +27,9 @@ namespace CODE_PersistenceLib
             var maxY = jtoken.Value<int>("maxY");
 
             if (type == "horizontal")
-                return new HorizontallyMovingEnemy(numberOfLives, x, y, minX, minY);
+                return new HorizontallyMovingEnemy(numberOfLives, x, y, minX, maxX);
             else if (type == "vertical")
-                return new VerticallyMovingEnemy(numberOfLives, x, y, minX, minY);
+                return new VerticallyMovingEnemy(numberOfLives, x, y, minY, maxY);
 
             throw new NoNullAllowedException("Enemy type " + type + " is not a valid item type.");
         }

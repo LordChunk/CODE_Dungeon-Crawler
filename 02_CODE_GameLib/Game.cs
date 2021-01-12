@@ -16,7 +16,11 @@ namespace CODE_GameLib
 
         public void MovePlayer(Direction direction)
         {
+            // Move enemies
+            Player.CurrentRoom.Enemies.ForEach(e => e.Move());
+
             var targetCoordinate = CalcTargetCoordinate(direction);
+            // Check if move if valid
             if (!CanPlayerMove(targetCoordinate)) return;
 
             if (IsCoordinateDoor(targetCoordinate))
