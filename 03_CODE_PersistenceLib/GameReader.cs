@@ -120,8 +120,8 @@ namespace CODE_PersistenceLib
         {
             var portal1Json = jsonPortal.First.First.First;
             var portal2Json = jsonPortal.First.First.First.Next;
-            var portal1 = PortalFactory.CreatePortal(portal1Json);
-            var portal2 = PortalFactory.CreatePortal(portal2Json);
+            var portal1 = DoorFactory.CreatePortal(portal1Json);
+            var portal2 = DoorFactory.CreatePortal(portal2Json);
             
             var room1 = GetRoomFromId(portal1Json.Value<int>("roomId"));
             var room2 = GetRoomFromId(portal2Json.Value<int>("roomId"));

@@ -74,5 +74,12 @@ namespace CODE_PersistenceLib
 
         #endregion
 
+        public static IDoor CreatePortal(JToken jsonPortal)
+        {
+            return new Portal
+            {
+                Coordinate = new Coordinate(jsonPortal.Value<int>("x"), jsonPortal.Value<int>("y"))
+            };
+        }
     }
 }
