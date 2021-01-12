@@ -4,6 +4,7 @@ using CODE_GameLib.Enums;
 using CODE_GameLib.Interfaces;
 using CODE_GameLib.Items;
 using System;
+using CODE_GameLib.Doors.Common;
 
 namespace CODE_Frontend
 {
@@ -141,6 +142,10 @@ namespace CODE_Frontend
                         _board[coordinate.X, coordinate.Y] = new CharWithColor('=',
                         (ConsoleColor)Enum.Parse(typeof(ConsoleColor), temp.ColorCode.Name));
                     }
+                }
+                else if (kvp.Value.GetType() == typeof(Portal))
+                {
+                    _board[coordinate.X, coordinate.Y] = new CharWithColor('Ø', ConsoleColor.Yellow);
                 }
                 else
                 {
