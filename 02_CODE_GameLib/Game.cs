@@ -133,14 +133,14 @@ namespace CODE_GameLib
                 Direction.East => new Coordinate(Player.CurrentRoom.Width - 1, (Player.CurrentRoom.Height - 1) / 2),
                 Direction.South => new Coordinate((Player.CurrentRoom.Width - 1) / 2, Player.CurrentRoom.Height - 1),
                 Direction.West => new Coordinate(0, (Player.CurrentRoom.Height - 1) / 2),
-                _ => throw new ArgumentOutOfRangeException("The direction you gave as input was not found. Did you add a new direction to the Direction enum?")
+                _ => throw new ArgumentOutOfRangeException(nameof(direction),"The direction you gave as input was not found. Did you add a new direction to the Direction enum?")
             };
         }
 
         private IDoor GetDoorOnLocation(Coordinate coordinate)
         {
             if (!IsCoordinateDoor(coordinate))
-                throw new ArgumentOutOfRangeException("The coordinate is not a door so this method cant return an IDoor.");
+                throw new ArgumentOutOfRangeException(nameof(coordinate),"The coordinate is not a door so this method cant return an IDoor.");
 
             return Player.CurrentRoom.Connections.FirstOrDefault(kvp => kvp.Key.X == coordinate.X && kvp.Key.Y == coordinate.Y).Value; 
         }
@@ -153,7 +153,7 @@ namespace CODE_GameLib
                 Direction.East => new Coordinate(Player.CurrentRoom.Width - 1, (Player.CurrentRoom.Height - 1) / 2),
                 Direction.South => new Coordinate((Player.CurrentRoom.Width - 1) / 2, Player.CurrentRoom.Height - 1),
                 Direction.West => new Coordinate(0, (Player.CurrentRoom.Height - 1) / 2),
-                _ => throw new ArgumentOutOfRangeException("The direction you gave as input was not found. Did you add a new direction to the Direction enum?")
+                _ => throw new ArgumentOutOfRangeException(nameof(direction),"The direction you gave as input was not found. Did you add a new direction to the Direction enum?")
             };
         }
     }
