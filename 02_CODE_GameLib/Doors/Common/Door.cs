@@ -5,7 +5,7 @@ namespace CODE_GameLib.Doors.Common
 {
     public class Door : IDoor
     {
-        public Direction Location { get; set; }
+        public Coordinate Coordinate { get; set; }
         public Room IsInRoom { get; set; }
         public IDoor ConnectsToDoor { get; set; }
 

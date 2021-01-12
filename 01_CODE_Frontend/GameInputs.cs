@@ -2,6 +2,7 @@
 using CODE_GameLib.Enums;
 using System;
 using System.Collections.Generic;
+using CODE_GameLib.Services;
 
 namespace CODE_Frontend
 {
@@ -13,7 +14,7 @@ namespace CODE_Frontend
         private readonly Game _game;
         private readonly GameView _gameView;
 
-        public GameInputs(GameView gameView, Game game)
+        public GameInputs(GameView gameView, Game game, CheatService cheatService)
         {
             _gameView = gameView;
             _game = game;
@@ -24,10 +25,8 @@ namespace CODE_Frontend
                 {ConsoleKey.LeftArrow, () => game.MovePlayer(Direction.West)},
                 {ConsoleKey.RightArrow, () => game.MovePlayer(Direction.East)},
                 {ConsoleKey.DownArrow, () => game.MovePlayer(Direction.South)},
-                {ConsoleKey.W, () => game.MovePlayer(Direction.North)},
-                {ConsoleKey.A, () => game.MovePlayer(Direction.West)},
-                {ConsoleKey.D,() =>  game.MovePlayer(Direction.East)},
-                {ConsoleKey.S, () => game.MovePlayer(Direction.South)},
+                {ConsoleKey.D,() =>  cheatService.WalkThroughDoors = !cheatService.WalkThroughDoors},
+                {ConsoleKey.L,() =>   cheatService.LoseNoLives = !cheatService.LoseNoLives},
                 {ConsoleKey.Escape, () => _gameView.DrawEnd()}
             };
         }

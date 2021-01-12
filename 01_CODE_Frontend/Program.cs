@@ -1,6 +1,8 @@
 ﻿using CODE_PersistenceLib;
 using System;
 using System.Text;
+using CODE_GameLib.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CODE_Frontend
 {
@@ -14,14 +16,19 @@ namespace CODE_Frontend
             Console.WindowHeight = 50;
             Console.CursorVisible = false;
 
-            var reader = new GameReader();
-            var game = reader.Read(@"./Levels/TempleOfDoom.json");
+            var cheatSystem = new CheatService();
+
+            var serviceProvider = new ServiceCollection().AddSingleton(cheatSystem)
+                .BuildServiceProvider();
+
+            var reader = new GameReader(cheatSystem);
+            var game = reader.Read(@"./Levels/TempleOfDoom_Extended_A.json");
 
             var gameView = new GameView();
 
             gameView.Draw(game);
 
-            var inputReader = new GameInputs(gameView, game);
+            var inputReader = new GameInputs(gameView, game, cheatSystem);
             inputReader.Run();
         }
     }

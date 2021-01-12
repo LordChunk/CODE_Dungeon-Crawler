@@ -4,6 +4,7 @@ using CODE_GameLib.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CODE_GameLib.Services;
 
 namespace CODE_GameLib
 {
@@ -11,8 +12,14 @@ namespace CODE_GameLib
     {
         public event EventHandler<Game> Updated;
         public Player Player;
+        private readonly CheatService _cheatService;
 
         private const int AmountOfSankaraStonesInGame = 5;
+
+        public Game(CheatService cheats)
+        {
+            _cheatService = cheats;
+        }
 
         public void MovePlayer(Direction direction)
         {
@@ -23,11 +30,14 @@ namespace CODE_GameLib
             {
                 var door = GetDoorOnLocation(targetCoordinate).ConnectsToDoor;
 
-                if (door.CanUseDoor(Player))
+                if (_cheatService.WalkThroughDoors)
                 {
-                    door.UseDoor(Player);
-                    Player.CurrentRoom = door.IsInRoom;
-                    targetCoordinate = CalcNewLocation(door.Location);
+                    targetCoordinate = MovePlayerThroughDoor(door);
+
+                }
+                else if (door.CanUseDoor(Player))
+                {
+                    targetCoordinate = MovePlayerThroughDoor(door);
                 }
             }
 
@@ -39,6 +49,13 @@ namespace CODE_GameLib
             Player.Spot = targetCoordinate;
 
             Updated?.Invoke(this, this);
+        }
+
+        private Coordinate MovePlayerThroughDoor(IDoor door)
+        {
+            door.UseDoor(Player);
+            Player.CurrentRoom = door.IsInRoom;
+            return door.Coordinate;
         }
 
         public bool DidPlayerWin() =>
@@ -114,7 +131,7 @@ namespace CODE_GameLib
 
             foreach (var kvp in Player.CurrentRoom.Connections)
             {
-                doorLocation.Add(CalcDoorLocation(kvp.Key));
+                doorLocation.Add(kvp.Key);
             }
 
             doorLocation = doorLocation.Where(coordinate => coordinate.IsEqual(targetCoordinate)).ToList();
@@ -138,22 +155,7 @@ namespace CODE_GameLib
             if (!IsCoordinateDoor(coordinate))
                 throw new ArgumentOutOfRangeException("The coordinate is not a door so this method cant return an IDoor.");
 
-            if (coordinate.X == 0)
-            {
-                return Player.CurrentRoom.Connections[Direction.West];
-            }
-            else if (coordinate.Y == 0)
-            {
-                return Player.CurrentRoom.Connections[Direction.North];
-            }
-            else if (coordinate.X == Player.CurrentRoom.Width - 1)
-            {
-                return Player.CurrentRoom.Connections[Direction.East];
-            }
-            else
-            {
-                return Player.CurrentRoom.Connections[Direction.South];
-            }
+            return Player.CurrentRoom.Connections.FirstOrDefault(kvp => kvp.Key.X == coordinate.X && kvp.Key.Y == coordinate.Y).Value;
         }
 
         private Coordinate CalcNewLocation(Direction direction)

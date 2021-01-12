@@ -7,16 +7,27 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using CODE_GameLib.Doors;
+using CODE_GameLib.Services;
 
 namespace CODE_PersistenceLib
 {
     public class GameReader
     {
         private Dictionary<int, Room> _rooms;
+        private CheatService _cheatService;
+
+
+        public GameReader(CheatService cheatService)
+        {
+            _cheatService = cheatService;
+        }
+
+
 
         public Game Read(string filePath)
         {
-            var returnGame = new Game();
+            var returnGame = new Game(_cheatService);
 
             var json = JObject.Parse(File.ReadAllText(filePath));
             var jsonRooms = json["rooms"];
@@ -61,7 +72,7 @@ namespace CODE_PersistenceLib
         /// <returns>ConnectsToRoom without doors or items</returns>
         private static Room CreateRoom(JToken jsonRoom)
         {
-            return new Room(jsonRoom["id"].Value<int>(), jsonRoom["height"].Value<int>(), jsonRoom["width"].Value<int>(), new Dictionary<Direction, IDoor>());
+            return new Room(jsonRoom["id"].Value<int>(), jsonRoom["height"].Value<int>(), jsonRoom["width"].Value<int>(), new Dictionary<Coordinate, IDoor>());
         }
 
 
@@ -81,24 +92,41 @@ namespace CODE_PersistenceLib
             var connection1 = jsonConnection.First;
             var connection2 = jsonConnection.First.Next;
 
-            // Parse definitions for first JSON line
-            var locationStringDoor2 = connection1.ToObject<JProperty>()?.Name;
-            var room1 = GetRoomFromId((int)connection1.First);
-            var location2 = (Direction)Enum.Parse(typeof(Direction), locationStringDoor2, true);
+            if (door1.GetType() == typeof(Ladder))
+            {
+                var room1 = GetRoomFromId((int)connection1.First);
+                var room2 = GetRoomFromId((int)connection2.First);
 
-            // Parse definitions for 2nd JSON line
-            var locationStringDoor1 = connection2.ToObject<JProperty>()?.Name;
-            var room2 = GetRoomFromId((int)connection2.First);
-            var location1 = (Direction)Enum.Parse(typeof(Direction), locationStringDoor1, true);
+                door1.Coordinate = new Coordinate(jsonConnection["ladder"].First.ToObject<int>(), jsonConnection["ladder"].First.Next.ToObject<int>());
+                door2.Coordinate = new Coordinate(jsonConnection["ladder"].Last.Previous.ToObject<int>(), jsonConnection["ladder"].Last.ToObject<int>());
 
-            door1.IsInRoom = room1;
-            door1.Location = location1;
+                door1.IsInRoom = room1;
+                door2.IsInRoom = room2;
 
-            door2.IsInRoom = room2;
-            door2.Location = location2;
+                room1.Connections.Add(door1.Coordinate, door1);
+                room2.Connections.Add(door2.Coordinate, door2);
+            }
+            else
+            {
+                // Parse definitions for first JSON line
+                var locationStringDoor2 = connection1.ToObject<JProperty>()?.Name;
+                var room1 = GetRoomFromId((int)connection1.First);
+                var location2 = (Direction)Enum.Parse(typeof(Direction), locationStringDoor2, true);
 
-            room1.Connections.Add(location1, door1);
-            room2.Connections.Add(location2, door2);
+                // Parse definitions for 2nd JSON line
+                var locationStringDoor1 = connection2.ToObject<JProperty>()?.Name;
+                var room2 = GetRoomFromId((int)connection2.First);
+                var location1 = (Direction)Enum.Parse(typeof(Direction), locationStringDoor1, true);
+
+                door1.IsInRoom = room1;
+                door1.Coordinate = DoorFactory.CalculateDoorCoordinate(door1, location1);
+
+                door2.IsInRoom = room2;
+                door2.Coordinate = DoorFactory.CalculateDoorCoordinate(door2, location2);
+
+                room1.Connections.Add(door1.Coordinate, door1);
+                room2.Connections.Add(door2.Coordinate, door2);
+            }
         }
 
     }
