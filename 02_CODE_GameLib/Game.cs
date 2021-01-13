@@ -48,22 +48,11 @@ namespace CODE_GameLib
             Updated?.Invoke(this, this);
         }
 
-        public bool DidPlayerWin()
-        {
-            return Player.Items.Count(item => item.GetType() == typeof(SankaraStone)) >= AmountOfSankaraStonesInGame;
-        }
+        public bool DidPlayerWin() => Player.Items.Count(item => item.GetType() == typeof(SankaraStone)) >= AmountOfSankaraStonesInGame;
 
-        public bool IsPlayerDead()
-        {
-            return Player.Lives <= 0;
-        }
+        public bool IsPlayerDead() => Player.Lives <= 0;
 
-        private bool CanPlayerMove(Coordinate targetCoordinate)
-        {
-            if (DidPlayerWin() || IsPlayerDead()) return false;
-
-            return !IsCoordinateWall(targetCoordinate);
-        }
+        private bool CanPlayerMove(Coordinate targetCoordinate) => !DidPlayerWin() && !IsPlayerDead() && !IsCoordinateWall(targetCoordinate);
 
         public static Coordinate CalcTargetCoordinate(Direction direction, Coordinate currentCoordinate, Room room)
         {
@@ -74,7 +63,6 @@ namespace CODE_GameLib
                 case Direction.North:
                     y--;
                     if (y < 0) y = 0;
-
                     break;
                 case Direction.East:
                     x++;
