@@ -1,10 +1,10 @@
-﻿using CODE_GameLib;
+﻿using System;
+using CODE_GameLib;
 using CODE_GameLib.Doors;
-using CODE_GameLib.Interfaces;
-using CODE_GameLib.Items;
-using System;
 using CODE_GameLib.Doors.Common;
 using CODE_GameLib.Enums;
+using CODE_GameLib.Interfaces;
+using CODE_GameLib.Items;
 
 namespace CODE_Frontend
 {
@@ -78,7 +78,7 @@ namespace CODE_Frontend
         {
             foreach (var belt in player.CurrentRoom.Belts)
             {
-                var character = 
+                var character =
                     belt.Direction switch
                     {
                         Direction.North => '^',
@@ -100,14 +100,12 @@ namespace CODE_Frontend
         private void CalcItem(Player player)
         {
             foreach (var item in player.CurrentRoom.Items)
-            {
                 if (item.GetType() == typeof(Key))
                 {
-                    var temp = (Key)item;
+                    var temp = (Key) item;
                     if (!temp.IsPickedUp)
-                    {
-                        _board[item.Coordinate.X, item.Coordinate.Y] = new CharWithColor('K', (ConsoleColor)Enum.Parse(typeof(ConsoleColor), temp.ColorCode.Name));
-                    }
+                        _board[item.Coordinate.X, item.Coordinate.Y] = new CharWithColor('K',
+                            (ConsoleColor) Enum.Parse(typeof(ConsoleColor), temp.ColorCode.Name));
                 }
                 else if (item.GetType() == typeof(PressurePlate))
                 {
@@ -115,25 +113,20 @@ namespace CODE_Frontend
                 }
                 else if (item.GetType() == typeof(SankaraStone))
                 {
-                    var temp = (SankaraStone)item;
+                    var temp = (SankaraStone) item;
                     if (!temp.IsPickedUp)
-                    {
                         _board[item.Coordinate.X, item.Coordinate.Y] = new CharWithColor('S', ConsoleColor.Yellow);
-                    }
                 }
                 else if (item.GetType() == typeof(SingleUseTrap))
                 {
-                    var temp = (SingleUseTrap)item;
+                    var temp = (SingleUseTrap) item;
                     if (!temp.IsUsed)
-                    {
                         _board[item.Coordinate.X, item.Coordinate.Y] = new CharWithColor('@', ConsoleColor.Yellow);
-                    }
                 }
                 else if (item.GetType() == typeof(Trap))
                 {
                     _board[item.Coordinate.X, item.Coordinate.Y] = new CharWithColor('O', ConsoleColor.Yellow);
                 }
-            }
         }
 
         private void CalcDoors(Player player)
@@ -154,17 +147,13 @@ namespace CODE_Frontend
                 }
                 else if (kvp.Value.GetType() == typeof(ColorCodedDoor))
                 {
-                    var temp = (ColorCodedDoor)kvp.Value;
+                    var temp = (ColorCodedDoor) kvp.Value;
                     if (coordinate.X == 0 || coordinate.X == kvp.Value.IsInRoom.Width)
-                    {
                         _board[coordinate.X, coordinate.Y] = new CharWithColor('|',
-                            (ConsoleColor)Enum.Parse(typeof(ConsoleColor), temp.ColorCode.Name));
-                    }
+                            (ConsoleColor) Enum.Parse(typeof(ConsoleColor), temp.ColorCode.Name));
                     else
-                    {
                         _board[coordinate.X, coordinate.Y] = new CharWithColor('=',
-                        (ConsoleColor)Enum.Parse(typeof(ConsoleColor), temp.ColorCode.Name));
-                    }
+                            (ConsoleColor) Enum.Parse(typeof(ConsoleColor), temp.ColorCode.Name));
                 }
                 else if (kvp.Value.GetType() == typeof(Portal))
                 {
@@ -196,18 +185,16 @@ namespace CODE_Frontend
         {
             var enemies = player.CurrentRoom.Enemies;
             foreach (var enemy in enemies)
-            {
                 _board[enemy.CurrentXLocation, enemy.CurrentYLocation] = new CharWithColor('E', ConsoleColor.DarkRed);
-            }
         }
 
         private void AddDoor(Coordinate coordinate, IDoor door)
         {
             if (door.GetType() == typeof(ColorCodedDoor))
             {
-                var temp = (ColorCodedDoor)door;
+                var temp = (ColorCodedDoor) door;
                 _board[coordinate.X, coordinate.Y] = new CharWithColor('=',
-                    (ConsoleColor)Enum.Parse(typeof(ConsoleColor), temp.ColorCode.Name));
+                    (ConsoleColor) Enum.Parse(typeof(ConsoleColor), temp.ColorCode.Name));
                 _board[coordinate.X, coordinate.Y] = new CharWithColor('=', ConsoleColor.Yellow);
             }
             else
@@ -224,7 +211,6 @@ namespace CODE_Frontend
             for (var i = 0; i < _board.GetLength(1); i++)
             {
                 for (var j = 0; j < _board.GetLength(0); j++)
-                {
                     //if (color)
                     //{
                     //    Console.BackgroundColor = ConsoleColor.DarkGray;
@@ -245,9 +231,10 @@ namespace CODE_Frontend
                     {
                         Console.Write(" ");
                     }
-                }
+
                 Console.WriteLine();
             }
+
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
         }

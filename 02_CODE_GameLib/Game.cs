@@ -1,17 +1,17 @@
-﻿using CODE_GameLib.Enums;
+﻿using System;
+using System.Linq;
+using CODE_GameLib.Enums;
 using CODE_GameLib.Interfaces;
 using CODE_GameLib.Items;
-using System;
-using System.Linq;
 using CODE_GameLib.Tiles;
 
 namespace CODE_GameLib
 {
     public class Game
     {
-        public event EventHandler<Game> Updated;
-        public Player Player;
         public int AmountOfSankaraStonesInGame = 5;
+        public Player Player;
+        public event EventHandler<Game> Updated;
 
         public void MovePlayer(Direction direction)
         {
@@ -48,9 +48,15 @@ namespace CODE_GameLib
             Updated?.Invoke(this, this);
         }
 
-        public bool DidPlayerWin() => Player.Items.Count(item => item.GetType() == typeof(SankaraStone)) >= AmountOfSankaraStonesInGame;
+        public bool DidPlayerWin()
+        {
+            return Player.Items.Count(item => item.GetType() == typeof(SankaraStone)) >= AmountOfSankaraStonesInGame;
+        }
 
-        public bool IsPlayerDead() => Player.Lives <= 0;
+        public bool IsPlayerDead()
+        {
+            return Player.Lives <= 0;
+        }
 
         private bool CanPlayerMove(Coordinate targetCoordinate)
         {
@@ -67,34 +73,23 @@ namespace CODE_GameLib
             {
                 case Direction.North:
                     y--;
-                    if (y < 0)
-                    {
-                        y = 0;
-                    }
+                    if (y < 0) y = 0;
 
                     break;
                 case Direction.East:
                     x++;
-                    if (x > room.Width - 1)
-                    {
-                        x = room.Width - 1;
-                    }
+                    if (x > room.Width - 1) x = room.Width - 1;
                     break;
                 case Direction.South:
                     y++;
-                    if (y > room.Height - 1)
-                    {
-                        y = room.Height - 1;
-                    }
+                    if (y > room.Height - 1) y = room.Height - 1;
                     break;
                 case Direction.West:
                     x--;
-                    if (x < 0)
-                    {
-                        x = 0;
-                    }
+                    if (x < 0) x = 0;
                     break;
             }
+
             return new Coordinate(x, y);
         }
 
@@ -115,9 +110,12 @@ namespace CODE_GameLib
 
         private IDoor GetDoorOnLocation(Coordinate coordinate)
         {
-            if (!IsCoordinateDoor(coordinate)) throw new ArgumentOutOfRangeException(nameof(coordinate), "The coordinate is not a door so this method cant return an IDoor.");
+            if (!IsCoordinateDoor(coordinate))
+                throw new ArgumentOutOfRangeException(nameof(coordinate),
+                    "The coordinate is not a door so this method cant return an IDoor.");
 
-            return Player.CurrentRoom.Connections.FirstOrDefault(kvp => kvp.Key.X == coordinate.X && kvp.Key.Y == coordinate.Y).Value;
+            return Player.CurrentRoom.Connections
+                .FirstOrDefault(kvp => kvp.Key.X == coordinate.X && kvp.Key.Y == coordinate.Y).Value;
         }
     }
 }

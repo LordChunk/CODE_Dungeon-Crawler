@@ -5,12 +5,12 @@ namespace CODE_GameLib.Items
 {
     public class SankaraStone : Item, IPickUpItem
     {
-        public bool IsPickedUp { get; set; }
-
         public SankaraStone(Coordinate coordinate) : base(coordinate)
         {
             IsPickedUp = false;
         }
+
+        public bool IsPickedUp { get; set; }
 
         public void OnPickUp(Player player)
         {

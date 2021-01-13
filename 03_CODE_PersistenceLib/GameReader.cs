@@ -1,14 +1,14 @@
-﻿using CODE_GameLib;
-using CODE_GameLib.Enums;
-using CODE_GameLib.Interfaces;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using CODE_GameLib;
+using CODE_GameLib.Enums;
+using CODE_GameLib.Interfaces;
 using CODE_GameLib.Tiles;
 using CODE_TempleOfDoom_DownloadableContent;
+using Newtonsoft.Json.Linq;
 
 namespace CODE_PersistenceLib
 {
@@ -49,7 +49,8 @@ namespace CODE_PersistenceLib
             });
 
             var startRoom = _rooms[json["player"]["startRoomId"].Value<int>()];
-            var startCoordinate = new Coordinate(json["player"]["startX"].Value<int>(), json["player"]["startY"].Value<int>());
+            var startCoordinate = new Coordinate(json["player"]["startX"].Value<int>(),
+                json["player"]["startY"].Value<int>());
             var startLives = json["player"]["lives"].Value<int>();
 
             returnGame.Player = new Player(startCoordinate, startRoom, startLives);
@@ -63,7 +64,7 @@ namespace CODE_PersistenceLib
         }
 
         /// <summary>
-        /// Creates a room item doors
+        ///     Creates a room item doors
         /// </summary>
         /// <param name="jsonRoom">JSON string containing the room</param>
         /// <returns>ConnectsToRoom without doors or items</returns>
@@ -86,19 +87,19 @@ namespace CODE_PersistenceLib
                 belts = ConveyorBeltFactory.CreateConveyorBelts(jsonBelts);
 
             return new Room(
-                jsonRoom["id"].Value<int>(), 
-                jsonRoom["height"].Value<int>(), 
-                jsonRoom["width"].Value<int>(), 
+                jsonRoom["id"].Value<int>(),
+                jsonRoom["height"].Value<int>(),
+                jsonRoom["width"].Value<int>(),
                 new Dictionary<Coordinate, IDoor>(),
                 items,
                 enemies,
                 belts
-                );
+            );
         }
 
 
         /// <summary>
-        /// Creates Door instances and links them to each other and to their respective room
+        ///     Creates Door instances and links them to each other and to their respective room
         /// </summary>
         /// <param name="jsonConnection">JSON string containing all connections</param>
         private void CreateDoorSet(JToken jsonConnection)
@@ -115,13 +116,13 @@ namespace CODE_PersistenceLib
 
             // Parse definitions for first JSON line
             var locationStringDoor2 = connection1.ToObject<JProperty>()?.Name;
-            var room1 = GetRoomFromId((int)connection1.First);
-            var location2 = (Direction)Enum.Parse(typeof(Direction), locationStringDoor2, true);
+            var room1 = GetRoomFromId((int) connection1.First);
+            var location2 = (Direction) Enum.Parse(typeof(Direction), locationStringDoor2, true);
 
             // Parse definitions for 2nd JSON line
             var locationStringDoor1 = connection2.ToObject<JProperty>()?.Name;
-            var room2 = GetRoomFromId((int)connection2.First);
-            var location1 = (Direction)Enum.Parse(typeof(Direction), locationStringDoor1, true);
+            var room2 = GetRoomFromId((int) connection2.First);
+            var location1 = (Direction) Enum.Parse(typeof(Direction), locationStringDoor1, true);
 
             door1.IsInRoom = room1;
             door1.Coordinate = DoorFactory.CalculateDoorCoordinate(door1, location1);
@@ -139,7 +140,7 @@ namespace CODE_PersistenceLib
             var portal2Json = jsonPortal.First.First.First.Next;
             var portal1 = DoorFactory.CreatePortal(portal1Json);
             var portal2 = DoorFactory.CreatePortal(portal2Json);
-            
+
             var room1 = GetRoomFromId(portal1Json.Value<int>("roomId"));
             var room2 = GetRoomFromId(portal2Json.Value<int>("roomId"));
 
@@ -152,6 +153,5 @@ namespace CODE_PersistenceLib
             room1.Connections.Add(portal1.Coordinate, portal1);
             room2.Connections.Add(portal2.Coordinate, portal2);
         }
-
     }
 }

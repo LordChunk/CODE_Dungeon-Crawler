@@ -1,14 +1,14 @@
-﻿using CODE_PersistenceLib;
-using System;
+﻿using System;
 using System.Text;
 using CODE_GameLib;
+using CODE_PersistenceLib;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CODE_Frontend
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
 

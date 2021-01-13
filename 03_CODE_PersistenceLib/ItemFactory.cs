@@ -1,31 +1,33 @@
-﻿using CODE_GameLib;
-using CODE_GameLib.Interfaces;
-using CODE_GameLib.Items;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using CODE_GameLib;
+using CODE_GameLib.Interfaces;
+using CODE_GameLib.Items;
+using Newtonsoft.Json.Linq;
 
 namespace CODE_PersistenceLib
 {
     public class ItemFactory
     {
         /// <summary>
-        /// A list of all item types with their corresponding parser methods. Each method takes a JToken as it's parameter and outputs an IItem.
+        ///     A list of all item types with their corresponding parser methods. Each method takes a JToken as it's parameter and
+        ///     outputs an IItem.
         /// </summary>
-        private static readonly Dictionary<string, Func<JToken, IItem>> _itemTypes = new Dictionary<string, Func<JToken, IItem>>
-        {
-            { "boobietrap", CreateTrap },
-            { "disappearing boobietrap", CreateSingleUseTrap },
-            { "sankara stone", CreateSankaraStone },
-            { "key", CreateKey },
-            { "pressure plate", CreatePressurePlate },
-        };
+        private static readonly Dictionary<string, Func<JToken, IItem>> _itemTypes =
+            new Dictionary<string, Func<JToken, IItem>>
+            {
+                {"boobietrap", CreateTrap},
+                {"disappearing boobietrap", CreateSingleUseTrap},
+                {"sankara stone", CreateSankaraStone},
+                {"key", CreateKey},
+                {"pressure plate", CreatePressurePlate}
+            };
 
         /// <summary>
-        /// Iterates through a set of JSON strings describing items and parses them.
+        ///     Iterates through a set of JSON strings describing items and parses them.
         /// </summary>
         /// <param name="jsonItems">A set of JSON strings describing items</param>
         /// <returns>List of items parsed from the jsonItems parameter</returns>
@@ -35,7 +37,8 @@ namespace CODE_PersistenceLib
         }
 
         /// <summary>
-        /// Parses a JSON string containing an item. This method will check the item against all item types stored in the ItemTypes dictionary
+        ///     Parses a JSON string containing an item. This method will check the item against all item types stored in the
+        ///     ItemTypes dictionary
         /// </summary>
         /// <param name="jsonItem">JSON string containing the item</param>
         /// <returns>Parsed item</returns>
@@ -44,7 +47,8 @@ namespace CODE_PersistenceLib
             var type = jsonItem["type"].Value<string>();
             // Check if item type is valid
             var typeKvp = _itemTypes.FirstOrDefault(it => it.Key == type);
-            if (typeKvp.Value == null) throw new NoNullAllowedException("Item type " + type + " is not a valid item type.");
+            if (typeKvp.Value == null)
+                throw new NoNullAllowedException("Item type " + type + " is not a valid item type.");
             // Parse item and return
             return typeKvp.Value(jsonItem);
         }
@@ -58,6 +62,7 @@ namespace CODE_PersistenceLib
         }
 
         #region Item create methods
+
         private static Trap CreateTrap(JToken jsonTrap)
         {
             return new Trap(GetItemCoordinates(jsonTrap), jsonTrap["damage"].Value<int>());
@@ -87,6 +92,7 @@ namespace CODE_PersistenceLib
         {
             return Color.FromName(color);
         }
+
         #endregion
     }
 }

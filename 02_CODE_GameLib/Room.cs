@@ -1,5 +1,5 @@
-﻿using CODE_GameLib.Interfaces;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using CODE_GameLib.Interfaces;
 using CODE_GameLib.Tiles;
 using CODE_TempleOfDoom_DownloadableContent;
 
@@ -7,16 +7,17 @@ namespace CODE_GameLib
 {
     public class Room
     {
-        public int Id;
-        public int Width;
-        public int Height;
-        public List<IItem> Items;
-        public List<Enemy> Enemies;
-        public Dictionary<Coordinate, IDoor> Connections;
-        public List<ConveyorBelt> Belts;
         public readonly string Type = "room";
+        public List<ConveyorBelt> Belts;
+        public Dictionary<Coordinate, IDoor> Connections;
+        public List<Enemy> Enemies;
+        public int Height;
+        public int Id;
+        public List<IItem> Items;
+        public int Width;
 
-        public Room(int id, int height, int width, Dictionary<Coordinate, IDoor> connections, List<IItem> items, List<Enemy> enemies, List<ConveyorBelt> belts)
+        public Room(int id, int height, int width, Dictionary<Coordinate, IDoor> connections, List<IItem> items,
+            List<Enemy> enemies, List<ConveyorBelt> belts)
         {
             Id = id;
             Height = height;

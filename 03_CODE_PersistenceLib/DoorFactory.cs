@@ -1,27 +1,29 @@
-﻿using CODE_GameLib.Doors;
-using CODE_GameLib.Doors.Common;
-using CODE_GameLib.Interfaces;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using CODE_GameLib;
+using CODE_GameLib.Doors;
+using CODE_GameLib.Doors.Common;
 using CODE_GameLib.Enums;
+using CODE_GameLib.Interfaces;
+using Newtonsoft.Json.Linq;
 
 namespace CODE_PersistenceLib
 {
     public class DoorFactory
     {
         /// <summary>
-        /// A list of all door types and their corresponding parser methods. Each method takes a JToken as it's parameter and outputs an IDoor.
+        ///     A list of all door types and their corresponding parser methods. Each method takes a JToken as it's parameter and
+        ///     outputs an IDoor.
         /// </summary>
-        private static readonly Dictionary<string, Func<JToken, IDoor>> _doorTypes = new Dictionary<string, Func<JToken, IDoor>>
-        {
-            { "colored", CreateColorCodedDoor },
-            { "toggle", _ => new ToggleDoor() },
-            { "closing gate", _ => new SingleUseDoor() }
-        };
+        private static readonly Dictionary<string, Func<JToken, IDoor>> _doorTypes =
+            new Dictionary<string, Func<JToken, IDoor>>
+            {
+                {"colored", CreateColorCodedDoor},
+                {"toggle", _ => new ToggleDoor()},
+                {"closing gate", _ => new SingleUseDoor()}
+            };
 
         public static IDoor CreateDoor(JToken jsonConnection)
         {

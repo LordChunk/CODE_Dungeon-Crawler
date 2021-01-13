@@ -5,12 +5,12 @@ namespace CODE_GameLib.Doors
 {
     public class ToggleDoor : Door, ILockable
     {
-        public bool IsLocked { get; private set; }
-
         public ToggleDoor()
         {
             IsLocked = false;
         }
+
+        public bool IsLocked { get; private set; }
 
         public void Toggle()
         {

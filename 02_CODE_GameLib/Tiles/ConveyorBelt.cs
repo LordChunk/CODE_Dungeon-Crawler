@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using CODE_GameLib.Enums;
 
@@ -7,8 +6,8 @@ namespace CODE_GameLib.Tiles
 {
     public class ConveyorBelt
     {
-        public Direction Direction;
         public Coordinate Coordinate;
+        public Direction Direction;
 
         public ConveyorBelt(Direction direction, Coordinate coordinate)
         {
@@ -35,7 +34,7 @@ namespace CODE_GameLib.Tiles
         }
 
         /// <summary>
-        /// Move all entities on conveyor belts in the room in which the player is playing.
+        ///     Move all entities on conveyor belts in the room in which the player is playing.
         /// </summary>
         /// <param name="player"></param>
         public static void MoveEntities(Player player)
@@ -55,13 +54,13 @@ namespace CODE_GameLib.Tiles
                 // Get belt on the same coordinate as enemy
                 var beltUnderEnemy = room.Belts.FirstOrDefault(b =>
                     b.Coordinate.X == enemy.CurrentXLocation && b.Coordinate.Y == enemy.CurrentYLocation);
-                
+
                 if (beltUnderEnemy == null) continue;
-                var coordinate = beltUnderEnemy.ApplyEffect(new Coordinate(enemy.CurrentXLocation, enemy.CurrentYLocation), room);
+                var coordinate =
+                    beltUnderEnemy.ApplyEffect(new Coordinate(enemy.CurrentXLocation, enemy.CurrentYLocation), room);
                 enemy.CurrentXLocation = coordinate.X;
                 enemy.CurrentYLocation = coordinate.Y;
             }
-
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿using CODE_GameLib;
-using CODE_GameLib.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using CODE_GameLib;
+using CODE_GameLib.Enums;
 
 namespace CODE_Frontend
 {
@@ -9,9 +9,9 @@ namespace CODE_Frontend
     {
         private static ConsoleKey _keyPressed;
         private static bool _quit;
-        private readonly Dictionary<ConsoleKey, Action> _moveKeys;
         private readonly Game _game;
         private readonly GameView _gameView;
+        private readonly Dictionary<ConsoleKey, Action> _moveKeys;
 
         public GameInputs(GameView gameView, Game game)
         {
@@ -24,9 +24,9 @@ namespace CODE_Frontend
                 {ConsoleKey.LeftArrow, () => game.MovePlayer(Direction.West)},
                 {ConsoleKey.RightArrow, () => game.MovePlayer(Direction.East)},
                 {ConsoleKey.DownArrow, () => game.MovePlayer(Direction.South)},
-                {ConsoleKey.Spacebar, () => game.Player.Attack() },
-                {ConsoleKey.T, () =>  CheatsService.ClosedClosingGateResets = !CheatsService.ClosedClosingGateResets },
-                {ConsoleKey.S, () => CheatsService.ToggleWinOnNextStone(game) }
+                {ConsoleKey.Spacebar, () => game.Player.Attack()},
+                {ConsoleKey.T, () => CheatsService.ClosedClosingGateResets = !CheatsService.ClosedClosingGateResets},
+                {ConsoleKey.S, () => CheatsService.ToggleWinOnNextStone(game)}
             };
         }
 

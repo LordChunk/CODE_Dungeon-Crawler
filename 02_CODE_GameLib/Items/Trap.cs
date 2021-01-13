@@ -7,6 +7,11 @@ namespace CODE_GameLib.Items
     {
         public int Damage;
 
+        public Trap(Coordinate coordinate, int damage) : base(coordinate)
+        {
+            Damage = damage;
+        }
+
         public virtual void OnTrigger(Player player)
         {
             player.Lives -= Damage;
@@ -15,11 +20,6 @@ namespace CODE_GameLib.Items
         public override void OnTouch(Player player)
         {
             OnTrigger(player);
-        }
-
-        public Trap(Coordinate coordinate, int damage) : base(coordinate)
-        {
-            Damage = damage;
         }
     }
 }

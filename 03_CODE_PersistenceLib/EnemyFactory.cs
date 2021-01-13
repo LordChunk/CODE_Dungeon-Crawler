@@ -8,11 +8,9 @@ namespace CODE_PersistenceLib
 {
     public class EnemyFactory
     {
-
         public static List<Enemy> CreateEnemies(IEnumerable<JToken> jsonItems)
         {
             return jsonItems.Select(CreateEnemy).ToList();
-
         }
 
         public static Enemy CreateEnemy(JToken jtoken)
@@ -28,7 +26,7 @@ namespace CODE_PersistenceLib
 
             if (type == "horizontal")
                 return new HorizontallyMovingEnemy(numberOfLives, x, y, minX, maxX);
-            else if (type == "vertical")
+            if (type == "vertical")
                 return new VerticallyMovingEnemy(numberOfLives, x, y, minY, maxY);
 
             throw new NoNullAllowedException("Enemy type " + type + " is not a valid item type.");
