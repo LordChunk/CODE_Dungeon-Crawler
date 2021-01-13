@@ -16,8 +16,8 @@ namespace CODE_GameLib.Doors.Common
         public virtual bool UseDoor(Player player)
         {
             if (!CanUseDoor(player)) return false;
-            player.CurrentRoom = IsInRoom;
-            player.Spot = Coordinate;
+            player.CurrentRoom = ConnectsToDoor.IsInRoom;
+            player.Spot = ConnectsToDoor.Coordinate;
             return true;
         }
     }

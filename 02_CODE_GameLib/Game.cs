@@ -25,11 +25,13 @@ namespace CODE_GameLib
 
             if (IsCoordinateDoor(targetCoordinate))
             {
-                var door = GetDoorOnLocation(targetCoordinate).ConnectsToDoor;
+                var door = GetDoorOnLocation(targetCoordinate);
 
-                door.UseDoor(Player);
-                Updated?.Invoke(this, this);
-                return;
+                if (door.UseDoor(Player))
+                {
+                    Updated?.Invoke(this, this);
+                    return;
+                }
             }
 
             // Pickup items
