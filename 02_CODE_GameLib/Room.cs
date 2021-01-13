@@ -10,6 +10,7 @@ namespace CODE_GameLib
         public int Width;
         public int Height;
         public List<IItem> Items;
+        public List<IFloorTile> FloorTiles;
         public Dictionary<Coordinate, IDoor> Connections;
         public readonly string Type = "room";
 
@@ -20,6 +21,7 @@ namespace CODE_GameLib
             Width = width;
             Connections = connections;
             Items = new List<IItem>();
+            FloorTiles = new List<IFloorTile>();
         }
     }
 }

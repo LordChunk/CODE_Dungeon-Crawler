@@ -4,6 +4,7 @@ using CODE_GameLib.Enums;
 using CODE_GameLib.Interfaces;
 using CODE_GameLib.Items;
 using System;
+using CODE_GameLib.FloorTiles;
 
 namespace CODE_Frontend
 {
@@ -55,14 +56,17 @@ namespace CODE_Frontend
 
         private void CalcBoard(Player player)
         {
-            //put all item position in array
+            //put all item positions in array
             CalcItem(player);
 
-            //put all walls position in array
+            //put all wall positions in array
             CalcWalls(player);
 
-            //put all door position in array
+            //put all door positions in array
             CalcDoors(player);
+
+            //put all floor tile positions in array
+            CalcFloorTiles(player);
 
             //put player position in array
             CalcPlayer(player);
@@ -166,6 +170,17 @@ namespace CODE_Frontend
             {
                 _board[0, i] = new CharWithColor('#', ConsoleColor.Yellow);
                 _board[player.CurrentRoom.Width - 1, i] = new CharWithColor('#', ConsoleColor.Yellow);
+            }
+        }
+
+        private void CalcFloorTiles(Player player)
+        {
+            foreach (var floorTile in player.CurrentRoom.FloorTiles)
+            {
+                if (floorTile.GetType() == typeof(IceFloorTile))
+                {
+                    _board[floorTile.Coordinate.X, floorTile.Coordinate.Y] = new CharWithColor('~', ConsoleColor.Yellow);
+                }
             }
         }
 

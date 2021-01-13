@@ -23,7 +23,7 @@ namespace CODE_GameLib
 
         public void MovePlayer(Direction direction)
         {
-            var targetCoordinate = CalcTargetCoordinate(direction);
+            var targetCoordinate = CalcTargetCoordinate(direction, Player.Spot);
             var playerLives = Player.Lives;
 
             if (!CanPlayerMove(targetCoordinate)) return;
@@ -35,12 +35,16 @@ namespace CODE_GameLib
                 if (_cheatService.WalkThroughDoors)
                 {
                     targetCoordinate = MovePlayerThroughDoor(door);
-
                 }
                 else if (door.CanUseDoor(Player))
                 {
                     targetCoordinate = MovePlayerThroughDoor(door);
                 }
+            }
+
+            if (IsCoordinateIce(targetCoordinate))
+            {
+                targetCoordinate = MovePlayerOverIce(direction, targetCoordinate);
             }
 
             foreach (var item in Player.CurrentRoom.Items.Where(item => item.Coordinate.IsEqual(targetCoordinate)))
@@ -49,6 +53,7 @@ namespace CODE_GameLib
             }
 
             Player.Spot = targetCoordinate;
+
 
             if (_cheatService.LoseNoLives)
             {
@@ -81,10 +86,10 @@ namespace CODE_GameLib
             return !IsCoordinateWall(targetCoordinate);
         }
 
-        private Coordinate CalcTargetCoordinate(Direction direction)
+        private Coordinate CalcTargetCoordinate(Direction direction, Coordinate playerPosition)
         {
-            var x = Player.Spot.X;
-            var y = Player.Spot.Y;
+            var x = playerPosition.X;
+            var y = playerPosition.Y;
             switch (direction)
             {
                 case Direction.North:
@@ -134,23 +139,30 @@ namespace CODE_GameLib
 
         private bool IsCoordinateDoor(Coordinate targetCoordinate)
         {
-            var doorLocation = new List<Coordinate>();
-
-            foreach (var kvp in Player.CurrentRoom.Connections)
-            {
-                doorLocation.Add(kvp.Key);
-            }
+            var doorLocation = Player.CurrentRoom.Connections.Select(kvp => kvp.Key).ToList();
 
             doorLocation = doorLocation.Where(coordinate => coordinate.IsEqual(targetCoordinate)).ToList();
             return doorLocation.FirstOrDefault() != null;
         }
-        
+
         private IDoor GetDoorOnLocation(Coordinate coordinate)
         {
             if (!IsCoordinateDoor(coordinate))
                 throw new ArgumentOutOfRangeException("The coordinate is not a door so this method cant return an IDoor.");
 
             return Player.CurrentRoom.Connections.FirstOrDefault(kvp => kvp.Key.X == coordinate.X && kvp.Key.Y == coordinate.Y).Value;
+        }
+
+        private bool IsCoordinateIce(Coordinate targetCoordinate) => Player.CurrentRoom.FloorTiles.Any(floorTile => targetCoordinate.IsEqual(floorTile.Coordinate));
+
+        private Coordinate MovePlayerOverIce(Direction direction, Coordinate targetCoordinate)
+        {
+            while (CanPlayerMove(targetCoordinate) && IsCoordinateIce(targetCoordinate))
+            {
+                targetCoordinate = CalcTargetCoordinate(direction, targetCoordinate);
+            }
+
+            return targetCoordinate;
         }
     }
 }

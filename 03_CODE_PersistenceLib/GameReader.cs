@@ -23,8 +23,6 @@ namespace CODE_PersistenceLib
             _cheatService = cheatService;
         }
 
-
-
         public Game Read(string filePath)
         {
             var returnGame = new Game(_cheatService);
@@ -42,6 +40,11 @@ namespace CODE_PersistenceLib
                 var jsonItems = jsonRoom["items"];
                 if (jsonItems != null)
                     room.Items = ItemFactory.CreateItems(jsonItems);
+               
+                var jsonFloorTiles = jsonRoom["specialFloorTiles"];
+                if (jsonFloorTiles != null)
+                    room.FloorTiles = FloorFactory.CreateFloorTiles(jsonFloorTiles);
+
                 _rooms.Add(room.Id, room);
             }
 
@@ -128,6 +131,5 @@ namespace CODE_PersistenceLib
                 room2.Connections.Add(door2.Coordinate, door2);
             }
         }
-
     }
 }
