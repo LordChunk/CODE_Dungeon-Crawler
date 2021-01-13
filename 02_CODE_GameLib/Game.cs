@@ -111,39 +111,17 @@ namespace CODE_GameLib
 
         private bool IsCoordinateWall(Coordinate targetCoordinate)
         {
-            if (Player.CurrentRoom.Height - 1 == targetCoordinate.Y || Player.CurrentRoom.Width - 1 == targetCoordinate.X || targetCoordinate.Y == 0 || targetCoordinate.X == 0)
-            {
-                if (!IsCoordinateDoor(targetCoordinate))
-                {
-                    return true;
-                }
-            }
-            return false;
+            if (Player.CurrentRoom.Height - 1 != targetCoordinate.Y &&
+                Player.CurrentRoom.Width - 1 != targetCoordinate.X && targetCoordinate.Y != 0 &&
+                targetCoordinate.X != 0) return false;
+            return !IsCoordinateDoor(targetCoordinate);
         }
 
         private bool IsCoordinateDoor(Coordinate targetCoordinate)
         {
-            var doorLocation = new List<Coordinate>();
-
-            foreach (var kvp in Player.CurrentRoom.Connections)
-            {
-                doorLocation.Add(kvp.Key);
-            }
-
+            var doorLocation = Player.CurrentRoom.Connections.Select(kvp => kvp.Key).ToList();
             doorLocation = doorLocation.Where(coordinate => coordinate.IsEqual(targetCoordinate)).ToList();
             return doorLocation.FirstOrDefault() != null;
-        }
-
-        private Coordinate CalcDoorLocation(Direction direction)
-        {
-            return direction switch
-            {
-                Direction.North => new Coordinate((Player.CurrentRoom.Width - 1) / 2, 0),
-                Direction.East => new Coordinate(Player.CurrentRoom.Width - 1, (Player.CurrentRoom.Height - 1) / 2),
-                Direction.South => new Coordinate((Player.CurrentRoom.Width - 1) / 2, Player.CurrentRoom.Height - 1),
-                Direction.West => new Coordinate(0, (Player.CurrentRoom.Height - 1) / 2),
-                _ => throw new ArgumentOutOfRangeException(nameof(direction),"The direction you gave as input was not found. Did you add a new direction to the Direction enum?")
-            };
         }
 
         private IDoor GetDoorOnLocation(Coordinate coordinate)
@@ -152,18 +130,6 @@ namespace CODE_GameLib
                 throw new ArgumentOutOfRangeException(nameof(coordinate),"The coordinate is not a door so this method cant return an IDoor.");
 
             return Player.CurrentRoom.Connections.FirstOrDefault(kvp => kvp.Key.X == coordinate.X && kvp.Key.Y == coordinate.Y).Value; 
-        }
-
-        private Coordinate CalcNewLocation(Direction direction)
-        {
-            return direction switch
-            {
-                Direction.North => new Coordinate((Player.CurrentRoom.Width - 1) / 2, 0),
-                Direction.East => new Coordinate(Player.CurrentRoom.Width - 1, (Player.CurrentRoom.Height - 1) / 2),
-                Direction.South => new Coordinate((Player.CurrentRoom.Width - 1) / 2, Player.CurrentRoom.Height - 1),
-                Direction.West => new Coordinate(0, (Player.CurrentRoom.Height - 1) / 2),
-                _ => throw new ArgumentOutOfRangeException(nameof(direction),"The direction you gave as input was not found. Did you add a new direction to the Direction enum?")
-            };
         }
     }
 }
