@@ -30,17 +30,26 @@ namespace CODE_GameLib
                 if (door.CanUseDoor(Player))
                 {
                     door.UseDoor(Player);
-                    Player.CurrentRoom = door.IsInRoom;
+                    Player.UpdateCurrentRoom(door.IsInRoom);
                     targetCoordinate = door.Coordinate;
                 }
             }
 
+            // Pickup items
             foreach (var item in Player.CurrentRoom.Items.Where(item => item.Coordinate.IsEqual(targetCoordinate)))
             {
                 item.OnTouch(Player);
             }
 
+            // Move player
             Player.Spot = targetCoordinate;
+
+            // Check enemy collisions
+            Player.CurrentRoom.Enemies.ForEach(enemy =>
+            {
+                if (enemy.CurrentXLocation == Player.Spot.X && enemy.CurrentYLocation == Player.Spot.Y)
+                    Player.Lives--;
+            });
 
             Updated?.Invoke(this, this);
         }

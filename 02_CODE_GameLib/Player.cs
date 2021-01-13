@@ -1,4 +1,5 @@
-﻿using CODE_GameLib.Interfaces;
+﻿using System;
+using CODE_GameLib.Interfaces;
 using System.Collections.Generic;
 
 namespace CODE_GameLib
@@ -17,6 +18,11 @@ namespace CODE_GameLib
             Items = new List<IPickUpItem>();
             CurrentRoom = currentRoom;
             Lives = lives;
+        }
+
+        public void UpdateCurrentRoom(Room room)
+        {
+            CurrentRoom = room;
         }
     }
 }

@@ -29,15 +29,7 @@ namespace CODE_PersistenceLib
             {
                 if (jsonRoom["type"]?.ToString() != "room") continue;
                 var room = CreateRoom(jsonRoom);
-                var jsonItems = jsonRoom["items"];
-                if (jsonItems != null)
-                    room.Items = ItemFactory.CreateItems(jsonItems);
 
-                var jsonEnemies = jsonRoom["enemies"];
-                if (jsonEnemies != null)
-                    room.Enemies = EnemyFactory.CreateEnemies(jsonEnemies);
-                else
-                    room.Enemies = new List<Enemy>();
 
                 _rooms.Add(room.Id, room);
             }
@@ -70,13 +62,31 @@ namespace CODE_PersistenceLib
         }
 
         /// <summary>
-        /// Creates a room item without items or doors
+        /// Creates a room item doors
         /// </summary>
         /// <param name="jsonRoom">JSON string containing the room</param>
         /// <returns>ConnectsToRoom without doors or items</returns>
         private static Room CreateRoom(JToken jsonRoom)
         {
-            return new Room(jsonRoom["id"].Value<int>(), jsonRoom["height"].Value<int>(), jsonRoom["width"].Value<int>(), new Dictionary<Coordinate, IDoor>());
+            var items = new List<IItem>();
+            var enemies = new List<Enemy>();
+
+            var jsonItems = jsonRoom["items"];
+            if (jsonItems != null)
+                items = ItemFactory.CreateItems(jsonItems);
+
+            var jsonEnemies = jsonRoom["enemies"];
+            if (jsonEnemies != null)
+                enemies = EnemyFactory.CreateEnemies(jsonEnemies); 
+
+            return new Room(
+                jsonRoom["id"].Value<int>(), 
+                jsonRoom["height"].Value<int>(), 
+                jsonRoom["width"].Value<int>(), 
+                new Dictionary<Coordinate, IDoor>(),
+                items,
+                enemies
+                );
         }
 
 

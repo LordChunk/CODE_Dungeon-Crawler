@@ -27,6 +27,8 @@ namespace CODE_Frontend
             inputReader.Run();
 
             var serviceProvider = new ServiceCollection()
+                .AddSingleton(game.Player)
+                .AddSingleton(new EnemyTracker(game.Player))
                 .AddSingleton(new CheatsService())
                 .BuildServiceProvider();
         }
