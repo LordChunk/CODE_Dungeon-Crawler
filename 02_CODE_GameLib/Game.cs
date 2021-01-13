@@ -11,7 +11,6 @@ namespace CODE_GameLib
     {
         public event EventHandler<Game> Updated;
         public Player Player;
-
         public int AmountOfSankaraStonesInGame = 5;
 
         public void MovePlayer(Direction direction)
@@ -23,22 +22,15 @@ namespace CODE_GameLib
             // Move enemies
             Player.CurrentRoom.Enemies.ForEach(e => e.Move());
 
-            if (IsCoordinateDoor(targetCoordinate))
+            if (IsCoordinateDoor(targetCoordinate) && GetDoorOnLocation(targetCoordinate).UseDoor(Player))
             {
-                var door = GetDoorOnLocation(targetCoordinate);
-
-                if (door.UseDoor(Player))
-                {
-                    Updated?.Invoke(this, this);
-                    return;
-                }
+                Updated?.Invoke(this, this);
+                return;
             }
 
             // Pickup items
             foreach (var item in Player.CurrentRoom.Items.Where(item => item.Coordinate.IsEqual(targetCoordinate)))
-            {
                 item.OnTouch(Player);
-            }
 
             // Move player
             Player.Spot = targetCoordinate;
@@ -56,20 +48,13 @@ namespace CODE_GameLib
             Updated?.Invoke(this, this);
         }
 
-        public bool DidPlayerWin()
-        {
-            return Player.Items.Count(item => item.GetType() == typeof(SankaraStone)) >= AmountOfSankaraStonesInGame;
-        }
+        public bool DidPlayerWin() => Player.Items.Count(item => item.GetType() == typeof(SankaraStone)) >= AmountOfSankaraStonesInGame;
 
-        public bool IsPlayerDead() =>
-            Player.Lives <= 0;
+        public bool IsPlayerDead() => Player.Lives <= 0;
 
         private bool CanPlayerMove(Coordinate targetCoordinate)
         {
-            if (DidPlayerWin() || IsPlayerDead())
-            {
-                return false;
-            }
+            if (DidPlayerWin() || IsPlayerDead()) return false;
 
             return !IsCoordinateWall(targetCoordinate);
         }
@@ -130,8 +115,7 @@ namespace CODE_GameLib
 
         private IDoor GetDoorOnLocation(Coordinate coordinate)
         {
-            if (!IsCoordinateDoor(coordinate))
-                throw new ArgumentOutOfRangeException(nameof(coordinate), "The coordinate is not a door so this method cant return an IDoor.");
+            if (!IsCoordinateDoor(coordinate)) throw new ArgumentOutOfRangeException(nameof(coordinate), "The coordinate is not a door so this method cant return an IDoor.");
 
             return Player.CurrentRoom.Connections.FirstOrDefault(kvp => kvp.Key.X == coordinate.X && kvp.Key.Y == coordinate.Y).Value;
         }
