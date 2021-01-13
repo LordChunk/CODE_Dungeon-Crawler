@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using CODE_GameLib.Tiles;
 using CODE_TempleOfDoom_DownloadableContent;
 
 namespace CODE_PersistenceLib
@@ -70,6 +71,7 @@ namespace CODE_PersistenceLib
         {
             var items = new List<IItem>();
             var enemies = new List<Enemy>();
+            var belts = new List<ConveyorBelt>();
 
             var jsonItems = jsonRoom["items"];
             if (jsonItems != null)
@@ -77,7 +79,11 @@ namespace CODE_PersistenceLib
 
             var jsonEnemies = jsonRoom["enemies"];
             if (jsonEnemies != null)
-                enemies = EnemyFactory.CreateEnemies(jsonEnemies); 
+                enemies = EnemyFactory.CreateEnemies(jsonEnemies);
+
+            var jsonBelts = jsonRoom["specialFloorTiles"];
+            if (jsonBelts != null)
+                belts = ConveyorBeltFactory.CreateConveyorBelts(jsonBelts);
 
             return new Room(
                 jsonRoom["id"].Value<int>(), 
