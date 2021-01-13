@@ -12,7 +12,7 @@ namespace CODE_GameLib
         public event EventHandler<Game> Updated;
         public Player Player;
 
-        private const int AmountOfSankaraStonesInGame = 5;
+        public int AmountOfSankaraStonesInGame = 5;
 
         public void MovePlayer(Direction direction)
         {

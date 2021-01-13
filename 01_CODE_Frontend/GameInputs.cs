@@ -26,7 +26,7 @@ namespace CODE_Frontend
                 {ConsoleKey.DownArrow, () => game.MovePlayer(Direction.South)},
                 {ConsoleKey.Spacebar, () => game.Player.Attack() },
                 {ConsoleKey.T, () =>  CheatsService.ClosedClosingGateResets = !CheatsService.ClosedClosingGateResets },
-                {ConsoleKey.S, () => CheatsService.WinOnNextStone = !CheatsService.WinOnNextStone }
+                {ConsoleKey.S, () => CheatsService.ToggleWinOnNextStone(game) }
             };
         }
 
