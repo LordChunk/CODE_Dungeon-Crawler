@@ -13,12 +13,24 @@ namespace CODE_GameLib
         public int Lives;
         public readonly List<IPickUpItem> Items;
 
+        private readonly Room _startingRoom;
+        private readonly Coordinate _startingCoordinate;
+
         public Player(Coordinate startSpot, Room currentRoom, int lives)
         {
             Spot = startSpot;
             Items = new List<IPickUpItem>();
             CurrentRoom = currentRoom;
             Lives = lives;
+
+            _startingCoordinate = startSpot;
+            _startingRoom = currentRoom;
+        }
+
+        public void Reset()
+        {
+            Spot = _startingCoordinate;
+            CurrentRoom = _startingRoom;
         }
 
         public void UpdateCurrentRoom(Room room)

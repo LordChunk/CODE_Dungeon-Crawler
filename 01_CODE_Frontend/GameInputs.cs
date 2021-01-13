@@ -25,11 +25,8 @@ namespace CODE_Frontend
                 {ConsoleKey.RightArrow, () => game.MovePlayer(Direction.East)},
                 {ConsoleKey.DownArrow, () => game.MovePlayer(Direction.South)},
                 {ConsoleKey.Spacebar, () => game.Player.Attack() },
-                //{ConsoleKey.W, () => game.MovePlayer(Direction.North)},
-                //{ConsoleKey.A, () => game.MovePlayer(Direction.West)},
-                //{ConsoleKey.D,() =>  game.MovePlayer(Direction.East)},
-                //{ConsoleKey.S, () => game.MovePlayer(Direction.South)},
-                {ConsoleKey.Escape, () => _gameView.DrawEnd()}
+                {ConsoleKey.T, () =>  CheatsService.ClosedClosingGateResets = !CheatsService.ClosedClosingGateResets },
+                {ConsoleKey.S, () => CheatsService.WinOnNextStone = !CheatsService.WinOnNextStone }
             };
         }
 

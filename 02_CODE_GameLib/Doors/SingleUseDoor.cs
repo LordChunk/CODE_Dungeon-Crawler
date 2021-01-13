@@ -26,7 +26,14 @@ namespace CODE_GameLib.Doors
 
         public override bool UseDoor(Player player)
         {
-            if (!CanUseDoor(player)) return false;
+
+            if (!CanUseDoor(player))
+            {
+                if (!CheatsService.ClosedClosingGateResets) return false;
+                player.Reset();
+                return true;
+            }
+            base.UseDoor(player);
             Lock();
             return true;
         }

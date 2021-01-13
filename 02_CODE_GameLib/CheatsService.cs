@@ -2,7 +2,7 @@
 {
     public class CheatsService
     {
-        public bool WinOnNextStone = false;
-        public bool ClosedClosingGateResets = false;
+        public static bool WinOnNextStone = false;
+        public static bool ClosedClosingGateResets = false;
     }
 }

@@ -27,12 +27,9 @@ namespace CODE_GameLib
             {
                 var door = GetDoorOnLocation(targetCoordinate).ConnectsToDoor;
 
-                if (door.CanUseDoor(Player))
-                {
-                    door.UseDoor(Player);
-                    Player.UpdateCurrentRoom(door.IsInRoom);
-                    targetCoordinate = door.Coordinate;
-                }
+                door.UseDoor(Player);
+                Updated?.Invoke(this, this);
+                return;
             }
 
             // Pickup items
@@ -57,8 +54,10 @@ namespace CODE_GameLib
             Updated?.Invoke(this, this);
         }
 
-        public bool DidPlayerWin() =>
-            Player.Items.Count(item => item.GetType() == typeof(SankaraStone)) >= AmountOfSankaraStonesInGame;
+        public bool DidPlayerWin()
+        {
+            return Player.Items.Count(item => item.GetType() == typeof(SankaraStone)) >= AmountOfSankaraStonesInGame;
+        }
 
         public bool IsPlayerDead() =>
             Player.Lives <= 0;
@@ -130,9 +129,9 @@ namespace CODE_GameLib
         private IDoor GetDoorOnLocation(Coordinate coordinate)
         {
             if (!IsCoordinateDoor(coordinate))
-                throw new ArgumentOutOfRangeException(nameof(coordinate),"The coordinate is not a door so this method cant return an IDoor.");
+                throw new ArgumentOutOfRangeException(nameof(coordinate), "The coordinate is not a door so this method cant return an IDoor.");
 
-            return Player.CurrentRoom.Connections.FirstOrDefault(kvp => kvp.Key.X == coordinate.X && kvp.Key.Y == coordinate.Y).Value; 
+            return Player.CurrentRoom.Connections.FirstOrDefault(kvp => kvp.Key.X == coordinate.X && kvp.Key.Y == coordinate.Y).Value;
         }
     }
 }
