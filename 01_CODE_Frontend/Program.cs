@@ -28,7 +28,6 @@ namespace CODE_Frontend
 
             var serviceProvider = new ServiceCollection()
                 .AddSingleton(game.Player)
-                .AddSingleton(new EnemyTracker(game.Player))
                 .AddSingleton(new CheatsService())
                 .BuildServiceProvider();
         }
