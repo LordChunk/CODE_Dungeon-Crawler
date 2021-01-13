@@ -16,7 +16,7 @@ namespace CODE_GameLib
 
         public void MovePlayer(Direction direction)
         {
-            var targetCoordinate = CalcTargetCoordinate(direction);
+            var targetCoordinate = CalcTargetCoordinate(direction, Player.Spot, Player.CurrentRoom);
             // Check if move if valid
             if (!CanPlayerMove(targetCoordinate)) return;
 
@@ -73,10 +73,10 @@ namespace CODE_GameLib
             return !IsCoordinateWall(targetCoordinate);
         }
 
-        private Coordinate CalcTargetCoordinate(Direction direction)
+        public static Coordinate CalcTargetCoordinate(Direction direction, Coordinate currentCoordinate, Room room)
         {
-            var x = Player.Spot.X;
-            var y = Player.Spot.Y;
+            var x = currentCoordinate.X;
+            var y = currentCoordinate.Y;
             switch (direction)
             {
                 case Direction.North:
@@ -89,16 +89,16 @@ namespace CODE_GameLib
                     break;
                 case Direction.East:
                     x++;
-                    if (x > Player.CurrentRoom.Width - 1)
+                    if (x > room.Width - 1)
                     {
-                        x = Player.CurrentRoom.Width - 1;
+                        x = room.Width - 1;
                     }
                     break;
                 case Direction.South:
                     y++;
-                    if (y > Player.CurrentRoom.Height - 1)
+                    if (y > room.Height - 1)
                     {
-                        y = Player.CurrentRoom.Height - 1;
+                        y = room.Height - 1;
                     }
                     break;
                 case Direction.West:

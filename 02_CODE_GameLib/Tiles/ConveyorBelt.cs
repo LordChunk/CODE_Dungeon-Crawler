@@ -16,27 +16,28 @@ namespace CODE_GameLib.Tiles
             Coordinate = coordinate;
         }
 
-        public Coordinate ApplyEffect(Coordinate coordinate)
+        public Coordinate ApplyEffect(Coordinate coordinate, Room room)
         {
             switch (Direction)
             {
                 case Direction.North:
-                    coordinate.Y--;
-                    return coordinate;
+                    return Game.CalcTargetCoordinate(Direction.North, coordinate, room);
                 case Direction.East:
-                    coordinate.X++;
-                    return coordinate;
+                    return Game.CalcTargetCoordinate(Direction.East, coordinate, room);
                 case Direction.South:
-                    coordinate.Y++;
-                    return coordinate;
+                    return Game.CalcTargetCoordinate(Direction.South, coordinate, room);
                 case Direction.West:
-                    coordinate.X--;
-                    return coordinate;
+                    return Game.CalcTargetCoordinate(Direction.West, coordinate, room);
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
 
+        /// <summary>
+        /// Move all entities on conveyor belts in the room in which the player is playing.
+        /// </summary>
+        /// <param name="player"></param>
         public static void MoveEntities(Player player)
         {
             var room = player.CurrentRoom;
@@ -45,9 +46,22 @@ namespace CODE_GameLib.Tiles
                 room.Belts.FirstOrDefault(b => b.Coordinate.X == player.Spot.X && b.Coordinate.Y == player.Spot.Y);
             // Move player
             if (beltUnderPlayer != null)
+                player.Spot = beltUnderPlayer.ApplyEffect(player.Spot, player.CurrentRoom);
+
+
+            // Move enemies
+            foreach (var enemy in room.Enemies)
             {
-                player.Spot = beltUnderPlayer.ApplyEffect(player.Spot);
+                // Get belt on the same coordinate as enemy
+                var beltUnderEnemy = room.Belts.FirstOrDefault(b =>
+                    b.Coordinate.X == enemy.CurrentXLocation && b.Coordinate.Y == enemy.CurrentYLocation);
+                
+                if (beltUnderEnemy == null) continue;
+                var coordinate = beltUnderEnemy.ApplyEffect(new Coordinate(enemy.CurrentXLocation, enemy.CurrentYLocation), room);
+                enemy.CurrentXLocation = coordinate.X;
+                enemy.CurrentYLocation = coordinate.Y;
             }
+
         }
     }
 }
