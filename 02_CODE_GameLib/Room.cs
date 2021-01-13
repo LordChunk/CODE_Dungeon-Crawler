@@ -13,10 +13,10 @@ namespace CODE_GameLib
         public List<IItem> Items;
         public List<Enemy> Enemies;
         public Dictionary<Coordinate, IDoor> Connections;
-        public Dictionary<Coordinate, ConveyorBelt> Belts;
+        public List<ConveyorBelt> Belts;
         public readonly string Type = "room";
 
-        public Room(int id, int height, int width, Dictionary<Coordinate, IDoor> connections, List<IItem> items, List<Enemy> enemies, Dictionary<Coordinate, ConveyorBelt> belts)
+        public Room(int id, int height, int width, Dictionary<Coordinate, IDoor> connections, List<IItem> items, List<Enemy> enemies, List<ConveyorBelt> belts)
         {
             Id = id;
             Height = height;

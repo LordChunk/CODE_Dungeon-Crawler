@@ -76,7 +76,7 @@ namespace CODE_Frontend
 
         private void CalcBelts(Player player)
         {
-            foreach (var (coordinate, belt) in player.CurrentRoom.Belts)
+            foreach (var belt in player.CurrentRoom.Belts)
             {
                 var character = 
                     belt.Direction switch
@@ -88,7 +88,7 @@ namespace CODE_Frontend
                         _ => throw new ArgumentOutOfRangeException()
                     };
 
-                _board[coordinate.X, coordinate.Y] = new CharWithColor(character, ConsoleColor.White);
+                _board[belt.Coordinate.X, belt.Coordinate.Y] = new CharWithColor(character, ConsoleColor.White);
             }
         }
 

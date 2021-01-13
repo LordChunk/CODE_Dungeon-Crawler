@@ -10,9 +10,9 @@ namespace CODE_PersistenceLib
 {
     public class ConveyorBeltFactory
     {
-        public static Dictionary<Coordinate, ConveyorBelt> CreateConveyorBelts(IEnumerable<JToken> jsonItems)
+        public static List<ConveyorBelt> CreateConveyorBelts(IEnumerable<JToken> jsonItems)
         {
-            return jsonItems.Select(CreateConveyorBelt).ToDictionary(belt => belt.Coordinate);
+            return jsonItems.Select(CreateConveyorBelt).ToList();
         }
 
         public static ConveyorBelt CreateConveyorBelt(JToken jsonBelt)

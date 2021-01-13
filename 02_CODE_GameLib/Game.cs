@@ -2,8 +2,8 @@
 using CODE_GameLib.Interfaces;
 using CODE_GameLib.Items;
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using CODE_GameLib.Tiles;
 
 namespace CODE_GameLib
 {
@@ -16,12 +16,12 @@ namespace CODE_GameLib
 
         public void MovePlayer(Direction direction)
         {
-            // Move enemies
-            Player.CurrentRoom.Enemies.ForEach(e => e.Move());
-
             var targetCoordinate = CalcTargetCoordinate(direction);
             // Check if move if valid
             if (!CanPlayerMove(targetCoordinate)) return;
+
+            // Move enemies
+            Player.CurrentRoom.Enemies.ForEach(e => e.Move());
 
             if (IsCoordinateDoor(targetCoordinate))
             {
@@ -50,6 +50,9 @@ namespace CODE_GameLib
                 if (enemy.CurrentXLocation == Player.Spot.X && enemy.CurrentYLocation == Player.Spot.Y)
                     Player.Lives--;
             });
+
+            // Check for additional conveyor belt moves
+            ConveyorBelt.MoveEntities(Player);
 
             Updated?.Invoke(this, this);
         }

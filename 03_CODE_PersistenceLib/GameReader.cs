@@ -71,7 +71,7 @@ namespace CODE_PersistenceLib
         {
             var items = new List<IItem>();
             var enemies = new List<Enemy>();
-            var belts = new Dictionary<Coordinate, ConveyorBelt>();
+            var belts = new List<ConveyorBelt>();
 
             var jsonItems = jsonRoom["items"];
             if (jsonItems != null)
