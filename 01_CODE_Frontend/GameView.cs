@@ -4,6 +4,7 @@ using CODE_GameLib.Interfaces;
 using CODE_GameLib.Items;
 using System;
 using CODE_GameLib.Doors.Common;
+using CODE_GameLib.Enums;
 
 namespace CODE_Frontend
 {
@@ -67,8 +68,28 @@ namespace CODE_Frontend
             // put all enemy position in array
             CalcEnemies(player);
 
+            CalcBelts(player);
+
             //put player position in array
             CalcPlayer(player);
+        }
+
+        private void CalcBelts(Player player)
+        {
+            foreach (var (coordinate, belt) in player.CurrentRoom.Belts)
+            {
+                var character = 
+                    belt.Direction switch
+                    {
+                        Direction.North => '^',
+                        Direction.East => '>',
+                        Direction.South => 'v',
+                        Direction.West => '<',
+                        _ => throw new ArgumentOutOfRangeException()
+                    };
+
+                _board[coordinate.X, coordinate.Y] = new CharWithColor(character, ConsoleColor.White);
+            }
         }
 
         private void CalcPlayer(Player player)
