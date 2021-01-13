@@ -10,12 +10,10 @@ namespace CODE_GameLib.Items
         
         public override void OnTouch(Player player)
         {
-            if (_cheatService.LoseNoLives)
-                return;
             player.Lives -= Damage;
         }
 
-        public Trap(Coordinate coordinate, CheatService cheatService, int damage) : base(coordinate,cheatService)
+        public Trap(Coordinate coordinate, int damage) : base(coordinate)
         {
             Damage = damage;
         }

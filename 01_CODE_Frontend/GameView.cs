@@ -145,7 +145,7 @@ namespace CODE_Frontend
                 }
                 else if (kvp.Value.GetType() == typeof(Ladder))
                 {
-                    _board[coordinate.X, coordinate.Y] = new CharWithColor('⧦', ConsoleColor.Yellow);
+                    _board[coordinate.X, coordinate.Y] = new CharWithColor('Ξ', ConsoleColor.Yellow);
                 }
                 else
                 {

@@ -10,7 +10,7 @@ namespace CODE_GameLib.Items
     {
         public bool IsActive { get; private set; }
 
-        public PressurePlate(Coordinate coordinate, CheatService cheatService) : base(coordinate, cheatService)
+        public PressurePlate(Coordinate coordinate) : base(coordinate)
         {
             IsActive = false;
         }

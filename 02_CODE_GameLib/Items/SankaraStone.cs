@@ -8,7 +8,7 @@ namespace CODE_GameLib.Items
     {
         public bool IsPickedUp { get; set; }
 
-        public SankaraStone(Coordinate coordinate, CheatService cheatService) : base(coordinate,cheatService)
+        public SankaraStone(Coordinate coordinate) : base(coordinate)
         {
             IsPickedUp = false;
         }

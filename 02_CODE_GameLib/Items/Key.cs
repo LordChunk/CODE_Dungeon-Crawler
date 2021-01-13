@@ -11,7 +11,7 @@ namespace CODE_GameLib.Items
 
         public bool IsPickedUp { get; set; }
 
-        public Key(Coordinate coordinate, CheatService cheatService, Color colorCode) : base(coordinate,cheatService)
+        public Key(Coordinate coordinate, Color colorCode) : base(coordinate)
         {
             ColorCode = colorCode;
             IsPickedUp = false;

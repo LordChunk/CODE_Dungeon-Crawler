@@ -6,12 +6,10 @@ namespace CODE_GameLib.Items.Common
     public abstract class Item : IItem
     {
         public Coordinate Coordinate { get; set; }
-        protected CheatService _cheatService;
 
-        public Item(Coordinate coordinate, CheatService cheatService)
+        public Item(Coordinate coordinate)
         {
             Coordinate = coordinate;
-            _cheatService = cheatService;
         }
 
         public abstract void OnTouch(Player player);

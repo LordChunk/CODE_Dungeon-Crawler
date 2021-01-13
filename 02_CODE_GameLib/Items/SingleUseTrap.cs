@@ -6,7 +6,7 @@ namespace CODE_GameLib.Items
     {
         public bool IsUsed { get; private set; }
 
-        public SingleUseTrap(Coordinate coordinate, CheatService cheatService, int damage) : base(coordinate, cheatService, damage)
+        public SingleUseTrap(Coordinate coordinate, int damage) : base(coordinate, damage)
         {
             IsUsed = false;
         }
