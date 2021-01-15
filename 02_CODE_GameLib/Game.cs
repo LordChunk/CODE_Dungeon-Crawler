@@ -4,6 +4,8 @@ using CODE_GameLib.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
+using CODE_GameLib.Items.Adapter;
 using CODE_GameLib.Services;
 
 namespace CODE_GameLib
@@ -54,6 +56,7 @@ namespace CODE_GameLib
 
             Player.Spot = targetCoordinate;
 
+            MoveEnemies();
 
             if (_cheatService.LoseNoLives)
             {
@@ -61,6 +64,18 @@ namespace CODE_GameLib
             }
 
             Updated?.Invoke(this, this);
+        }
+
+        private void MoveEnemies()
+        {
+            foreach (var enemy in Player.CurrentRoom.Items.Where(item => item.GetType() == typeof(EnemyAdapter)).Cast<EnemyAdapter>())
+            {
+                enemy.Adaptee.Move();
+                if (Player.Spot.IsEqual(enemy.Coordinate))
+                {
+                    enemy.OnTouch(Player);
+                }
+            }
         }
 
         private Coordinate MovePlayerThroughDoor(IDoor door)
@@ -83,7 +98,7 @@ namespace CODE_GameLib
                 return false;
             }
 
-            return !IsCoordinateWall(targetCoordinate);
+            return !IsCoordinateWall(targetCoordinate) && !IsCoordinateEnemy(targetCoordinate);
         }
 
         private Coordinate CalcTargetCoordinate(Direction direction, Coordinate playerPosition)
@@ -135,6 +150,11 @@ namespace CODE_GameLib
                 }
             }
             return false;
+        }
+
+        private bool IsCoordinateEnemy(Coordinate targetCoordinate)
+        {
+            return Player.CurrentRoom.Items.Where(item => item.GetType() == typeof(EnemyAdapter)).Any(item => item.Coordinate.IsEqual(targetCoordinate));
         }
 
         private bool IsCoordinateDoor(Coordinate targetCoordinate)

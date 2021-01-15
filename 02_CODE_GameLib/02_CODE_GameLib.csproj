@@ -9,4 +9,16 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="CODE_TempleOfDoom_DownloadableContent">
+      <HintPath>..\CODE_TempleOfDoom_DownloadableContent.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <!--<ItemGroup>
+    <Reference Include="CODE_TempleOfDoom_DownloadableContent">
+      <HintPath>..\..\..\..\Documents\CODE_TempleOfDoom_DownloadableContent.dll</HintPath>
+    </Reference>
+  </ItemGroup>-->
+
 </Project>

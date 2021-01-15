@@ -45,6 +45,22 @@ namespace CODE_PersistenceLib
                 if (jsonFloorTiles != null)
                     room.FloorTiles = FloorFactory.CreateFloorTiles(jsonFloorTiles);
 
+                var jsonEnemies = jsonRoom["enemies"];
+                if (jsonFloorTiles != null)
+                {
+                    if (room.Items != null)
+                    {
+                        foreach (var enemyItem in ItemFactory.CreateItems(jsonEnemies))
+                        {
+                            room.Items.Add(enemyItem);
+                        }
+                    }
+                    else
+                    {
+                        room.Items = ItemFactory.CreateItems(jsonEnemies);
+                    }
+                }
+
                 _rooms.Add(room.Id, room);
             }
 

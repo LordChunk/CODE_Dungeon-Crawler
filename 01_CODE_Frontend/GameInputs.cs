@@ -27,7 +27,8 @@ namespace CODE_Frontend
                 {ConsoleKey.DownArrow, () => game.MovePlayer(Direction.South)},
                 {ConsoleKey.D,() =>  cheatService.WalkThroughDoors = !cheatService.WalkThroughDoors},
                 {ConsoleKey.L,() =>   cheatService.LoseNoLives = !cheatService.LoseNoLives},
-                {ConsoleKey.Escape, () => _gameView.DrawEnd()}
+                {ConsoleKey.Escape, () => _gameView.DrawEnd()},
+                {ConsoleKey.Spacebar, () => game.Player.Shoot()}
             };
         }
 

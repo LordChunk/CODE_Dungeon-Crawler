@@ -5,6 +5,7 @@ using CODE_GameLib.Interfaces;
 using CODE_GameLib.Items;
 using System;
 using CODE_GameLib.FloorTiles;
+using CODE_GameLib.Items.Adapter;
 
 namespace CODE_Frontend
 {
@@ -112,6 +113,10 @@ namespace CODE_Frontend
                 else if (item.GetType() == typeof(Trap))
                 {
                     _board[item.Coordinate.X, item.Coordinate.Y] = new CharWithColor('O', ConsoleColor.Yellow);
+                }
+                else if (item.GetType() == typeof(EnemyAdapter))
+                {
+                    _board[item.Coordinate.X, item.Coordinate.Y] = new CharWithColor('E', ConsoleColor.DarkRed);
                 }
             }
         }

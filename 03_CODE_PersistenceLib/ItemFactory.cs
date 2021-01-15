@@ -7,12 +7,16 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using CODE_GameLib.Items.Adapter;
 using CODE_GameLib.Services;
+using CODE_TempleOfDoom_DownloadableContent;
 
 namespace CODE_PersistenceLib
 {
     public class ItemFactory
     {
+        private const int EnemyLives = 3;
+
         /// <summary>
         /// A list of all item types with their corresponding parser methods. Each method takes a JToken as it's parameter and outputs an IItem.
         /// </summary>
@@ -23,7 +27,10 @@ namespace CODE_PersistenceLib
             { "sankara stone", CreateSankaraStone },
             { "key", CreateKey },
             { "pressure plate", CreatePressurePlate },
+            { "horizontal", CreateHorizontalEnemy },
+            { "vertical", CreateVerticalEnemy },
         };
+
 
         /// <summary>
         /// Iterates through a set of JSON strings describing items and parses them.
@@ -47,7 +54,8 @@ namespace CODE_PersistenceLib
             var typeKvp = _itemTypes.FirstOrDefault(it => it.Key == type);
             if (typeKvp.Value == null) throw new NoNullAllowedException("Item type " + type + " is not a valid item type.");
             // Parse item and return
-            return typeKvp.Value(jsonItem);
+            var item = typeKvp.Value(jsonItem);
+            return item;
         }
 
         private static Coordinate GetItemCoordinates(JToken jsonItem)
@@ -87,6 +95,16 @@ namespace CODE_PersistenceLib
         private static Color ParseColorString(string color)
         {
             return Color.FromName(color);
+        }
+
+        private static IItem CreateHorizontalEnemy(JToken jsonEnemy)
+        {
+            return new EnemyAdapter(new HorizontallyMovingEnemy(EnemyLives, (int)jsonEnemy["x"], (int)jsonEnemy["y"], (int)jsonEnemy["minX"], (int)jsonEnemy["maxX"]));
+        }
+
+        private static IItem CreateVerticalEnemy(JToken jsonEnemy)
+        {
+            return new EnemyAdapter(new VerticallyMovingEnemy(EnemyLives, (int)jsonEnemy["x"], (int)jsonEnemy["y"], (int)jsonEnemy["minY"], (int)jsonEnemy["maxY"]));
         }
         #endregion
     }
