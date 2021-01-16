@@ -15,7 +15,7 @@ namespace CODE_PersistenceLib
     public class GameReader
     {
         private Dictionary<int, Room> _rooms;
-        private CheatService _cheatService;
+        private readonly CheatService _cheatService;
 
 
         public GameReader(CheatService cheatService)
