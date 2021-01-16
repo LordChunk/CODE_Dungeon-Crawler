@@ -1,5 +1,4 @@
-﻿using CODE_GameLib.Interfaces;
-using CODE_GameLib.Items.Common;
+﻿using CODE_GameLib.Items.Common;
 using CODE_TempleOfDoom_DownloadableContent;
 
 namespace CODE_GameLib.Items.Adapter
