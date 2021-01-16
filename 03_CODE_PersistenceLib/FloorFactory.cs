@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using CODE_GameLib;
-using CODE_GameLib.Doors;
-using CODE_GameLib.Doors.Common;
 using CODE_GameLib.FloorTiles;
 using CODE_GameLib.Interfaces;
 using Newtonsoft.Json.Linq;

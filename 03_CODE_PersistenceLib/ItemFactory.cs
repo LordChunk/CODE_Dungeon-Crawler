@@ -7,8 +7,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using CODE_GameLib.Items.Adapter;
-using CODE_GameLib.Services;
 using CODE_TempleOfDoom_DownloadableContent;
 
 namespace CODE_PersistenceLib

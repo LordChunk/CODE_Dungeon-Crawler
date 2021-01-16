@@ -1,8 +1,7 @@
 ﻿using CODE_GameLib.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
-using CODE_GameLib.Items.Adapter;
-using CODE_TempleOfDoom_DownloadableContent;
+using CODE_GameLib.Items;
 
 namespace CODE_GameLib
 {

@@ -15,6 +15,10 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Items\Adapter\" />
+  </ItemGroup>
+
   <!--<ItemGroup>
     <Reference Include="CODE_TempleOfDoom_DownloadableContent">
       <HintPath>..\..\..\..\Documents\CODE_TempleOfDoom_DownloadableContent.dll</HintPath>

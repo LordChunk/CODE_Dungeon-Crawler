@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using CODE_GameLib.Interfaces;
+﻿using CODE_GameLib.Interfaces;
 using CODE_TempleOfDoom_DownloadableContent;
 
-namespace CODE_GameLib.Items.Adapter
+namespace CODE_GameLib.Items
 {
     public class EnemyAdapter : IItem
     {
