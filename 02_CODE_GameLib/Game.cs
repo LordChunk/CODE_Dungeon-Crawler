@@ -3,6 +3,7 @@ using CODE_GameLib.Interfaces;
 using CODE_GameLib.Items;
 using System;
 using System.Linq;
+using CODE_GameLib.Items.Adapter;
 using CODE_GameLib.Services;
 
 namespace CODE_GameLib
@@ -67,7 +68,7 @@ namespace CODE_GameLib
         {
             foreach (var enemy in Player.CurrentRoom.Items.Where(item => item.GetType() == typeof(EnemyAdapter)).Cast<EnemyAdapter>())
             {
-                enemy.Adaptee.Move();
+                enemy.Move();
                 if (Player.Spot.IsEqual(enemy.Coordinate))
                 {
                     enemy.OnTouch(Player);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CODE_GameLib.Items;
+using CODE_GameLib.Items.Adapter;
 
 namespace CODE_GameLib
 {
@@ -23,21 +24,15 @@ namespace CODE_GameLib
             CurrentRoom = currentRoom;
             Lives = lives;
             _gunDamage = 1;
-            ShootRange = new List<Coordinate>()
-            {
-                new Coordinate(Spot.X - 1, Spot.Y),
-                new Coordinate(Spot.X + 1, Spot.Y),
-                new Coordinate(Spot.X, Spot.Y - 1),
-                new Coordinate(Spot.X - 1, Spot.Y + 1)
-            };
+            DetermineShootRange();
         }
 
         public void Shoot()
         {
             foreach (var enemy in EnemiesNearby())
             {
-                enemy.Adaptee.GetHurt(_gunDamage);
-                if (enemy.Adaptee.NumberOfLives <= 0)
+                enemy.GetHurt(_gunDamage);
+                if (enemy.NumberOfLives <= 0)
                 {
                     CurrentRoom.Items.Remove(enemy);
                 }
@@ -61,9 +56,27 @@ namespace CODE_GameLib
 
         private bool IsEnemyClose(EnemyAdapter enemy)
         {
-            var enemyLocation = new Coordinate(enemy.Adaptee.CurrentXLocation, enemy.Adaptee.CurrentYLocation);
+            DetermineShootRange();
+            foreach (var coordinate in ShootRange)
+            {
+                if (coordinate.IsEqual(enemy.Coordinate))
+                {
+                    return true;
+                }
+            }
 
-            return ShootRange.Any(coordinate => enemyLocation.IsEqual(coordinate));
+            return false;
+        }
+
+        private void DetermineShootRange()
+        {
+            ShootRange = new List<Coordinate>()
+            {
+                new Coordinate(Spot.X - 1, Spot.Y),
+                new Coordinate(Spot.X + 1, Spot.Y),
+                new Coordinate(Spot.X, Spot.Y - 1),
+                new Coordinate(Spot.X - 1, Spot.Y + 1)
+            };
         }
     }
 }

@@ -4,6 +4,7 @@ using CODE_GameLib.Interfaces;
 using CODE_GameLib.Items;
 using System;
 using CODE_GameLib.FloorTiles;
+using CODE_GameLib.Items.Adapter;
 
 namespace CODE_Frontend
 {
