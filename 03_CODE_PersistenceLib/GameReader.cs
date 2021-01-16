@@ -16,7 +16,7 @@ namespace CODE_PersistenceLib
     {
         private Dictionary<int, Room> _rooms;
 
-        public Game Read(string filePath)
+        public virtual Game Read(string filePath)
         {
             var returnGame = new Game();
 
