@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CODE_PersistenceLib.DoorFactory">
+    <Position X="6.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAQAAAAAAAAgAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>DoorFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CODE_PersistenceLib.FloorFactory">
+    <Position X="9" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAARACAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FloorFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CODE_PersistenceLib.JsonGameReader" BaseTypeListCollapsed="true">
+    <Position X="8" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAQAAAAkAAAAAgAAAAAAAAAAEAA=</HashCode>
+      <FileName>JsonGameReader.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CODE_PersistenceLib.ItemFactory">
+    <Position X="4.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAIwAAQAAAAAAAQAJAAAKAAAAACAAIAAAAAAAACAA=</HashCode>
+      <FileName>ItemFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CODE_PersistenceLib.SqlGameReader" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAgAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>SqlGameReader.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="CODE_PersistenceLib.IDataReader">
+    <Position X="6.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IDataReader.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
